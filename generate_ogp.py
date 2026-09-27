@@ -1,171 +1,197 @@
 import os
+import math
 from PIL import Image, ImageDraw, ImageFont
 
-# Canvas dimensions
+# ==============================================================================
+# LINGUISTICS TOOLBOX — REFINED OGP POSTER GENERATOR
+# Swiss Typographic Style / Golden Ratio Balance / 1200 x 630 px
+# ==============================================================================
+
 WIDTH = 1200
 HEIGHT = 630
 
-# Colors (Swiss Style Palette)
-BG_COLOR = (255, 255, 255)
-TEXT_PRIMARY = (17, 17, 17)        # #111111
-TEXT_MUTED = (107, 114, 128)       # #6B7280
-SWISS_RED = (227, 6, 19)          # #E30613
-BORDER_DARK = (17, 17, 17)
-BORDER_LIGHT = (229, 231, 235)     # #E5E7EB
-CARD_BG = (250, 250, 252)
+# Color Palette (Strict Swiss International Style)
+COLOR_BG = (255, 255, 255)
+COLOR_TEXT_MAIN = (17, 17, 17)        # #111111
+COLOR_TEXT_MUTED = (100, 110, 125)    # #646E7D
+COLOR_SWISS_RED = (227, 6, 19)        # #E30613
+COLOR_FRAME = (17, 17, 17)
+COLOR_PLATE_BG = (17, 17, 17)         # Dark quadrant plate
+COLOR_PLATE_LINE = (38, 38, 38)       # #262626
+COLOR_PLATE_MUTED = (156, 163, 175)   # #9CA3AF
+COLOR_WHITE = (255, 255, 255)
+COLOR_LIGHT_GRAY = (243, 244, 246)
 
-# Create image
-img = Image.new("RGB", (WIDTH, HEIGHT), BG_COLOR)
+img = Image.new("RGB", (WIDTH, HEIGHT), COLOR_BG)
 draw = ImageDraw.Draw(img)
 
-# Outer Border (Swiss Poster Frame)
-BORDER_MARGIN = 24
-draw.rectangle(
-    [BORDER_MARGIN, BORDER_MARGIN, WIDTH - BORDER_MARGIN, HEIGHT - BORDER_MARGIN],
-    outline=BORDER_DARK,
-    width=3
-)
+# Outer Architectural Border
+MARGIN = 28
+draw.rectangle([MARGIN, MARGIN, WIDTH - MARGIN, HEIGHT - MARGIN], outline=COLOR_FRAME, width=2)
 
-# Load Fonts
+# Load System Fonts
 FONT_DIR = "C:/Windows/Fonts"
-font_title_en = ImageFont.truetype(os.path.join(FONT_DIR, "segoeuib.ttf"), 48)
-font_title_jp = ImageFont.truetype(os.path.join(FONT_DIR, "meiryob.ttc"), 44)
-font_subtitle = ImageFont.truetype(os.path.join(FONT_DIR, "meiryo.ttc"), 20)
-font_mono_bold = ImageFont.truetype(os.path.join(FONT_DIR, "segoeuib.ttf"), 16)
-font_mono_small = ImageFont.truetype(os.path.join(FONT_DIR, "segoeui.ttf"), 14)
-font_card_num = ImageFont.truetype(os.path.join(FONT_DIR, "segoeuib.ttf"), 22)
-font_card_title = ImageFont.truetype(os.path.join(FONT_DIR, "segoeuib.ttf"), 17)
-font_card_desc = ImageFont.truetype(os.path.join(FONT_DIR, "meiryo.ttc"), 13)
+font_jp_title = ImageFont.truetype(os.path.join(FONT_DIR, "meiryob.ttc"), 46)
+font_en_title = ImageFont.truetype(os.path.join(FONT_DIR, "segoeuib.ttf"), 40)
+font_catch = ImageFont.truetype(os.path.join(FONT_DIR, "meiryob.ttc"), 18)
+font_desc = ImageFont.truetype(os.path.join(FONT_DIR, "meiryo.ttc"), 14)
+font_mono_bold = ImageFont.truetype(os.path.join(FONT_DIR, "segoeuib.ttf"), 14)
+font_mono_sub = ImageFont.truetype(os.path.join(FONT_DIR, "segoeui.ttf"), 12)
+font_quad_symbol = ImageFont.truetype(os.path.join(FONT_DIR, "segoeuib.ttf"), 40)
+font_quad_ipa = ImageFont.truetype(os.path.join(FONT_DIR, "meiryob.ttc"), 38)
+font_quad_tag = ImageFont.truetype(os.path.join(FONT_DIR, "segoeuib.ttf"), 11)
+font_quad_desc = ImageFont.truetype(os.path.join(FONT_DIR, "segoeui.ttf"), 10)
 
-# 1. Header Band
-HEADER_Y = BORDER_MARGIN + 32
-# Red square accent
-draw.rectangle([BORDER_MARGIN + 36, HEADER_Y + 2, BORDER_MARGIN + 36 + 14, HEADER_Y + 16], fill=SWISS_RED)
-draw.text((BORDER_MARGIN + 60, HEADER_Y), "LINGUISTICS TOOLBOX // PORTAL", font=font_mono_bold, fill=TEXT_PRIMARY)
+# ==============================================================================
+# LEFT COLUMN: BOLD SWISS TYPOGRAPHY (Clean Hierarchy & Generous Whitespace)
+# ==============================================================================
+LEFT_X = MARGIN + 48
+CONTENT_Y = MARGIN + 52
 
-header_right_text = "100% CLIENT-SIDE ■ NO SERVER UPLOAD ■ OPEN SOURCE"
-bbox_r = font_mono_small.getbbox(header_right_text)
-w_r = bbox_r[2] - bbox_r[0]
-draw.text((WIDTH - BORDER_MARGIN - 36 - w_r, HEADER_Y + 2), header_right_text, font=font_mono_small, fill=TEXT_MUTED)
+# 1. Top Metadata Overline
+draw.rectangle([LEFT_X, CONTENT_Y + 3, LEFT_X + 10, CONTENT_Y + 13], fill=COLOR_SWISS_RED)
+draw.text((LEFT_X + 20, CONTENT_Y), "OPEN SOURCE WEB SUITE // EST. 2026", font=font_mono_bold, fill=COLOR_SWISS_RED)
 
-# Header separator line
-draw.line([(BORDER_MARGIN, HEADER_Y + 36), (WIDTH - BORDER_MARGIN, HEADER_Y + 36)], fill=BORDER_DARK, width=2)
+# 2. Main Title Group
+TITLE_Y = CONTENT_Y + 36
+draw.text((LEFT_X, TITLE_Y), "言語学ツールポータル", font=font_jp_title, fill=COLOR_TEXT_MAIN)
+draw.text((LEFT_X, TITLE_Y + 64), "LINGUISTICS TOOLBOX", font=font_en_title, fill=COLOR_SWISS_RED)
 
-# 2. Main Title Section
-MAIN_Y = HEADER_Y + 54
+# Accent Bar
+draw.rectangle([LEFT_X, TITLE_Y + 128, LEFT_X + 54, TITLE_Y + 132], fill=COLOR_TEXT_MAIN)
 
-# Japanese Main Title
-draw.text((BORDER_MARGIN + 36, MAIN_Y), "言語学ツールポータル", font=font_title_jp, fill=TEXT_PRIMARY)
+# 3. Core Narrative & Bullet Feature Summary
+SUMMARY_Y = TITLE_Y + 154
+draw.text((LEFT_X, SUMMARY_Y), "音声分析 ■ IPA入力 ■ 構文木 ■ 音韻規則", font=font_catch, fill=COLOR_TEXT_MAIN)
+draw.text((LEFT_X, SUMMARY_Y + 34), "言語学研究・学習のための4領域特化型Webツール群", font=font_desc, fill=COLOR_TEXT_MUTED)
+draw.text((LEFT_X, SUMMARY_Y + 58), "外部サーバー通信なし・完全ブラウザ完結処理", font=font_desc, fill=COLOR_TEXT_MUTED)
 
-# English Brand Subtitle
-draw.text((BORDER_MARGIN + 36, MAIN_Y + 62), "LINGUISTICS TOOLBOX", font=font_title_en, fill=SWISS_RED)
+# 4. Feature Badges (Geometric Tag Strips)
+BADGES_Y = SUMMARY_Y + 104
+badges = ["100% CLIENT-SIDE", "NO SERVER UPLOAD", "MIT LICENSE"]
+cur_bx = LEFT_X
+for b in badges:
+    bbox = font_mono_sub.getbbox(b)
+    bw = bbox[2] - bbox[0] + 16
+    bh = 24
+    draw.rectangle([cur_bx, BADGES_Y, cur_bx + bw, BADGES_Y + bh], fill=COLOR_LIGHT_GRAY, outline=COLOR_TEXT_MAIN, width=1)
+    draw.text((cur_bx + 8, BADGES_Y + 4), b, font=font_mono_sub, fill=COLOR_TEXT_MAIN)
+    cur_bx += bw + 10
 
-# Tagline
-draw.text((BORDER_MARGIN + 36, MAIN_Y + 130), "音声分析・IPA記号入力・構文木・音韻規則の4領域を網羅するWebアプリケーション群", font=font_subtitle, fill=TEXT_PRIMARY)
+# 5. Bottom URL readout
+BOTTOM_Y = HEIGHT - MARGIN - 42
+draw.line([(MARGIN, BOTTOM_Y - 14), (WIDTH - MARGIN, BOTTOM_Y - 14)], fill=COLOR_LIGHT_GRAY, width=1)
+draw.text((LEFT_X, BOTTOM_Y), "https://okawawaka.github.io/linguistics-suite-portal/", font=font_mono_bold, fill=COLOR_TEXT_MAIN)
 
-# Decorative Swiss coordinate / specs box on right
-SPEC_BOX_X = WIDTH - BORDER_MARGIN - 320
-SPEC_BOX_Y = MAIN_Y + 6
-SPEC_BOX_W = 284
-SPEC_BOX_H = 150
-draw.rectangle([SPEC_BOX_X, SPEC_BOX_Y, SPEC_BOX_X + SPEC_BOX_W, SPEC_BOX_Y + SPEC_BOX_H], fill=CARD_BG, outline=BORDER_DARK, width=1)
-draw.rectangle([SPEC_BOX_X, SPEC_BOX_Y, SPEC_BOX_X + SPEC_BOX_W, SPEC_BOX_Y + 28], fill=BORDER_DARK)
-draw.text((SPEC_BOX_X + 12, SPEC_BOX_Y + 6), "CORE ARCHITECTURE", font=font_mono_small, fill=(255, 255, 255))
+# ==============================================================================
+# RIGHT COLUMN: 4-QUADRANT MONUMENTAL EMBLEM PLATE (420 x 420 px)
+# ==============================================================================
+PLATE_W = 428
+PLATE_H = 428
+PLATE_X = WIDTH - MARGIN - PLATE_W - 38
+PLATE_Y = MARGIN + 40
 
-specs = [
-    ("AUDIO DSP", "16-bit PCM / Burg LPC / F0"),
-    ("PHONETICS", "339 IPA / Chao Tone"),
-    ("SYNTAX", "Penn Treebank / X-Bar"),
-    ("PHONOLOGY", "SPE Distinctive Matrix")
-]
-for i, (k, v) in enumerate(specs):
-    sy = SPEC_BOX_Y + 36 + i * 27
-    draw.text((SPEC_BOX_X + 12, sy), k, font=font_mono_small, fill=SWISS_RED)
-    draw.text((SPEC_BOX_X + 105, sy), v, font=font_mono_small, fill=TEXT_PRIMARY)
+# Solid Dark Geometric Plate
+draw.rectangle([PLATE_X, PLATE_Y, PLATE_X + PLATE_W, PLATE_Y + PLATE_H], fill=COLOR_PLATE_BG, outline=COLOR_FRAME, width=2)
 
-# Separator before cards
-CARDS_TOP_Y = MAIN_Y + 185
-draw.line([(BORDER_MARGIN, CARDS_TOP_Y), (WIDTH - BORDER_MARGIN, CARDS_TOP_Y)], fill=BORDER_DARK, width=2)
+# Quadrant Divider Crosshair
+MID_X = PLATE_X + PLATE_W // 2
+MID_Y = PLATE_Y + PLATE_H // 2
+draw.line([(MID_X, PLATE_Y + 16), (MID_X, PLATE_Y + PLATE_H - 16)], fill=COLOR_PLATE_LINE, width=2)
+draw.line([(PLATE_X + 16, MID_Y), (PLATE_X + PLATE_W - 16, MID_Y)], fill=COLOR_PLATE_LINE, width=2)
 
-# 3. 4 Tool Cards Grid
-CARD_GAP = 12
-CARDS_PAD_X = BORDER_MARGIN + 24
-AVAILABLE_WIDTH = (WIDTH - BORDER_MARGIN * 2) - 48
-CARD_W = (AVAILABLE_WIDTH - CARD_GAP * 3) // 4
-CARD_H = 175
-CARD_Y = CARDS_TOP_Y + 20
+# Central Registration Red Square
+draw.rectangle([MID_X - 5, MID_Y - 5, MID_X + 5, MID_Y + 5], fill=COLOR_SWISS_RED)
 
-cards_data = [
-    {
-        "num": "01",
-        "title": "Acoustic Annotator",
-        "desc1": "ブラウザ音響分析",
-        "desc2": "Praat TextGrid エディタ",
-        "meta": "LPC / F0 / VAD"
-    },
-    {
-        "num": "02",
-        "title": "IPA Editor",
-        "desc1": "国際音声字母エディタ",
-        "desc2": "声調記号自動合字",
-        "meta": "339 SYMBOLS"
-    },
-    {
-        "num": "03",
-        "title": "Syntax Tree Editor",
-        "desc1": "構文木・樹形図エディタ",
-        "desc2": "構成素移動矢印描画",
-        "meta": "X-BAR / LATEX"
-    },
-    {
-        "num": "04",
-        "title": "Phonological Rule",
-        "desc1": "音韻規則・音変化エディタ",
-        "desc2": "SPE示差特徴マトリクス",
-        "meta": "KATEX / SVG"
-    }
-]
+# --- QUADRANT 1 (Top-Left): Acoustic Waveform & LPC Spectrum ---
+Q1_X = PLATE_X + 18
+Q1_Y = PLATE_Y + 18
+draw.text((Q1_X, Q1_Y), "01 / ACOUSTICS", font=font_quad_tag, fill=COLOR_SWISS_RED)
+draw.text((Q1_X, Q1_Y + 14), "DSP / LPC / F0", font=font_quad_desc, fill=COLOR_PLATE_MUTED)
 
-for i, card in enumerate(cards_data):
-    cx = CARDS_PAD_X + i * (CARD_W + CARD_GAP)
-    cy = CARD_Y
-    # Card background and border
-    draw.rectangle([cx, cy, cx + CARD_W, cy + CARD_H], fill=CARD_BG, outline=BORDER_DARK, width=1)
-    
-    # Top red index tab
-    draw.rectangle([cx, cy, cx + 46, cy + 28], fill=BORDER_DARK)
-    draw.text((cx + 10, cy + 4), card["num"], font=font_card_num, fill=(255, 255, 255))
-    
-    # Meta pill
-    draw.text((cx + 56, cy + 8), card["meta"], font=font_mono_small, fill=SWISS_RED)
-    
-    # Card Title
-    draw.text((cx + 12, cy + 42), card["title"], font=font_card_title, fill=TEXT_PRIMARY)
-    
-    # Divider
-    draw.line([(cx + 12, cy + 74), (cx + CARD_W - 12, cy + 74)], fill=BORDER_LIGHT, width=1)
-    
-    # Card Desc
-    draw.text((cx + 12, cy + 86), card["desc1"], font=font_card_desc, fill=TEXT_PRIMARY)
-    draw.text((cx + 12, cy + 110), card["desc2"], font=font_card_desc, fill=TEXT_MUTED)
-    
-    # Bottom accent line
-    draw.rectangle([cx, cy + CARD_H - 4, cx + CARD_W, cy + CARD_H], fill=SWISS_RED)
+# Sound wave bars in Swiss Red
+wave_x = Q1_X + 12
+wave_baseline = Q1_Y + 145
+wave_heights = [18, 38, 64, 92, 110, 78, 52, 96, 68, 42, 24]
+for j, wh in enumerate(wave_heights):
+    bx = wave_x + j * 15
+    by1 = wave_baseline - wh
+    by2 = wave_baseline
+    bar_color = COLOR_SWISS_RED if j in [3, 4, 7] else (200, 200, 200)
+    draw.rectangle([bx, by1, bx + 7, by2], fill=bar_color)
 
-# 4. Footer Bar
-FOOTER_Y = HEIGHT - BORDER_MARGIN - 42
-draw.line([(BORDER_MARGIN, FOOTER_Y), (WIDTH - BORDER_MARGIN, FOOTER_Y)], fill=BORDER_DARK, width=2)
+# --- QUADRANT 2 (Top-Right): IPA Typography & Chao Tone Ligature ---
+Q2_X = MID_X + 18
+Q2_Y = PLATE_Y + 18
+draw.text((Q2_X, Q2_Y), "02 / PHONETICS", font=font_quad_tag, fill=COLOR_SWISS_RED)
+draw.text((Q2_X, Q2_Y + 14), "339 IPA & Chao Tone", font=font_quad_desc, fill=COLOR_PLATE_MUTED)
 
-FOOTER_CONTENT_Y = FOOTER_Y + 12
-draw.text((BORDER_MARGIN + 36, FOOTER_CONTENT_Y), "URL: https://okawawaka.github.io/linguistics-suite-portal/", font=font_mono_small, fill=TEXT_PRIMARY)
+# IPA Phonetic Symbol Art [ ʃ ] + Tone Letter
+draw.text((Q2_X + 24, Q2_Y + 45), "[ ʃ ]", font=font_quad_ipa, fill=COLOR_WHITE)
+draw.text((Q2_X + 115, Q2_Y + 45), "˥˩", font=font_quad_ipa, fill=COLOR_SWISS_RED)
+# Sub-spec line
+draw.line([(Q2_X + 10, Q2_Y + 118), (Q2_X + 175, Q2_Y + 118)], fill=COLOR_PLATE_LINE, width=1)
+draw.text((Q2_X + 10, Q2_Y + 128), "U+0283 / CONSONANT", font=font_quad_desc, fill=COLOR_PLATE_MUTED)
 
-copy_text = "OKAWAWAKA // MIT LICENSE"
-bbox_c = font_mono_small.getbbox(copy_text)
-w_c = bbox_c[2] - bbox_c[0]
-draw.text((WIDTH - BORDER_MARGIN - 36 - w_c, FOOTER_CONTENT_Y), copy_text, font=font_mono_small, fill=TEXT_MUTED)
+# --- QUADRANT 3 (Bottom-Left): Syntax Tree Diagram ---
+Q3_X = PLATE_X + 18
+Q3_Y = MID_Y + 18
+draw.text((Q3_X, Q3_Y), "03 / FORMAL SYNTAX", font=font_quad_tag, fill=COLOR_SWISS_RED)
+draw.text((Q3_X, Q3_Y + 14), "X-Bar & Movement", font=font_quad_desc, fill=COLOR_PLATE_MUTED)
 
-# Ensure assets directory exists
-os.makedirs("assets", exist_ok=True)
+# Mini Tree Diagram Art
+NODE_ROOT_X = Q3_X + 90
+NODE_ROOT_Y = Q3_Y + 44
+# Root TP box
+draw.rectangle([NODE_ROOT_X - 16, NODE_ROOT_Y, NODE_ROOT_X + 16, NODE_ROOT_Y + 18], fill=COLOR_SWISS_RED)
+draw.text((NODE_ROOT_X - 8, NODE_ROOT_Y + 2), "TP", font=font_quad_desc, fill=COLOR_WHITE)
+
+# Left DP branch
+DP_X = NODE_ROOT_X - 52
+DP_Y = NODE_ROOT_Y + 44
+draw.line([(NODE_ROOT_X - 6, NODE_ROOT_Y + 18), (DP_X + 12, DP_Y)], fill=COLOR_WHITE, width=2)
+draw.rectangle([DP_X, DP_Y, DP_X + 24, DP_Y + 16], outline=COLOR_WHITE, width=1)
+draw.text((DP_X + 5, DP_Y + 1), "DP", font=font_quad_desc, fill=COLOR_WHITE)
+
+# Right T' branch
+T_X = NODE_ROOT_X + 40
+T_Y = NODE_ROOT_Y + 44
+draw.line([(NODE_ROOT_X + 6, NODE_ROOT_Y + 18), (T_X + 12, T_Y)], fill=COLOR_WHITE, width=2)
+draw.rectangle([T_X, T_Y, T_X + 24, T_Y + 16], outline=COLOR_WHITE, width=1)
+draw.text((T_X + 6, T_Y + 1), "T'", font=font_quad_desc, fill=COLOR_WHITE)
+
+# Movement dash arrow below
+draw.line([(DP_X + 12, DP_Y + 22), (T_X + 12, T_Y + 22)], fill=COLOR_SWISS_RED, width=2)
+
+# --- QUADRANT 4 (Bottom-Right): Phonological Rule & Distinctive Features ---
+Q4_X = MID_X + 18
+Q4_Y = MID_Y + 18
+draw.text((Q4_X, Q4_Y), "04 / PHONOLOGY", font=font_quad_tag, fill=COLOR_SWISS_RED)
+draw.text((Q4_X, Q4_Y + 14), "SPE Distinctive Matrix", font=font_quad_desc, fill=COLOR_PLATE_MUTED)
+
+# Phonological Rule formula: /t/ → [tʃ]
+draw.text((Q4_X + 10, Q4_Y + 45), "/t/ → [tʃ]", font=font_mono_bold, fill=COLOR_WHITE)
+draw.text((Q4_X + 10, Q4_Y + 68), "/ __ [i]", font=font_mono_sub, fill=COLOR_SWISS_RED)
+
+# Feature matrix brackets
+MAT_X = Q4_X + 10
+MAT_Y = Q4_Y + 95
+draw.rectangle([MAT_X, MAT_Y, MAT_X + 160, MAT_Y + 62], outline=(60, 60, 60), fill=(26, 26, 28), width=1)
+draw.text((MAT_X + 10, MAT_Y + 8), "+consonantal", font=font_quad_desc, fill=COLOR_PLATE_MUTED)
+draw.text((MAT_X + 10, MAT_Y + 24), "+coronal", font=font_quad_desc, fill=COLOR_PLATE_MUTED)
+draw.text((MAT_X + 10, MAT_Y + 40), "+delayed release", font=font_quad_desc, fill=COLOR_SWISS_RED)
+
+# 5. Bottom URL readout & Credits
+BOTTOM_Y = HEIGHT - MARGIN - 42
+draw.line([(MARGIN, BOTTOM_Y - 14), (WIDTH - MARGIN, BOTTOM_Y - 14)], fill=COLOR_LIGHT_GRAY, width=1)
+draw.text((LEFT_X, BOTTOM_Y), "https://okawawaka.github.io/linguistics-suite-portal/", font=font_mono_bold, fill=COLOR_TEXT_MAIN)
+
+credit_text = "OKAWAWAKA // MIT LICENSE"
+bbox_cr = font_mono_sub.getbbox(credit_text)
+w_cr = bbox_cr[2] - bbox_cr[0]
+draw.text((WIDTH - MARGIN - 48 - w_cr, BOTTOM_Y + 2), credit_text, font=font_mono_sub, fill=COLOR_TEXT_MUTED)
+
+# Save high-quality output
 output_path = "assets/ogp.png"
 img.save(output_path, "PNG", quality=95)
-print(f"Generated OGP image successfully at: {output_path} ({os.path.getsize(output_path)} bytes)")
+print(f"Refined Swiss OGP image successfully saved at: {output_path} ({os.path.getsize(output_path)} bytes)")
