@@ -11,49 +11,56 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }, 100);
 
-  const kineticElements = document.querySelectorAll(
-    ".slide-in-up, .poster-block, .sec-header, .poster-head, .tool-focus-section, .section-lead-band, .metrics-strip"
-  );
-
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: "0px 0px -40px 0px"
+  // 2. Component-level Intersection Observers (Precise view-triggered animations)
+  const animObserverOptions = {
+    threshold: 0.15,
+    rootMargin: "0px 0px -30px 0px"
   };
 
-  const observer = new IntersectionObserver((entries) => {
+  const animObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.classList.add("is-visible");
+
+        // If it's a metrics strip, trigger number counters immediately
+        if (entry.target.classList.contains("metrics-strip")) {
+          const metricVals = entry.target.querySelectorAll(".metric-val");
+          metricVals.forEach(animateMetricVal);
+        }
       }
     });
-  }, observerOptions);
+  }, animObserverOptions);
 
-  kineticElements.forEach((el) => {
+  // Observe each component individually so animations trigger right in front of user
+  document.querySelectorAll(
+    ".slide-in-up, .poster-block, .sec-header, .poster-head, .section-lead-band, .tool-feature-list, .metrics-strip"
+  ).forEach((el) => {
     if (!el.closest(".hero-section")) {
-      observer.observe(el);
+      animObserver.observe(el);
     }
   });
 
-  // 2b. Scientific Vertical Ruler Tracking & Metric Counters
-  const sections = document.querySelectorAll("section[id]");
-  const rulerLinks = document.querySelectorAll(".ruler-step-link");
-
+  // 2b. High-Precision Digital Metric Counter Animation
   function animateMetricVal(el) {
     if (el.dataset.hasCounted) return;
     el.dataset.hasCounted = "true";
 
-    const targetStr = el.getAttribute("data-target") || el.textContent.trim();
-    const targetNum = parseInt(targetStr, 10);
+    const targetNum = parseInt(el.getAttribute("data-target"), 10);
+    const suffix = el.getAttribute("data-suffix") || "";
     if (isNaN(targetNum)) return;
 
-    const originalText = el.textContent.trim();
-    const suffix = originalText.endsWith("%") ? "%" : (originalText.endsWith("ms") ? "ms" : "");
-    const duration = 850;
+    if (targetNum === 0) {
+      el.textContent = "0" + suffix;
+      return;
+    }
+
+    const duration = 950;
     const startTime = performance.now();
 
     function update(now) {
       const elapsed = now - startTime;
       const progress = Math.min(elapsed / duration, 1);
+      // Cubic ease-out curve
       const easeProgress = 1 - Math.pow(1 - progress, 3);
       const currentNum = Math.round(easeProgress * targetNum);
       el.textContent = currentNum + suffix;
@@ -61,55 +68,70 @@ document.addEventListener("DOMContentLoaded", () => {
       if (progress < 1) {
         requestAnimationFrame(update);
       } else {
-        el.textContent = originalText;
+        el.textContent = targetNum + suffix;
       }
     }
     requestAnimationFrame(update);
   }
 
-  const sectionObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("is-visible", "is-scanned");
-        const currentId = entry.target.getAttribute("id");
-        rulerLinks.forEach((link) => {
-          if (link.getAttribute("data-step") === currentId) {
-            link.classList.add("active");
-          } else {
-            link.classList.remove("active");
-          }
-        });
-
-        const metricVals = entry.target.querySelectorAll(".metric-val");
-        metricVals.forEach(animateMetricVal);
-      }
-    });
-  }, {
-    threshold: 0.25,
-    rootMargin: "-5% 0px -25% 0px"
-  });
-
-  sections.forEach((sec) => sectionObserver.observe(sec));
-
-  // 3. Scroll Progress Indicator & Header Sticky Border
+  // 3. Robust Scroll Progress & Continuous Vertical Ruler Tracker
   const header = document.querySelector(".portal-header");
   const progressBar = document.getElementById("scroll-progress");
+  const rulerThumb = document.getElementById("ruler-thumb");
+  const rulerLinks = document.querySelectorAll(".ruler-step-link");
+  const sections = Array.from(document.querySelectorAll("section[id]"));
 
-  window.addEventListener("scroll", () => {
+  function updateScrollState() {
     const scrollY = window.scrollY;
     const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? Math.min(100, Math.max(0, (scrollY / docHeight) * 100)) : 0;
 
-    if (progressBar && docHeight > 0) {
-      const progress = Math.min(100, Math.max(0, (scrollY / docHeight) * 100));
+    // A. Top Progress Line
+    if (progressBar) {
       progressBar.style.width = progress + "%";
     }
 
-    if (scrollY > 40) {
-      header.classList.add("header-scrolled");
-    } else {
-      header.classList.remove("header-scrolled");
+    // B. Header Sticky Scrolled State
+    if (header) {
+      if (scrollY > 40) {
+        header.classList.add("header-scrolled");
+      } else {
+        header.classList.remove("header-scrolled");
+      }
     }
-  });
+
+    // C. Vertical Ruler Thumb Position
+    if (rulerThumb) {
+      const trackHeight = 220;
+      const thumbHeight = 8;
+      const thumbTop = (progress / 100) * (trackHeight - thumbHeight);
+      rulerThumb.style.top = thumbTop + "px";
+    }
+
+    // D. Active Section Highlight on Ruler
+    const probeY = scrollY + window.innerHeight * 0.38;
+    let activeId = "";
+
+    for (let i = sections.length - 1; i >= 0; i--) {
+      const sec = sections[i];
+      if (sec.offsetTop <= probeY) {
+        activeId = sec.getAttribute("id");
+        break;
+      }
+    }
+
+    rulerLinks.forEach((link) => {
+      if (activeId && link.getAttribute("data-step") === activeId) {
+        link.classList.add("active");
+      } else {
+        link.classList.remove("active");
+      }
+    });
+  }
+
+  window.addEventListener("scroll", updateScrollState, { passive: true });
+  window.addEventListener("resize", updateScrollState, { passive: true });
+  updateScrollState();
 
   // 4. Precision Scientific Coordinate Readout (Mouse Tracking)
   const posReadout = document.getElementById("header-coord-pos");
