@@ -39,9 +39,11 @@
       </a>
 
       <nav class="nav-links">
-        <a href="#tools" class="nav-link" data-i18n="navTools">ツール一覧</a>
-        <a href="#workflow" class="nav-link" data-i18n="navWorkflow">研究ワークフロー</a>
-        <a href="#philosophy" class="nav-link" data-i18n="navPhilosophy">設計思想</a>
+        <a href="#annotator" class="nav-link">01 ANNOTATOR</a>
+        <a href="#ipa" class="nav-link">02 IPA</a>
+        <a href="#syntax" class="nav-link">03 SYNTAX</a>
+        <a href="#phonology" class="nav-link">04 PHONOLOGY</a>
+        <a href="#workflow" class="nav-link" data-i18n="navWorkflow">ワークフロー</a>
         <a href="https://github.com/okawawaka" target="_blank" rel="noopener noreferrer" class="nav-link" data-i18n="navGithub">GITHUB</a>
       </nav>
 
@@ -61,24 +63,24 @@
     <canvas id="hero-canvas"></canvas>
 
     <div class="container hero-content">
-      <div class="hero-overline" data-i18n="heroOverline">AN OPEN SUITE FOR PHONETICS & THEORETICAL LINGUISTICS</div>
+      <div class="hero-overline slide-in-left" data-i18n="heroOverline">AN OPEN SUITE FOR PHONETICS & THEORETICAL LINGUISTICS</div>
       
       <h1 class="hero-headline">
-        <span class="headline-line" data-i18n="heroTitleLine1">言語学・音声学を、</span>
-        <span class="headline-line" data-i18n="heroTitleLine2">極めて精緻に。</span>
-        <span class="headline-line" style="color: var(--swiss-red);" data-i18n="heroTitleLine3">ブラウザで完結する。</span>
+        <span class="headline-line slide-in-up delay-1" data-i18n="heroTitleLine1">言語学・音声学を、</span>
+        <span class="headline-line slide-in-up delay-2" data-i18n="heroTitleLine2">極めて精緻に。</span>
+        <span class="headline-line slide-in-up delay-3" style="color: var(--swiss-red);" data-i18n="heroTitleLine3">ブラウザで完結する。</span>
       </h1>
 
-      <p class="hero-lead" data-i18n="heroLead">
+      <p class="hero-lead slide-in-up delay-4" data-i18n="heroLead">
         国際音声字母、音響分析、音韻規則、構文木。研究と教育を刷新する、スイススタイルで統一された4つのオープンソースWebアプリケーション群。
       </p>
 
-      <div class="hero-actions">
-        <a href="#tools" class="swiss-btn swiss-btn-primary" data-i18n="heroCtaExplore">ツールを体験する ↓</a>
+      <div class="hero-actions slide-in-up delay-5">
+        <a href="#annotator" class="swiss-btn swiss-btn-primary" data-i18n="heroCtaExplore">ツールを体験する ↓</a>
         <a href="#workflow" class="swiss-btn swiss-btn-outline" data-i18n="heroCtaWorkflow">ワークフローを見る →</a>
       </div>
 
-      <div class="hero-stats-grid">
+      <div class="hero-stats-grid slide-in-up delay-6">
         <div class="stat-cell">
           <span class="stat-cell-num">04</span>
           <span class="stat-cell-label" data-i18n="heroStatTools">4つの特化ツール</span>
@@ -100,142 +102,350 @@
   </section>
 
   <!-- ========================================================================
-       SECTION 01: TOOL SUITE SHOWCASE
+       TOOL 01: ACOUSTIC ANNOTATOR (FULL SECTION)
        ======================================================================== -->
-  <section id="tools" class="section-wrapper">
+  <section id="annotator" class="tool-focus-section">
     <div class="container">
-      <div class="sec-header">
-        <span class="sec-index" data-i18n="secToolsTitle">01 / TOOL SUITE</span>
-        <h2 class="sec-title" data-i18n="secToolsSubtitle">専門性の高い4つの独立Webアプリケーション</h2>
-        <p class="sec-lead" data-i18n="secToolsDesc">
-          各ツールはインストール不要・サーバー不要でブラウザ上で即座に動作し、高度な計算・描画を完全クライアントサイドで処理します。
-        </p>
-      </div>
-
-      <div class="tools-grid">
-
-        <!-- Tool 1: Acoustic Annotator -->
-        <article class="swiss-card" id="tool-annotator">
-          <div>
-            <div class="card-top">
-              <span class="card-category" data-i18n="t1Category">音響音声学 / DSP & アノテーション</span>
-              <span class="card-index">[ 01 ]</span>
-            </div>
-            <div class="card-icon-wrap">
+      <div class="tool-split-layout">
+        <!-- Left: Text & Specs -->
+        <div class="tool-details-col slide-in-left">
+          <div class="tool-index-tag">[ 01 / ACOUSTIC PHONETICS ]</div>
+          <div class="tool-header-group">
+            <div class="tool-icon-box">
               <img src="assets/acoustic-annotator.svg" alt="Acoustic Annotator Icon">
             </div>
-            <h3 class="card-title" data-i18n="t1Title">Acoustic Annotator</h3>
-            <span class="card-subtitle" data-i18n="t1Subtitle">ブラウザ音響分析 & Praat TextGrid エディタ</span>
-            <p class="card-desc" data-i18n="t1Desc">
-              大学院・音声学研究のためのWebネイティブ音響分析スイート。ブラウザ内マイクから16-bit PCM高音質録音を行い、LPC フォルマント軌跡 (Burg法)、F0ピッチ抽出、母音四辺形プロット、音響VADによる自動区間分割を瞬時に実行します。
-            </p>
-            <ul class="card-specs">
-              <li class="card-spec-item" data-i18n="t1Spec1">自己相関F0ピッチ & Burg LPCフォルマント (F1-F3)</li>
-              <li class="card-spec-item" data-i18n="t1Spec2">STFT 高精細スペクトログラム ＆ 音響VAD無音検出</li>
-              <li class="card-spec-item" data-i18n="t1Spec3">F1-F2 音響母音四辺形プロット ＆ CSV出力</li>
-              <li class="card-spec-item" data-i18n="t1Spec4">Praat TextGrid 双方向インポート・エクスポート</li>
-            </ul>
+            <div>
+              <h2 class="tool-title" data-i18n="t1Title">Acoustic Annotator</h2>
+              <span class="tool-subtitle" data-i18n="t1Subtitle">ブラウザ音響分析 & Praat TextGrid エディタ</span>
+            </div>
           </div>
-          <div class="card-actions">
-            <a href="https://okawawaka.github.io/acoustic-annotator/" target="_blank" rel="noopener noreferrer" class="card-action-launch" data-i18n="t1ActionLaunch">アプリを起動する ↗</a>
-            <a href="https://github.com/okawawaka/acoustic-annotator" target="_blank" rel="noopener noreferrer" class="card-action-repo" data-i18n="t1ActionRepo">リポジトリ (GitHub)</a>
-          </div>
-        </article>
 
-        <!-- Tool 2: IPA Editor -->
-        <article class="swiss-card" id="tool-ipa">
-          <div>
-            <div class="card-top">
-              <span class="card-category" data-i18n="t2Category">音声学・音標文字 / 字母入力</span>
-              <span class="card-index">[ 02 ]</span>
-            </div>
-            <div class="card-icon-wrap">
-              <img src="assets/ipa-editor.svg" alt="IPA Editor Icon">
-            </div>
-            <h3 class="card-title" data-i18n="t2Title">IPA Editor</h3>
-            <span class="card-subtitle" data-i18n="t2Subtitle">国際音声字母エディタ & 声調記号入力</span>
-            <p class="card-desc" data-i18n="t2Desc">
-              スイススタイルによる合理的・現代的な国際音声字母（IPA）Webエディタ。339記号を完全網羅し、子音表・母音四辺形・結合分音記号・声調バー（Chao Tone Letters）の合字合成をワンクリックで自在に入力できます。
-            </p>
-            <ul class="card-specs">
-              <li class="card-spec-item" data-i18n="t2Spec1">全339 IPA記号・非肺気流子音・補助記号を完全網羅</li>
-              <li class="card-spec-item" data-i18n="t2Spec2">SIL国際規格に準拠した声調バー自動合字（Ligature）</li>
-              <li class="card-spec-item" data-i18n="t2Spec3">基底文字とダイアクリティカルマークの非破壊自動結合</li>
-              <li class="card-spec-item" data-i18n="t2Spec4">ワンクリッククリップボードコピー ＆ 国際化UI</li>
-            </ul>
-          </div>
-          <div class="card-actions">
-            <a href="https://okawawaka.github.io/ipa-editor/" target="_blank" rel="noopener noreferrer" class="card-action-launch" data-i18n="t2ActionLaunch">アプリを起動する ↗</a>
-            <a href="https://github.com/okawawaka/ipa-editor" target="_blank" rel="noopener noreferrer" class="card-action-repo" data-i18n="t2ActionRepo">リポジトリ (GitHub)</a>
-          </div>
-        </article>
+          <p class="tool-narrative" data-i18n="t1Desc">
+            大学院・音声学研究のためのWebネイティブ音響分析スイート。ブラウザ内マイクから16-bit PCM高音質録音を行い、LPC フォルマント軌跡 (Burg法)、F0ピッチ抽出、母音四辺形プロット、音響VADによる自動区間分割を瞬時に実行します。
+          </p>
 
-        <!-- Tool 3: Syntax Tree Editor -->
-        <article class="swiss-card" id="tool-syntax">
-          <div>
-            <div class="card-top">
-              <span class="card-category" data-i18n="t3Category">統語論・形式文法 / 樹形図描画</span>
-              <span class="card-index">[ 03 ]</span>
-            </div>
-            <div class="card-icon-wrap">
-              <img src="assets/syntax-tree-editor.svg" alt="Syntax Tree Editor Icon">
-            </div>
-            <h3 class="card-title" data-i18n="t3Title">Syntax Tree Editor</h3>
-            <span class="card-subtitle" data-i18n="t3Subtitle">構文木エディタ & 統語階層可視化</span>
-            <p class="card-desc" data-i18n="t3Desc">
-              言語学・統語論のための Penn Treebank 形式構文木エディタ。ブラケット記法からのリアルタイム描画、Xバー理論・学術体系（TP/DP/vP）の即時切替、三角形省略、構成素移動矢印、LaTeX・SVG・高解像度PNG出力に対応します。
-            </p>
-            <ul class="card-specs">
-              <li class="card-spec-item" data-i18n="t3Spec1">ブラケット記法（Penn Treebank）リアルタイム構文解析</li>
-              <li class="card-spec-item" data-i18n="t3Spec2">伝統的体系（S/NP）と生成文法学術体系（TP/DP）の切替</li>
-              <li class="card-spec-item" data-i18n="t3Spec3">構成素移動矢印（Movement Arrows）と三角形省略記法</li>
-              <li class="card-spec-item" data-i18n="t3Spec4">LaTeX（forest / qtree / tikz-qtree）・SVG・PNGエクスポート</li>
-            </ul>
-          </div>
-          <div class="card-actions">
-            <a href="https://okawawaka.github.io/syntax-tree-editor/" target="_blank" rel="noopener noreferrer" class="card-action-launch" data-i18n="t3ActionLaunch">アプリを起動する ↗</a>
-            <a href="https://github.com/okawawaka/syntax-tree-editor" target="_blank" rel="noopener noreferrer" class="card-action-repo" data-i18n="t3ActionRepo">リポジトリ (GitHub)</a>
-          </div>
-        </article>
+          <ul class="tool-feature-list">
+            <li class="tool-feature-item" data-i18n="t1Spec1">自己相関F0ピッチ & Burg LPCフォルマント (F1-F3)</li>
+            <li class="tool-feature-item" data-i18n="t1Spec2">STFT 高精細スペクトログラム ＆ 音響VAD無音検出</li>
+            <li class="tool-feature-item" data-i18n="t1Spec3">F1-F2 音響母音四辺形プロット ＆ CSV出力</li>
+            <li class="tool-feature-item" data-i18n="t1Spec4">Praat TextGrid 双方向インポート・エクスポート</li>
+          </ul>
 
-        <!-- Tool 4: Phonological Rule Editor -->
-        <article class="swiss-card" id="tool-phonology">
-          <div>
-            <div class="card-top">
-              <span class="card-category" data-i18n="t4Category">音韻論・歴史言語学 / 規則記述</span>
-              <span class="card-index">[ 04 ]</span>
-            </div>
-            <div class="card-icon-wrap">
-              <img src="assets/phonological-rule-editor.svg" alt="Phonological Rule Editor Icon">
-            </div>
-            <h3 class="card-title" data-i18n="t4Title">Phonological Rule Editor</h3>
-            <span class="card-subtitle" data-i18n="t4Subtitle">音韻規則・音変化エディタ & KaTeX出力</span>
-            <p class="card-desc" data-i18n="t4Desc">
-              音韻規則（共時的規則: A → B / C _ D）および音変化（通時的変化: A > B / C _ D）の構造化記述Webエディタ。SPE示差特徴マトリクス、環境条件のビジュアル整形、KaTeX数式描画、論文用高解像度エクスポートをサポートします。
-            </p>
-            <ul class="card-specs">
-              <li class="card-spec-item" data-i18n="t4Spec1">共時的音韻規則（→）と通時的音変化（>）の統合記述</li>
-              <li class="card-spec-item" data-i18n="t4Spec2">Chomsky-Halle (SPE) 示差特徴マトリクスの自動整形</li>
-              <li class="card-spec-item" data-i18n="t4Spec3">KaTeX（LaTeX）数式コード生成 ＆ リアルタイム表示</li>
-              <li class="card-spec-item" data-i18n="t4Spec4">SVGベクターグラフィック ＆ 論文用高解像度PNG出力</li>
-            </ul>
+          <div class="tool-action-group">
+            <a href="https://okawawaka.github.io/acoustic-annotator/" target="_blank" rel="noopener noreferrer" class="swiss-btn swiss-btn-primary" data-i18n="t1ActionLaunch">アプリを起動する ↗</a>
+            <a href="https://github.com/okawawaka/acoustic-annotator" target="_blank" rel="noopener noreferrer" class="swiss-btn swiss-btn-outline" data-i18n="t1ActionRepo">リポジトリ (GitHub)</a>
           </div>
-          <div class="card-actions">
-            <a href="https://okawawaka.github.io/phonological-rule-editor/" target="_blank" rel="noopener noreferrer" class="card-action-launch" data-i18n="t4ActionLaunch">アプリを起動する ↗</a>
-            <a href="https://github.com/okawawaka/phonological-rule-editor" target="_blank" rel="noopener noreferrer" class="card-action-repo" data-i18n="t4ActionRepo">リポジトリ (GitHub)</a>
-          </div>
-        </article>
+        </div>
 
+        <!-- Right: Animated Visual Simulator -->
+        <div class="tool-visual-col slide-in-right">
+          <div class="visual-monitor-frame">
+            <div class="monitor-header">
+              <span class="monitor-title">LIVE DSP SIGNAL & PRAAT TEXTGRID RUNTIME</span>
+              <span class="monitor-badge">44.1kHz / 16-bit PCM</span>
+            </div>
+            <div class="canvas-container">
+              <canvas id="demo-annotator-canvas"></canvas>
+            </div>
+            <div class="monitor-footer">
+              <div class="monitor-status">
+                <span class="status-indicator"></span>
+                <span class="mono">STATUS: SYNCHRONIZED DSP ENGINE</span>
+              </div>
+              <span class="mono" style="color: var(--swiss-red);">LPC ORDER: 16 | BURG ROOT RESOLUTION</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ========================================================================
-       SECTION 02: INTEGRATED WORKFLOW PIPELINE
+       TOOL 02: IPA EDITOR (FULL SECTION)
+       ======================================================================== -->
+  <section id="ipa" class="tool-focus-section section-alt">
+    <div class="container">
+      <div class="tool-split-layout reverse-on-desktop">
+        <!-- Visual Column (Left on Desktop) -->
+        <div class="tool-visual-col slide-in-left">
+          <div class="visual-monitor-frame">
+            <div class="monitor-header">
+              <span class="monitor-title">LIVE IPA INPUT & CHAO TONE LIGATURE ENGINE</span>
+              <span class="monitor-badge">SIL LIGATURE SPEC</span>
+            </div>
+            
+            <div class="demo-ipa-wrapper">
+              <!-- Output Text Display Box -->
+              <div class="demo-ipa-output-box">
+                <span class="output-label">PHONETIC OUTPUT:</span>
+                <div class="output-content">
+                  <span class="output-bracket">[</span>
+                  <span id="demo-ipa-output" class="output-text"></span>
+                  <span class="typing-cursor"></span>
+                  <span class="output-bracket">]</span>
+                </div>
+              </div>
+
+              <!-- Interactive Virtual Keypad -->
+              <div class="demo-ipa-keypad">
+                <div class="keypad-row">
+                  <button type="button" class="demo-ipa-key" id="key-t">t</button>
+                  <button type="button" class="demo-ipa-key" id="key-esh">ʃ</button>
+                  <button type="button" class="demo-ipa-key" id="key-k">k</button>
+                  <button type="button" class="demo-ipa-key" id="key-j">j</button>
+                  <button type="button" class="demo-ipa-key" id="key-colon">ː</button>
+                  <button type="button" class="demo-ipa-key accent-key" id="key-tone">˥˩ (Tone)</button>
+                </div>
+                <div class="keypad-row">
+                  <span class="demo-ipa-key small">p</span>
+                  <span class="demo-ipa-key small">b</span>
+                  <span class="demo-ipa-key small">d</span>
+                  <span class="demo-ipa-key small">ɡ</span>
+                  <span class="demo-ipa-key small">m</span>
+                  <span class="demo-ipa-key small">n</span>
+                  <span class="demo-ipa-key small">ŋ</span>
+                  <span class="demo-ipa-key small">ɾ</span>
+                  <span class="demo-ipa-key small">ɯ</span>
+                  <span class="demo-ipa-key small">e</span>
+                  <span class="demo-ipa-key small">o</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="monitor-footer">
+              <div class="monitor-status">
+                <span class="status-indicator"></span>
+                <span class="mono">AUTO LIGATURE: ACTIVE</span>
+              </div>
+              <span class="mono">339 SYMBOLS & COMBINING DIACRITICS</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Text Column (Right on Desktop) -->
+        <div class="tool-details-col slide-in-right">
+          <div class="tool-index-tag">[ 02 / PHONETIC TRANSCRIPTION ]</div>
+          <div class="tool-header-group">
+            <div class="tool-icon-box">
+              <img src="assets/ipa-editor.svg" alt="IPA Editor Icon">
+            </div>
+            <div>
+              <h2 class="tool-title" data-i18n="t2Title">IPA Editor</h2>
+              <span class="tool-subtitle" data-i18n="t2Subtitle">国際音声字母エディタ & 声調記号入力</span>
+            </div>
+          </div>
+
+          <p class="tool-narrative" data-i18n="t2Desc">
+            スイススタイルによる合理的・現代的な国際音声字母（IPA）Webエディタ。339記号を完全網羅し、子音表・母音四辺形・結合分音記号・声調バー（Chao Tone Letters）の合字合成をワンクリックで自在に入力できます。
+          </p>
+
+          <ul class="tool-feature-list">
+            <li class="tool-feature-item" data-i18n="t2Spec1">全339 IPA記号・非肺気流子音・補助記号を完全網羅</li>
+            <li class="tool-feature-item" data-i18n="t2Spec2">SIL国際規格に準拠した声調バー自動合字（Ligature）</li>
+            <li class="tool-feature-item" data-i18n="t2Spec3">基底文字とダイアクリティカルマークの非破壊自動結合</li>
+            <li class="tool-feature-item" data-i18n="t2Spec4">ワンクリッククリップボードコピー ＆ 国際化UI</li>
+          </ul>
+
+          <div class="tool-action-group">
+            <a href="https://okawawaka.github.io/ipa-editor/" target="_blank" rel="noopener noreferrer" class="swiss-btn swiss-btn-primary" data-i18n="t2ActionLaunch">アプリを起動する ↗</a>
+            <a href="https://github.com/okawawaka/ipa-editor" target="_blank" rel="noopener noreferrer" class="swiss-btn swiss-btn-outline" data-i18n="t2ActionRepo">リポジトリ (GitHub)</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       TOOL 03: SYNTAX TREE EDITOR (FULL SECTION)
+       ======================================================================== -->
+  <section id="syntax" class="tool-focus-section">
+    <div class="container">
+      <div class="tool-split-layout">
+        <!-- Left: Text & Specs -->
+        <div class="tool-details-col slide-in-left">
+          <div class="tool-index-tag">[ 03 / FORMAL SYNTAX ]</div>
+          <div class="tool-header-group">
+            <div class="tool-icon-box">
+              <img src="assets/syntax-tree-editor.svg" alt="Syntax Tree Editor Icon">
+            </div>
+            <div>
+              <h2 class="tool-title" data-i18n="t3Title">Syntax Tree Editor</h2>
+              <span class="tool-subtitle" data-i18n="t3Subtitle">構文木エディタ & 統語階層可視化</span>
+            </div>
+          </div>
+
+          <p class="tool-narrative" data-i18n="t3Desc">
+            言語学・統語論のための Penn Treebank 形式構文木エディタ。ブラケット記法からのリアルタイム描画、Xバー理論・学術体系（TP/DP/vP）の即時切替、三角形省略、構成素移動矢印、LaTeX・SVG・高解像度PNG出力に対応します。
+          </p>
+
+          <ul class="tool-feature-list">
+            <li class="tool-feature-item" data-i18n="t3Spec1">ブラケット記法（Penn Treebank）リアルタイム構文解析</li>
+            <li class="tool-feature-item" data-i18n="t3Spec2">伝統的体系（S/NP）と生成文法学術体系（TP/DP）の切替</li>
+            <li class="tool-feature-item" data-i18n="t3Spec3">構成素移動矢印（Movement Arrows）と三角形省略記法</li>
+            <li class="tool-feature-item" data-i18n="t3Spec4">LaTeX（forest / qtree / tikz-qtree）・SVG・PNGエクスポート</li>
+          </ul>
+
+          <div class="tool-action-group">
+            <a href="https://okawawaka.github.io/syntax-tree-editor/" target="_blank" rel="noopener noreferrer" class="swiss-btn swiss-btn-primary" data-i18n="t3ActionLaunch">アプリを起動する ↗</a>
+            <a href="https://github.com/okawawaka/syntax-tree-editor" target="_blank" rel="noopener noreferrer" class="swiss-btn swiss-btn-outline" data-i18n="t3ActionRepo">リポジトリ (GitHub)</a>
+          </div>
+        </div>
+
+        <!-- Right: Animated Visual Simulator -->
+        <div class="tool-visual-col slide-in-right">
+          <div class="visual-monitor-frame">
+            <div class="monitor-header">
+              <span class="monitor-title">DYNAMIC X-BAR PARSING & MOVEMENT ARROW TRACE</span>
+              <span class="monitor-badge">PENN TREEBANK AST</span>
+            </div>
+
+            <div class="demo-tree-wrapper">
+              <svg id="demo-tree-svg" viewBox="0 0 520 280">
+                <!-- Root TP -->
+                <g class="tree-anim-item" id="node-tp">
+                  <rect x="230" y="15" width="60" height="28" fill="#111111" />
+                  <text x="260" y="34" fill="#FFFFFF" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="700" text-anchor="middle">TP</text>
+                  <!-- Branches down -->
+                  <line x1="250" y1="43" x2="130" y2="90" stroke="#111111" stroke-width="1.5" />
+                  <line x1="270" y1="43" x2="380" y2="90" stroke="#111111" stroke-width="1.5" />
+                </g>
+
+                <!-- Subject DP -->
+                <g class="tree-anim-item" id="node-dp1">
+                  <rect x="100" y="90" width="60" height="28" fill="#FFFFFF" stroke="#111111" stroke-width="1.5" />
+                  <text x="130" y="109" fill="#111111" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="700" text-anchor="middle">DP</text>
+                  <line x1="130" y1="118" x2="130" y2="160" stroke="#111111" stroke-width="1.5" />
+                  <text x="130" y="180" fill="#111111" font-family="'Noto Sans JP', sans-serif" font-size="14" font-weight="600" text-anchor="middle">The linguist</text>
+                </g>
+
+                <!-- T' -->
+                <g class="tree-anim-item" id="node-tbar">
+                  <rect x="350" y="90" width="60" height="28" fill="#FFFFFF" stroke="#111111" stroke-width="1.5" />
+                  <text x="380" y="109" fill="#111111" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="700" text-anchor="middle">T'</text>
+                  <line x1="365" y1="118" x2="310" y2="160" stroke="#111111" stroke-width="1.5" />
+                  <line x1="395" y1="118" x2="440" y2="160" stroke="#111111" stroke-width="1.5" />
+                  <text x="310" y="180" fill="#E30613" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="600" text-anchor="middle">will</text>
+                </g>
+
+                <!-- VP with triangle -->
+                <g class="tree-anim-item" id="node-vp">
+                  <rect x="410" y="160" width="60" height="28" fill="#FFFFFF" stroke="#111111" stroke-width="1.5" />
+                  <text x="440" y="179" fill="#111111" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="700" text-anchor="middle">VP</text>
+                  <!-- Triangle notation for abbreviation -->
+                  <polygon points="440,188 385,230 495,230" fill="none" stroke="#111111" stroke-width="1.5" />
+                  <text x="440" y="246" fill="#111111" font-family="'Noto Sans JP', sans-serif" font-size="13" text-anchor="middle">analyze the acoustics</text>
+                </g>
+
+                <!-- Movement Arrow -->
+                <g class="tree-anim-item" id="branch-arrow">
+                  <path d="M 130 195 C 130 270, 440 270, 440 252" fill="none" stroke="#E30613" stroke-width="2" stroke-dasharray="4,4" />
+                  <polygon points="440,250 435,260 445,260" fill="#E30613" />
+                  <text x="285" y="272" fill="#E30613" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" text-anchor="middle">[ MOVEMENT TRACE ]</text>
+                </g>
+              </svg>
+            </div>
+
+            <div class="monitor-footer">
+              <div class="monitor-status">
+                <span class="status-indicator"></span>
+                <span class="mono">LATEX & SVG EXPORT READY</span>
+              </div>
+              <span class="mono">TP / DP / vP ACADEMIC SYSTEM</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       TOOL 04: PHONOLOGICAL RULE EDITOR (FULL SECTION)
+       ======================================================================== -->
+  <section id="phonology" class="tool-focus-section section-alt">
+    <div class="container">
+      <div class="tool-split-layout reverse-on-desktop">
+        <!-- Visual Column (Left on Desktop) -->
+        <div class="tool-visual-col slide-in-left">
+          <div class="visual-monitor-frame">
+            <div class="monitor-header">
+              <span class="monitor-title">CHOMSKY-HALLE (SPE) MATRIX & KATEX TYPESETTING</span>
+              <span class="monitor-badge">SYNCHRONIC & DIACHRONIC</span>
+            </div>
+
+            <div class="demo-rule-wrapper" id="demo-rule-container">
+              <!-- Visual Rule Builder Formula -->
+              <div class="rule-formula-display">
+                <span class="rule-block input-term" id="rule-part-input">/ t /</span>
+                <span class="rule-arrow" id="rule-part-arrow">→</span>
+                <span class="rule-block output-term" id="rule-part-output">[ tʃ ]</span>
+                <span class="rule-slash" id="rule-part-slash">/</span>
+                <span class="rule-block env-term" id="rule-part-env">__ [ i ]</span>
+              </div>
+
+              <!-- SPE Distinctive Feature Matrix Box -->
+              <div class="spe-matrix-box" id="rule-part-matrix">
+                <div class="matrix-label">SPE DISTINCTIVE FEATURE MATRIX</div>
+                <div class="matrix-brackets">
+                  <div class="matrix-content">
+                    <span class="matrix-feat">+consonantal</span>
+                    <span class="matrix-feat">+coronal</span>
+                    <span class="matrix-feat accent">-anterior</span>
+                    <span class="matrix-feat accent">+delayed release</span>
+                    <span class="matrix-feat">-voice</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="monitor-footer">
+              <div class="monitor-status">
+                <span class="status-indicator"></span>
+                <span class="mono">KATEX ENGINE: RENDERED</span>
+              </div>
+              <span class="mono">HIGH-RES SVG / PNG PUBLICATION FORMAT</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Text Column (Right on Desktop) -->
+        <div class="tool-details-col slide-in-right">
+          <div class="tool-index-tag">[ 04 / PHONOLOGY & HISTORICAL LINGUISTICS ]</div>
+          <div class="tool-header-group">
+            <div class="tool-icon-box">
+              <img src="assets/phonological-rule-editor.svg" alt="Phonological Rule Editor Icon">
+            </div>
+            <div>
+              <h2 class="tool-title" data-i18n="t4Title">Phonological Rule Editor</h2>
+              <span class="tool-subtitle" data-i18n="t4Subtitle">音韻規則・音変化エディタ & KaTeX出力</span>
+            </div>
+          </div>
+
+          <p class="tool-narrative" data-i18n="t4Desc">
+            音韻規則（共時的規則: A → B / C _ D）および音変化（通時的変化: A > B / C _ D）の構造化記述Webエディタ。SPE示差特徴マトリクス、環境条件のビジュアル整形、KaTeX数式描画、論文用高解像度エクスポートをサポートします。
+          </p>
+
+          <ul class="tool-feature-list">
+            <li class="tool-feature-item" data-i18n="t4Spec1">共時的音韻規則（→）と通時的音変化（>）の統合記述</li>
+            <li class="tool-feature-item" data-i18n="t4Spec2">Chomsky-Halle (SPE) 示差特徴マトリクスの自動整形</li>
+            <li class="tool-feature-item" data-i18n="t4Spec3">KaTeX（LaTeX）数式コード生成 ＆ リアルタイム表示</li>
+            <li class="tool-feature-item" data-i18n="t4Spec4">SVGベクターグラフィック ＆ 論文用高解像度PNG出力</li>
+          </ul>
+
+          <div class="tool-action-group">
+            <a href="https://okawawaka.github.io/phonological-rule-editor/" target="_blank" rel="noopener noreferrer" class="swiss-btn swiss-btn-primary" data-i18n="t4ActionLaunch">アプリを起動する ↗</a>
+            <a href="https://github.com/okawawaka/phonological-rule-editor" target="_blank" rel="noopener noreferrer" class="swiss-btn swiss-btn-outline" data-i18n="t4ActionRepo">リポジトリ (GitHub)</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       SECTION: INTEGRATED WORKFLOW PIPELINE
        ======================================================================== -->
   <section id="workflow" class="section-wrapper workflow-section">
     <div class="container">
-      <div class="sec-header">
+      <div class="sec-header slide-in-up">
         <span class="sec-index" data-i18n="secWorkflowTitle">02 / INTEGRATED WORKFLOW</span>
         <h2 class="sec-title" data-i18n="secWorkflowSubtitle">実証的データから形式理論までをつなぐ一連の研究サイクル</h2>
         <p class="sec-lead" data-i18n="secWorkflowDesc">
@@ -244,7 +454,7 @@
       </div>
 
       <div class="workflow-timeline">
-        <div class="workflow-step">
+        <div class="workflow-step slide-in-up delay-1">
           <span class="wf-step-number" data-i18n="wfStep1Num">01</span>
           <h3 class="wf-step-title" data-i18n="wfStep1Title">音響分析 (Acoustic Phonetics)</h3>
           <p class="wf-step-desc" data-i18n="wfStep1Desc">
@@ -252,7 +462,7 @@
           </p>
         </div>
 
-        <div class="workflow-step">
+        <div class="workflow-step slide-in-up delay-2">
           <span class="wf-step-number" data-i18n="wfStep2Num">02</span>
           <h3 class="wf-step-title" data-i18n="wfStep2Title">音声記号転記 (Phonetic Transcription)</h3>
           <p class="wf-step-desc" data-i18n="wfStep2Desc">
@@ -260,7 +470,7 @@
           </p>
         </div>
 
-        <div class="workflow-step">
+        <div class="workflow-step slide-in-up delay-3">
           <span class="wf-step-number" data-i18n="wfStep3Num">03</span>
           <h3 class="wf-step-title" data-i18n="wfStep3Title">音韻規則化 (Phonological Modeling)</h3>
           <p class="wf-step-desc" data-i18n="wfStep3Desc">
@@ -268,7 +478,7 @@
           </p>
         </div>
 
-        <div class="workflow-step">
+        <div class="workflow-step slide-in-up delay-4">
           <span class="wf-step-number" data-i18n="wfStep4Num">04</span>
           <h3 class="wf-step-title" data-i18n="wfStep4Title">統語構造解析 (Syntactic Tree Modeling)</h3>
           <p class="wf-step-desc" data-i18n="wfStep4Desc">
@@ -280,11 +490,11 @@
   </section>
 
   <!-- ========================================================================
-       SECTION 03: SWISS STYLE PHILOSOPHY & SPECS
+       SECTION: SWISS STYLE PHILOSOPHY & SPECS
        ======================================================================== -->
   <section id="philosophy" class="section-wrapper">
     <div class="container">
-      <div class="sec-header">
+      <div class="sec-header slide-in-up">
         <span class="sec-index" data-i18n="secPhilosophyTitle">03 / SWISS STYLE & PHILOSOPHY</span>
         <h2 class="sec-title" data-i18n="secPhilosophySubtitle">スイススタイル（国際タイポグラフィ様式）の美学と設計思想</h2>
         <p class="sec-lead" data-i18n="secPhilosophyDesc">
@@ -293,7 +503,7 @@
       </div>
 
       <div class="philosophy-grid">
-        <div class="philosophy-card">
+        <div class="philosophy-card slide-in-up delay-1">
           <div class="phil-mark"></div>
           <h3 class="phil-title" data-i18n="phil1Title">角丸ゼロ・装飾シャドウの排除</h3>
           <p class="phil-desc" data-i18n="phil1Desc">
@@ -301,7 +511,7 @@
           </p>
         </div>
 
-        <div class="philosophy-card">
+        <div class="philosophy-card slide-in-up delay-2">
           <div class="phil-mark"></div>
           <h3 class="phil-title" data-i18n="phil2Title">数学的モジュラーグリッド</h3>
           <p class="phil-desc" data-i18n="phil2Desc">
@@ -309,7 +519,7 @@
           </p>
         </div>
 
-        <div class="philosophy-card">
+        <div class="philosophy-card slide-in-up delay-3">
           <div class="phil-mark"></div>
           <h3 class="phil-title" data-i18n="phil3Title">機能的タイポグラフィと色彩</h3>
           <p class="phil-desc" data-i18n="phil3Desc">
@@ -317,7 +527,7 @@
           </p>
         </div>
 
-        <div class="philosophy-card">
+        <div class="philosophy-card slide-in-up delay-4">
           <div class="phil-mark"></div>
           <h3 class="phil-title" data-i18n="phil4Title">100% クライアントサイド & プライバシー保護</h3>
           <p class="phil-desc" data-i18n="phil4Desc">
@@ -375,6 +585,7 @@
   <!-- Scripts -->
   <script src="js/i18n.js"></script>
   <script src="js/canvas-bg.js"></script>
+  <script src="js/visual-demos.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

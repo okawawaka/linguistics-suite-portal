@@ -4,29 +4,39 @@
  */
 
 document.addEventListener("DOMContentLoaded", () => {
-  // 1. Intersection Observer for Kinetic Entrance Animations
+  // 1. Immediately reveal hero elements after load
+  setTimeout(() => {
+    document.querySelectorAll(".hero-section .slide-in-up, .hero-section .slide-in-left").forEach((el) => {
+      el.classList.add("is-visible");
+    });
+  }, 100);
+
+  // 2. Intersection Observer for Scroll Kinetic Slide-In Animations
   const kineticElements = document.querySelectorAll(
-    ".reveal-text, .swiss-card, .workflow-step, .philosophy-card, .sec-header"
+    ".slide-in-left, .slide-in-right, .slide-in-up, .workflow-step, .philosophy-card, .sec-header"
   );
 
   const observerOptions = {
-    threshold: 0.15,
-    rootMargin: "0px 0px -50px 0px"
+    threshold: 0.12,
+    rootMargin: "0px 0px -40px 0px"
   };
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.classList.add("is-visible");
-        // Optional: unobserve once visible
-        // observer.unobserve(entry.target);
       }
     });
   }, observerOptions);
 
-  kineticElements.forEach((el) => observer.observe(el));
+  kineticElements.forEach((el) => {
+    // Only observe elements not already visible (e.g. outside hero)
+    if (!el.closest(".hero-section")) {
+      observer.observe(el);
+    }
+  });
 
-  // 2. Sticky Header active border on scroll
+  // 3. Sticky Header active border on scroll
   const header = document.querySelector(".portal-header");
   window.addEventListener("scroll", () => {
     if (window.scrollY > 40) {
@@ -36,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // 3. Smooth scroll for internal links
+  // 4. Smooth scroll for internal links
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
       const targetId = this.getAttribute("href");
@@ -52,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // 4. Back to top button
+  // 5. Back to top button
   const topBtn = document.getElementById("back-to-top");
   if (topBtn) {
     topBtn.addEventListener("click", () => {
@@ -60,19 +70,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 5. Academic Keyboard Shortcuts (Power-User Feature)
+  // 6. Academic Keyboard Shortcuts (Power-User Feature)
   window.addEventListener("keydown", (e) => {
-    // If user is inside an input or textarea, ignore
     if (["INPUT", "TEXTAREA"].includes(document.activeElement.tagName)) return;
 
     if (e.key === "1") {
-      document.querySelector("#tool-annotator")?.scrollIntoView({ behavior: "smooth" });
+      document.querySelector("#annotator")?.scrollIntoView({ behavior: "smooth" });
     } else if (e.key === "2") {
-      document.querySelector("#tool-ipa")?.scrollIntoView({ behavior: "smooth" });
+      document.querySelector("#ipa")?.scrollIntoView({ behavior: "smooth" });
     } else if (e.key === "3") {
-      document.querySelector("#tool-syntax")?.scrollIntoView({ behavior: "smooth" });
+      document.querySelector("#syntax")?.scrollIntoView({ behavior: "smooth" });
     } else if (e.key === "4") {
-      document.querySelector("#tool-phonology")?.scrollIntoView({ behavior: "smooth" });
+      document.querySelector("#phonology")?.scrollIntoView({ behavior: "smooth" });
     } else if (e.key === "t" || e.key === "T") {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }

@@ -2,6 +2,7 @@
    LINGUISTICS SUITE PORTAL — SWISS TYPOGRAPHIC STYLE (DIE NEUE GRAPHIK)
    Aesthetics: Zero Border-Radius, Zero Drop-Shadows, Absolute Grid Discipline,
    Stark Monochromatic Contrast with Swiss Red (#E30613) Signals.
+   Kinetic Animations & Interactive Visual Simulators.
    ========================================================================== */
 
 :root {
@@ -25,7 +26,7 @@
   --font-sans: 'Noto Sans', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
 
-  --container-max-width: 1320px;
+  --container-max-width: 1360px;
   --header-height: 64px;
 }
 
@@ -91,8 +92,45 @@ h1, h2, h3, h4, h5, h6 {
 .container {
   max-width: var(--container-max-width);
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 32px;
 }
+
+/* ==========================================================================
+   KINETIC SLIDE-IN & REVEAL ANIMATIONS
+   ========================================================================== */
+
+.slide-in-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.slide-in-left {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.slide-in-right {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.is-visible.slide-in-up,
+.is-visible.slide-in-left,
+.is-visible.slide-in-right {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* Staggered transition delays */
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+.delay-4 { transition-delay: 0.4s; }
+.delay-5 { transition-delay: 0.5s; }
+.delay-6 { transition-delay: 0.6s; }
 
 /* ==========================================================================
    STICKY HEADER (SWISS MASTHEAD)
@@ -103,8 +141,8 @@ h1, h2, h3, h4, h5, h6 {
   top: 0;
   z-index: 1000;
   height: var(--header-height);
-  background-color: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(8px);
+  background-color: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border-light);
   transition: border-color 0.2s ease;
 }
@@ -162,13 +200,13 @@ h1, h2, h3, h4, h5, h6 {
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 24px;
 }
 
 .nav-link {
   font-family: var(--font-mono);
-  font-size: 0.78rem;
-  font-weight: 500;
+  font-size: 0.76rem;
+  font-weight: 600;
   letter-spacing: 0.04em;
   color: var(--text-secondary);
   position: relative;
@@ -227,7 +265,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ==========================================================================
-   HERO SECTION (KINETIC TYPOGRAPHY & HARMONIC CANVAS)
+   HERO SECTION
    ========================================================================== */
 
 .hero-section {
@@ -253,9 +291,9 @@ h1, h2, h3, h4, h5, h6 {
 .hero-content {
   position: relative;
   z-index: 2;
-  padding: 72px 0 64px 0;
-  max-width: 980px;
-  pointer-events: none; /* Let canvas capture mouse unless on interactive CTA */
+  padding: 80px 0 70px 0;
+  max-width: 1040px;
+  pointer-events: none;
 }
 
 .hero-content a, .hero-content button {
@@ -267,9 +305,9 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   gap: 12px;
   font-family: var(--font-mono);
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
   color: var(--swiss-red);
   margin-bottom: 24px;
 }
@@ -283,7 +321,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero-headline {
-  font-size: clamp(2.4rem, 5.5vw, 4.4rem);
+  font-size: clamp(2.6rem, 5.8vw, 4.8rem);
   font-weight: 800;
   letter-spacing: -0.04em;
   line-height: 1.08;
@@ -296,11 +334,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero-lead {
-  font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
   color: var(--text-secondary);
   font-weight: 400;
   line-height: 1.65;
-  max-width: 720px;
+  max-width: 780px;
   margin-bottom: 40px;
 }
 
@@ -311,7 +349,6 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 56px;
 }
 
-/* Swiss Solid Buttons */
 .swiss-btn {
   display: inline-flex;
   align-items: center;
@@ -347,47 +384,456 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--text-inverse);
 }
 
-/* Hero Metric Stats Grid */
 .hero-stats-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1px;
   background-color: var(--border-medium);
   border: 1px solid var(--border-medium);
-  max-width: 860px;
+  max-width: 900px;
 }
 
 .stat-cell {
-  background-color: rgba(255, 255, 255, 0.9);
-  padding: 16px 20px;
+  background-color: rgba(255, 255, 255, 0.92);
+  padding: 18px 24px;
 }
 
 .stat-cell-num {
   font-family: var(--font-mono);
-  font-size: 1.3rem;
-  font-weight: 700;
+  font-size: 1.35rem;
+  font-weight: 800;
   color: var(--text-primary);
   display: block;
 }
 
 .stat-cell-label {
   font-family: var(--font-sans);
-  font-size: 0.75rem;
-  font-weight: 500;
+  font-size: 0.78rem;
+  font-weight: 600;
   color: var(--text-secondary);
 }
 
 /* ==========================================================================
-   SECTION COMMON STYLES
-   ========================================================================= */
+   TOOL FOCUS SECTIONS (DEDICATED FULL-WIDTH APPS)
+   ========================================================================== */
 
-.section-wrapper {
+.tool-focus-section {
+  padding: 110px 0;
+  border-bottom: 1px solid var(--border-dark);
+  position: relative;
+  background-color: var(--bg-primary);
+}
+
+.tool-focus-section.section-alt {
+  background-color: #FAFAFC;
+}
+
+.tool-split-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.18fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.tool-split-layout.reverse-on-desktop {
+  grid-template-columns: 1.18fr 1fr;
+}
+
+.tool-index-tag {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--swiss-red);
+  margin-bottom: 16px;
+}
+
+.tool-header-group {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.tool-icon-box {
+  width: 56px;
+  height: 56px;
+  border: 1px solid var(--border-dark);
+  background-color: var(--bg-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.tool-icon-box img {
+  width: 32px;
+  height: 32px;
+}
+
+.tool-title {
+  font-size: clamp(2rem, 3.2vw, 2.7rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.tool-subtitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--swiss-red);
+  display: block;
+  margin-top: 4px;
+}
+
+.tool-narrative {
+  font-size: 1.02rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+.tool-feature-list {
+  list-style: none;
+  margin-bottom: 40px;
+  border-top: 1px solid var(--border-light);
+}
+
+.tool-feature-item {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 0.86rem;
+  color: var(--text-primary);
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.tool-feature-item::before {
+  content: '■';
+  font-size: 0.6rem;
+  color: var(--swiss-red);
+}
+
+.tool-action-group {
+  display: flex;
+  gap: 16px;
+}
+
+/* ==========================================================================
+   VISUAL MONITOR FRAME (SWISS SCIENTIFIC MONITOR)
+   ========================================================================== */
+
+.visual-monitor-frame {
+  border: 1px solid var(--border-dark);
+  background-color: var(--bg-primary);
+  overflow: hidden;
+  position: relative;
+}
+
+.monitor-header {
+  background-color: var(--bg-dark);
+  color: var(--text-inverse);
+  padding: 10px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid var(--border-dark);
+}
+
+.monitor-badge {
+  background-color: var(--swiss-red);
+  padding: 2px 8px;
+  color: #FFFFFF;
+}
+
+.monitor-footer {
+  background-color: var(--bg-secondary);
+  padding: 10px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  border-top: 1px solid var(--border-light);
+}
+
+.monitor-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  background-color: #10B981; /* Healthy green pulse */
+  display: inline-block;
+  animation: pulseIndicator 1.8s infinite;
+}
+
+@keyframes pulseIndicator {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.canvas-container {
+  width: 100%;
+  height: 280px;
+  background-color: #111111;
+  position: relative;
+}
+
+/* ==========================================================================
+   DEMO 2: IPA INTERACTIVE TYPING SIMULATOR
+   ========================================================================== */
+
+.demo-ipa-wrapper {
+  padding: 28px;
+  background-color: var(--bg-primary);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-height: 280px;
+  justify-content: center;
+}
+
+.demo-ipa-output-box {
+  border: 1px solid var(--border-dark);
+  padding: 16px 20px;
+  background-color: #FAFAFA;
+}
+
+.output-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.output-content {
+  display: flex;
+  align-items: center;
+  font-family: var(--font-sans);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.output-bracket {
+  color: var(--swiss-red);
+}
+
+.output-text {
+  margin: 0 4px;
+  color: var(--text-primary);
+  min-height: 2.2rem;
+}
+
+.typing-cursor {
+  display: inline-block;
+  width: 3px;
+  height: 1.8rem;
+  background-color: var(--swiss-red);
+  margin-left: 4px;
+  animation: blinkCursor 0.8s infinite;
+}
+
+@keyframes blinkCursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.demo-ipa-keypad {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.keypad-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.demo-ipa-key {
+  border: 1px solid var(--border-dark);
+  background-color: var(--bg-primary);
+  padding: 8px 14px;
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  transition: all 0.15s ease;
+}
+
+.demo-ipa-key.accent-key {
+  background-color: var(--bg-secondary);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--swiss-red);
+}
+
+.demo-ipa-key.small {
+  padding: 4px 8px;
+  font-size: 0.85rem;
+  border-color: var(--border-light);
+  color: var(--text-muted);
+}
+
+.demo-ipa-key.key-active {
+  background-color: var(--swiss-red) !important;
+  color: var(--text-inverse) !important;
+  border-color: var(--swiss-red) !important;
+  transform: scale(0.95);
+}
+
+/* ==========================================================================
+   DEMO 3: SYNTAX TREE SVG ANIMATION
+   ========================================================================== */
+
+.demo-tree-wrapper {
+  padding: 16px 20px;
+  background-color: var(--bg-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 280px;
+}
+
+.demo-tree-wrapper svg {
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+}
+
+.tree-anim-item {
+  opacity: 0;
+  transform: scale(0.92);
+  transform-origin: center;
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tree-anim-item.is-drawn {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ==========================================================================
+   DEMO 4: PHONOLOGICAL RULE & SPE MATRIX ANIMATION
+   ========================================================================== */
+
+.demo-rule-wrapper {
+  padding: 24px;
+  background-color: var(--bg-primary);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 20px;
+  min-height: 280px;
+}
+
+.rule-formula-display {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.rule-block {
+  border: 1px solid var(--border-dark);
+  padding: 8px 14px;
+  background-color: var(--bg-primary);
+  opacity: 0.3;
+  transition: all 0.4s ease;
+}
+
+.rule-arrow, .rule-slash {
+  color: var(--text-muted);
+  opacity: 0.3;
+  transition: all 0.4s ease;
+}
+
+.rule-block.matrix-active, .rule-arrow.matrix-active, .rule-slash.matrix-active {
+  opacity: 1;
+  color: var(--text-primary);
+}
+
+.output-term.matrix-active {
+  background-color: var(--text-primary);
+  color: var(--text-inverse);
+}
+
+.spe-matrix-box {
+  border: 1px solid var(--border-dark);
+  background-color: var(--bg-secondary);
+  padding: 16px 20px;
+  opacity: 0.2;
+  transform: translateY(10px);
+  transition: all 0.5s ease;
+}
+
+.spe-matrix-box.matrix-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.matrix-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--swiss-red);
+  margin-bottom: 8px;
+}
+
+.matrix-brackets {
+  border-left: 2px solid var(--border-dark);
+  border-right: 2px solid var(--border-dark);
+  padding: 4px 12px;
+}
+
+.matrix-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.matrix-feat {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.matrix-feat.accent {
+  color: var(--swiss-red);
+}
+
+/* ==========================================================================
+   WORKFLOW SECTION
+   ========================================================================== */
+
+.workflow-section {
+  background-color: var(--bg-secondary);
   padding: 100px 0;
   border-bottom: 1px solid var(--border-light);
 }
 
 .sec-header {
-  margin-bottom: 64px;
+  margin-bottom: 56px;
 }
 
 .sec-index {
@@ -410,171 +856,8 @@ h1, h2, h3, h4, h5, h6 {
 .sec-lead {
   font-size: 1.1rem;
   color: var(--text-secondary);
-  max-width: 760px;
+  max-width: 780px;
   line-height: 1.6;
-}
-
-/* ==========================================================================
-   TOOLS SHOWCASE (2x2 MODULAR GRID)
-   ========================================================================== */
-
-.tools-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 32px;
-}
-
-.swiss-card {
-  position: relative;
-  background-color: var(--bg-primary);
-  border: 1px solid var(--border-medium);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 40px;
-  transition: border-color 0.2s ease, transform 0.2s ease;
-}
-
-.swiss-card:hover {
-  border-color: var(--text-primary);
-}
-
-.card-top {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  margin-bottom: 24px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid var(--border-light);
-}
-
-.card-category {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  color: var(--text-muted);
-  text-transform: uppercase;
-}
-
-.card-index {
-  font-family: var(--font-mono);
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--swiss-red);
-}
-
-.card-icon-wrap {
-  width: 48px;
-  height: 48px;
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--border-medium);
-  background-color: var(--bg-secondary);
-}
-
-.card-icon-wrap img, .card-icon-wrap svg {
-  width: 28px;
-  height: 28px;
-  object-fit: contain;
-}
-
-.card-title {
-  font-size: 1.65rem;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  margin-bottom: 6px;
-}
-
-.card-subtitle {
-  font-family: var(--font-sans);
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--swiss-red);
-  margin-bottom: 16px;
-  display: block;
-}
-
-.card-desc {
-  font-size: 0.92rem;
-  color: var(--text-secondary);
-  line-height: 1.65;
-  margin-bottom: 28px;
-}
-
-.card-specs {
-  list-style: none;
-  margin-bottom: 32px;
-  border-top: 1px solid var(--border-light);
-}
-
-.card-spec-item {
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-  padding: 8px 0;
-  border-bottom: 1px solid var(--border-light);
-}
-
-.card-spec-item::before {
-  content: '■';
-  font-size: 0.5rem;
-  color: var(--swiss-red);
-}
-
-.card-actions {
-  display: grid;
-  grid-template-columns: 1.3fr 1fr;
-  gap: 12px;
-  margin-top: auto;
-}
-
-.card-action-launch {
-  background-color: var(--text-primary);
-  color: var(--text-inverse);
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  font-weight: 600;
-  padding: 12px 16px;
-  text-align: center;
-  border: 1px solid var(--border-dark);
-  transition: background-color 0.15s ease;
-}
-
-.card-action-launch:hover {
-  background-color: var(--swiss-red);
-  border-color: var(--swiss-red);
-  color: var(--text-inverse);
-}
-
-.card-action-repo {
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  font-weight: 600;
-  padding: 12px 16px;
-  text-align: center;
-  border: 1px solid var(--border-medium);
-  transition: all 0.15s ease;
-}
-
-.card-action-repo:hover {
-  border-color: var(--text-primary);
-  background-color: var(--bg-secondary);
-}
-
-/* ==========================================================================
-   WORKFLOW SECTION (CHRONOLOGICAL PIPELINE MATRIX)
-   ========================================================================== */
-
-.workflow-section {
-  background-color: var(--bg-secondary);
 }
 
 .workflow-timeline {
@@ -623,6 +906,11 @@ h1, h2, h3, h4, h5, h6 {
 /* ==========================================================================
    PHILOSOPHY & ARCHITECTURE (4-COLUMN PILLARS)
    ========================================================================== */
+
+.section-wrapper {
+  padding: 100px 0;
+  border-bottom: 1px solid var(--border-light);
+}
 
 .philosophy-grid {
   display: grid;
@@ -750,9 +1038,11 @@ h1, h2, h3, h4, h5, h6 {
    RESPONSIVE DESIGN (SWISS ADAPTIVE SYSTEM)
    ========================================================================== */
 
-@media (max-width: 1024px) {
-  .tools-grid {
+@media (max-width: 1080px) {
+  .tool-split-layout,
+  .tool-split-layout.reverse-on-desktop {
     grid-template-columns: 1fr;
+    gap: 40px;
   }
   .workflow-timeline {
     grid-template-columns: repeat(2, 1fr);
@@ -775,8 +1065,8 @@ h1, h2, h3, h4, h5, h6 {
   .philosophy-grid {
     grid-template-columns: 1fr;
   }
-  .card-actions {
-    grid-template-columns: 1fr;
+  .tool-action-group {
+    flex-direction: column;
   }
   .footer-top {
     flex-direction: column;
