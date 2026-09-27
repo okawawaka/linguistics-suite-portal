@@ -11,9 +11,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }, 100);
 
-  // 2. Intersection Observer for Scroll Kinetic Slide-In Animations
   const kineticElements = document.querySelectorAll(
-    ".slide-in-up, .poster-block, .sec-header, .poster-head"
+    ".slide-in-up, .poster-block, .sec-header, .poster-head, .tool-focus-section, .section-lead-band, .metrics-strip"
   );
 
   const observerOptions = {
@@ -34,6 +33,63 @@ document.addEventListener("DOMContentLoaded", () => {
       observer.observe(el);
     }
   });
+
+  // 2b. Scientific Vertical Ruler Tracking & Metric Counters
+  const sections = document.querySelectorAll("section[id]");
+  const rulerLinks = document.querySelectorAll(".ruler-step-link");
+
+  function animateMetricVal(el) {
+    if (el.dataset.hasCounted) return;
+    el.dataset.hasCounted = "true";
+
+    const targetStr = el.getAttribute("data-target") || el.textContent.trim();
+    const targetNum = parseInt(targetStr, 10);
+    if (isNaN(targetNum)) return;
+
+    const originalText = el.textContent.trim();
+    const suffix = originalText.endsWith("%") ? "%" : (originalText.endsWith("ms") ? "ms" : "");
+    const duration = 850;
+    const startTime = performance.now();
+
+    function update(now) {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const easeProgress = 1 - Math.pow(1 - progress, 3);
+      const currentNum = Math.round(easeProgress * targetNum);
+      el.textContent = currentNum + suffix;
+
+      if (progress < 1) {
+        requestAnimationFrame(update);
+      } else {
+        el.textContent = originalText;
+      }
+    }
+    requestAnimationFrame(update);
+  }
+
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible", "is-scanned");
+        const currentId = entry.target.getAttribute("id");
+        rulerLinks.forEach((link) => {
+          if (link.getAttribute("data-step") === currentId) {
+            link.classList.add("active");
+          } else {
+            link.classList.remove("active");
+          }
+        });
+
+        const metricVals = entry.target.querySelectorAll(".metric-val");
+        metricVals.forEach(animateMetricVal);
+      }
+    });
+  }, {
+    threshold: 0.25,
+    rootMargin: "-5% 0px -25% 0px"
+  });
+
+  sections.forEach((sec) => sectionObserver.observe(sec));
 
   // 3. Scroll Progress Indicator & Header Sticky Border
   const header = document.querySelector(".portal-header");

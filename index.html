@@ -28,6 +28,29 @@
   <!-- Dynamic Scroll Progress Indicator (Swiss Red Line) -->
   <div id="scroll-progress" class="scroll-progress-line"></div>
 
+  <!-- Scientific Vertical Elevation Ruler & Quick-Navigation -->
+  <aside class="vertical-ruler" aria-label="Section Navigation Ruler">
+    <div class="ruler-track" aria-hidden="true">
+      <div class="ruler-tick major"></div>
+      <div class="ruler-tick"></div>
+      <div class="ruler-tick"></div>
+      <div class="ruler-tick major"></div>
+      <div class="ruler-tick"></div>
+      <div class="ruler-tick"></div>
+      <div class="ruler-tick major"></div>
+      <div class="ruler-tick"></div>
+      <div class="ruler-tick"></div>
+      <div class="ruler-tick major"></div>
+    </div>
+    <ul class="ruler-steps">
+      <li><a href="#annotator" class="ruler-step-link" data-step="annotator">01</a></li>
+      <li><a href="#ipa" class="ruler-step-link" data-step="ipa">02</a></li>
+      <li><a href="#syntax" class="ruler-step-link" data-step="syntax">03</a></li>
+      <li><a href="#phonology" class="ruler-step-link" data-step="phonology">04</a></li>
+      <li><a href="#features" class="ruler-step-link" data-step="features">FT</a></li>
+    </ul>
+  </aside>
+
   <!-- ========================================================================
        SWISS MASTHEAD / STICKY HEADER
        ======================================================================== -->
@@ -91,7 +114,13 @@
        TOOL 01: ACOUSTIC ANNOTATOR (FULL SECTION)
        ======================================================================== -->
   <section id="annotator" class="tool-focus-section">
+    <div class="laser-scanline"></div>
     <div class="container">
+      <div class="section-lead-band">
+        <span class="lead-band-tag">SECTION 01 / ACOUSTIC PHONETICS</span>
+        <span class="lead-band-coords">DSP // LPC-BURG // 44.1kHz PCM</span>
+      </div>
+
       <div class="tool-split-layout">
         <!-- Left: Text & Specs -->
         <div class="tool-details-col slide-in-up">
@@ -106,16 +135,32 @@
             </div>
           </div>
 
+          <!-- Scientific Metric Badges -->
+          <div class="metrics-strip">
+            <div class="metric-item">
+              <span class="metric-val" data-target="16">16</span>
+              <span class="metric-lbl">BIT PCM</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-val" data-target="3">3</span>
+              <span class="metric-lbl">FORMANTS (F1-F3)</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-val" data-target="100">100%</span>
+              <span class="metric-lbl">CLIENT LOCAL</span>
+            </div>
+          </div>
+
           <ul class="tool-feature-list">
-            <li class="tool-feature-item" data-i18n="t1Spec1">ブラウザ内16-bit PCM高音質録音 & 音響VAD無音自動分割</li>
-            <li class="tool-feature-item" data-i18n="t1Spec2">F0ピッチ軌跡推定 & Burg法LPCフォルマント (F1-F3)</li>
-            <li class="tool-feature-item" data-i18n="t1Spec3">F1-F2母音四辺形散布図プロット（CSV出力対応）</li>
-            <li class="tool-feature-item" data-i18n="t1Spec4">Praat TextGrid形式の双方向インポート・エクスポート</li>
-            <li class="tool-feature-item" data-i18n="t1Spec5">サーバー送信なし・完全ローカルクライアントサイド処理</li>
+            <li class="tool-feature-item stagger-item" data-i18n="t1Spec1">ブラウザ内16-bit PCM高音質録音 & 音響VAD無音自動分割</li>
+            <li class="tool-feature-item stagger-item" data-i18n="t1Spec2">F0ピッチ軌跡推定 & Burg法LPCフォルマント (F1-F3)</li>
+            <li class="tool-feature-item stagger-item" data-i18n="t1Spec3">F1-F2母音四辺形散布図プロット（CSV出力対応）</li>
+            <li class="tool-feature-item stagger-item" data-i18n="t1Spec4">Praat TextGrid形式の双方向インポート・エクスポート</li>
+            <li class="tool-feature-item stagger-item" data-i18n="t1Spec5">サーバー送信なし・完全ローカルクライアントサイド処理</li>
           </ul>
 
           <div class="tool-action-group">
-            <a href="https://okawawaka.github.io/acoustic-annotator/" target="_blank" rel="noopener noreferrer" class="swiss-btn swiss-btn-primary" data-i18n="t1ActionLaunch">アプリを起動する ↗</a>
+            <a href="https://okawawaka.github.io/acoustic-annotator/" target="_blank" rel="noopener noreferrer" class="swiss-btn swiss-btn-primary" data-i18n="t1ActionLaunch">アプリを起動する <span class="btn-arrow">↗</span></a>
             <a href="https://github.com/okawawaka/acoustic-annotator" target="_blank" rel="noopener noreferrer" class="swiss-btn swiss-btn-outline" data-i18n="t1ActionRepo">GitHub リポジトリ</a>
           </div>
         </div>
@@ -160,7 +205,13 @@
        TOOL 02: IPA EDITOR (FULL SECTION)
        ======================================================================== -->
   <section id="ipa" class="tool-focus-section section-alt">
+    <div class="laser-scanline"></div>
     <div class="container">
+      <div class="section-lead-band">
+        <span class="lead-band-tag">SECTION 02 / PHONETIC TRANSCRIPTION</span>
+        <span class="lead-band-coords">IPA 2024 // CHAO TONE // SIL LIGATURE</span>
+      </div>
+
       <div class="tool-split-layout reverse-on-desktop">
         <!-- Visual Column (Left on Desktop) -->
         <div class="tool-visual-col slide-in-up">
@@ -231,15 +282,31 @@
             </div>
           </div>
 
+          <!-- Scientific Metric Badges -->
+          <div class="metrics-strip">
+            <div class="metric-item">
+              <span class="metric-val" data-target="339">339</span>
+              <span class="metric-lbl">IPA SYMBOLS</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-val" data-target="5">5</span>
+              <span class="metric-lbl">CHAO TONE LEVELS</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-val" data-target="0">0ms</span>
+              <span class="metric-lbl">LIGATURE LATENCY</span>
+            </div>
+          </div>
+
           <ul class="tool-feature-list">
-            <li class="tool-feature-item" data-i18n="t2Spec1">全339記号・肺臓気流・非肺臓気流・補助記号を完全網羅</li>
-            <li class="tool-feature-item" data-i18n="t2Spec2">声調番号からChao Tone Letters（声調バー）を自動合字合成</li>
-            <li class="tool-feature-item" data-i18n="t2Spec3">結合分音記号の非破壊自動アタッチ & 音声記号検索</li>
-            <li class="tool-feature-item" data-i18n="t2Spec4">ワンクリックでのクリップボードコピー & 日英UI</li>
+            <li class="tool-feature-item stagger-item" data-i18n="t2Spec1">全339記号・肺臓気流・非肺臓気流・補助記号を完全網羅</li>
+            <li class="tool-feature-item stagger-item" data-i18n="t2Spec2">声調番号からChao Tone Letters（声調バー）を自動合字合成</li>
+            <li class="tool-feature-item stagger-item" data-i18n="t2Spec3">結合分音記号の非破壊自動アタッチ & 音声記号検索</li>
+            <li class="tool-feature-item stagger-item" data-i18n="t2Spec4">ワンクリックでのクリップボードコピー & 日英UI</li>
           </ul>
 
           <div class="tool-action-group">
-            <a href="https://okawawaka.github.io/ipa-editor/" target="_blank" rel="noopener noreferrer" class="swiss-btn swiss-btn-primary" data-i18n="t2ActionLaunch">アプリを起動する ↗</a>
+            <a href="https://okawawaka.github.io/ipa-editor/" target="_blank" rel="noopener noreferrer" class="swiss-btn swiss-btn-primary" data-i18n="t2ActionLaunch">アプリを起動する <span class="btn-arrow">↗</span></a>
             <a href="https://github.com/okawawaka/ipa-editor" target="_blank" rel="noopener noreferrer" class="swiss-btn swiss-btn-outline" data-i18n="t2ActionRepo">GitHub リポジトリ</a>
           </div>
         </div>
@@ -251,7 +318,13 @@
        TOOL 03: SYNTAX TREE EDITOR (FULL SECTION)
        ======================================================================== -->
   <section id="syntax" class="tool-focus-section">
+    <div class="laser-scanline"></div>
     <div class="container">
+      <div class="section-lead-band">
+        <span class="lead-band-tag">SECTION 03 / FORMAL SYNTAX</span>
+        <span class="lead-band-coords">X-BAR // PENN TREEBANK // LATEX FOREST</span>
+      </div>
+
       <div class="tool-split-layout">
         <!-- Left: Text & Specs -->
         <div class="tool-details-col slide-in-up">
@@ -266,15 +339,31 @@
             </div>
           </div>
 
+          <!-- Scientific Metric Badges -->
+          <div class="metrics-strip">
+            <div class="metric-item">
+              <span class="metric-val" data-target="2">2</span>
+              <span class="metric-lbl">GRAMMAR SYSTEMS</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-val" data-target="100">100%</span>
+              <span class="metric-lbl">VECTOR SVG/LATEX</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-val" data-target="0">0</span>
+              <span class="metric-lbl">BACKEND CALLS</span>
+            </div>
+          </div>
+
           <ul class="tool-feature-list">
-            <li class="tool-feature-item" data-i18n="t3Spec1">Penn Treebankブラケット記法のリアルタイム構文木パース</li>
-            <li class="tool-feature-item" data-i18n="t3Spec2">TP/DP学術体系 ＆ S/NP学校文法体系のワンクリック切替</li>
-            <li class="tool-feature-item" data-i18n="t3Spec3">構成素移動矢印（Movement Arrows）と三角形省略記法</li>
-            <li class="tool-feature-item" data-i18n="t3Spec4">LaTeX（forest / qtree）コード & ベクターSVG/PNG出力</li>
+            <li class="tool-feature-item stagger-item" data-i18n="t3Spec1">Penn Treebankブラケット記法のリアルタイム構文木パース</li>
+            <li class="tool-feature-item stagger-item" data-i18n="t3Spec2">TP/DP学術体系 ＆ S/NP学校文法体系のワンクリック切替</li>
+            <li class="tool-feature-item stagger-item" data-i18n="t3Spec3">構成素移動矢印（Movement Arrows）と三角形省略記法</li>
+            <li class="tool-feature-item stagger-item" data-i18n="t3Spec4">LaTeX（forest / qtree）コード & ベクターSVG/PNG出力</li>
           </ul>
 
           <div class="tool-action-group">
-            <a href="https://okawawaka.github.io/syntax-tree-editor/" target="_blank" rel="noopener noreferrer" class="swiss-btn swiss-btn-primary" data-i18n="t3ActionLaunch">アプリを起動する ↗</a>
+            <a href="https://okawawaka.github.io/syntax-tree-editor/" target="_blank" rel="noopener noreferrer" class="swiss-btn swiss-btn-primary" data-i18n="t3ActionLaunch">アプリを起動する <span class="btn-arrow">↗</span></a>
             <a href="https://github.com/okawawaka/syntax-tree-editor" target="_blank" rel="noopener noreferrer" class="swiss-btn swiss-btn-outline" data-i18n="t3ActionRepo">GitHub リポジトリ</a>
           </div>
         </div>
@@ -350,7 +439,13 @@
        TOOL 04: PHONOLOGICAL RULE EDITOR (FULL SECTION - FIXED LAYOUT)
        ======================================================================== -->
   <section id="phonology" class="tool-focus-section section-alt">
+    <div class="laser-scanline"></div>
     <div class="container">
+      <div class="section-lead-band">
+        <span class="lead-band-tag">SECTION 04 / PHONOLOGICAL RULES</span>
+        <span class="lead-band-coords">SPE MATRIX // KATEX SYNTAX // DIACHRONIC</span>
+      </div>
+
       <div class="tool-split-layout reverse-on-desktop">
         <!-- Visual Column (Left on Desktop) -->
         <div class="tool-visual-col slide-in-up">
@@ -432,15 +527,31 @@
             </div>
           </div>
 
+          <!-- Scientific Metric Badges -->
+          <div class="metrics-strip">
+            <div class="metric-item">
+              <span class="metric-val" data-target="28">28</span>
+              <span class="metric-lbl">SPE FEATURES</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-val" data-target="2">2</span>
+              <span class="metric-lbl">RULE MODES (→ / &gt;)</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-val" data-target="100">100%</span>
+              <span class="metric-lbl">KATEX REALTIME</span>
+            </div>
+          </div>
+
           <ul class="tool-feature-list">
-            <li class="tool-feature-item" data-i18n="t4Spec1">共時的音韻規則（→）と通時的音変化（>）の統合エディタ</li>
-            <li class="tool-feature-item" data-i18n="t4Spec2">Chomsky-Halle (SPE) 示差特徴マトリクスの自動整形</li>
-            <li class="tool-feature-item" data-i18n="t4Spec3">KaTeX（LaTeX）数式コード生成 & リアルタイムプレビュー</li>
-            <li class="tool-feature-item" data-i18n="t4Spec4">論文・発表スライド用ベクターSVG & 高解像度PNG出力</li>
+            <li class="tool-feature-item stagger-item" data-i18n="t4Spec1">共時的音韻規則（→）と通時的音変化（>）の統合エディタ</li>
+            <li class="tool-feature-item stagger-item" data-i18n="t4Spec2">Chomsky-Halle (SPE) 示差特徴マトリクスの自動整形</li>
+            <li class="tool-feature-item stagger-item" data-i18n="t4Spec3">KaTeX（LaTeX）数式コード生成 & リアルタイムプレビュー</li>
+            <li class="tool-feature-item stagger-item" data-i18n="t4Spec4">論文・発表スライド用ベクターSVG & 高解像度PNG出力</li>
           </ul>
 
           <div class="tool-action-group">
-            <a href="https://okawawaka.github.io/phonological-rule-editor/" target="_blank" rel="noopener noreferrer" class="swiss-btn swiss-btn-primary" data-i18n="t4ActionLaunch">アプリを起動する ↗</a>
+            <a href="https://okawawaka.github.io/phonological-rule-editor/" target="_blank" rel="noopener noreferrer" class="swiss-btn swiss-btn-primary" data-i18n="t4ActionLaunch">アプリを起動する <span class="btn-arrow">↗</span></a>
             <a href="https://github.com/okawawaka/phonological-rule-editor" target="_blank" rel="noopener noreferrer" class="swiss-btn swiss-btn-outline" data-i18n="t4ActionRepo">GitHub リポジトリ</a>
           </div>
         </div>
@@ -451,7 +562,8 @@
   <!-- ========================================================================
        SECTION: TOOL FEATURES (3 MAJOR PILLARS: MINIMAL, LOCAL, LINGUISTICS)
        ======================================================================== -->
-  <section id="features" class="section-wrapper design-poster-section">
+  <section id="features" class="section-wrapper design-poster-section" style="position: relative;">
+    <div class="laser-scanline"></div>
     <div class="container">
       <div class="poster-head slide-in-up">
         <span class="sec-index" data-i18n="secFeaturesTitle">FEATURES</span>
