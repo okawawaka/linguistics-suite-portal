@@ -1059,7 +1059,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .playbar-segment {
   border-bottom: 1px solid #D1D5DB;
-  padding: 2px 10px;
+  padding: 3px 10px;
   background-color: #F3F4F6;
   font-family: var(--font-mono);
   font-size: 0.62rem;
@@ -1069,6 +1069,24 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   transition: background-color 0.15s ease;
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.playbar-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background-color: rgba(37, 99, 235, 0.25);
+  pointer-events: none;
+  transition: width 0.05s linear;
+}
+
+.playbar-label {
+  position: relative;
+  z-index: 2;
 }
 
 .playbar-segment:hover {
@@ -1169,6 +1187,12 @@ h1, h2, h3, h4, h5, h6 {
   color: #FFFFFF;
 }
 
+.mini-ipa-act-btn.act-highlight {
+  background-color: var(--swiss-red) !important;
+  color: #FFFFFF !important;
+  border-color: var(--swiss-red) !important;
+}
+
 .demo-status-ticker {
   background-color: var(--bg-secondary);
   border: 1px solid var(--border-light);
@@ -1178,12 +1202,14 @@ h1, h2, h3, h4, h5, h6 {
   gap: 10px;
   font-family: var(--font-mono);
   font-size: 0.68rem;
+  min-height: 28px;
 }
 
 .demo-ticker-sym {
   color: var(--swiss-red);
   font-weight: 800;
   font-size: 0.85rem;
+  transition: all 0.2s ease;
 }
 
 .demo-ticker-text {
@@ -1191,6 +1217,7 @@ h1, h2, h3, h4, h5, h6 {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  transition: all 0.2s ease;
 }
 
 .demo-ipa-tabs {
@@ -1276,7 +1303,7 @@ h1, h2, h3, h4, h5, h6 {
   padding: 1px 5px;
   margin: 0 1px;
   cursor: pointer;
-  transition: all 0.12s ease;
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
   line-height: 1;
 }
 
@@ -1289,7 +1316,8 @@ h1, h2, h3, h4, h5, h6 {
   background-color: var(--swiss-red) !important;
   color: #FFFFFF !important;
   border-color: var(--swiss-red) !important;
-  transform: scale(0.94);
+  transform: scale(0.92);
+  box-shadow: 0 0 8px rgba(227, 6, 19, 0.4);
 }
 
 .demo-tone-strip {
@@ -1320,7 +1348,7 @@ h1, h2, h3, h4, h5, h6 {
   padding: 3px 6px;
   cursor: pointer;
   white-space: nowrap;
-  transition: all 0.15s ease;
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .demo-tone-btn.tone-special {
@@ -1336,6 +1364,8 @@ h1, h2, h3, h4, h5, h6 {
   background-color: var(--swiss-red) !important;
   color: #FFFFFF !important;
   border-color: var(--swiss-red) !important;
+  transform: scale(0.92);
+  box-shadow: 0 0 8px rgba(227, 6, 19, 0.4);
 }
 
 /* ==========================================================================
@@ -1401,6 +1431,15 @@ h1, h2, h3, h4, h5, h6 {
 .code-line {
   display: flex;
   white-space: nowrap;
+  transition: background-color 0.2s ease, padding-left 0.2s ease;
+  border-left: 2px solid transparent;
+  padding: 1px 0;
+}
+
+.code-line.active-line {
+  background-color: rgba(227, 6, 19, 0.08) !important;
+  border-left-color: var(--swiss-red) !important;
+  padding-left: 4px;
 }
 
 .line-num {
@@ -1497,8 +1536,24 @@ h1, h2, h3, h4, h5, h6 {
   aspect-ratio: 380 / 230;
 }
 
+.tree-node-group rect,
+.tree-node-group text {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.node-pulsing rect {
+  stroke: var(--swiss-red) !important;
+  stroke-width: 2.2px !important;
+  fill: #FFF5F5 !important;
+}
+
+.node-pulsing text {
+  fill: var(--swiss-red) !important;
+  font-weight: 800 !important;
+}
+
 .flowing-dash-path {
-  animation: dashFlow 1.4s linear infinite;
+  animation: dashFlow 1.2s linear infinite;
   stroke-linecap: square;
 }
 
@@ -1548,15 +1603,18 @@ h1, h2, h3, h4, h5, h6 {
 
 .rule-syn-chunk {
   color: #111111;
+  transition: color 0.2s ease;
 }
 
 .rule-syn-op {
   color: var(--swiss-red);
   font-weight: 800;
+  transition: all 0.2s ease;
 }
 
 .rule-syn-env {
   color: #4B5563;
+  transition: color 0.2s ease;
 }
 
 .rule-builder-blocks {
@@ -1578,6 +1636,18 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   background-color: #FAFAFA;
   flex-shrink: 0;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.builder-block.active-step {
+  border-color: var(--swiss-red) !important;
+  background-color: #FFF5F5 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(227, 6, 19, 0.25);
+}
+
+.builder-block.active-step .block-val {
+  color: var(--swiss-red) !important;
 }
 
 .block-tag {
@@ -1592,6 +1662,7 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 1.05rem;
   font-weight: 700;
   color: #111111;
+  transition: color 0.2s ease;
 }
 
 .builder-op-arrow, .builder-slash, .builder-slot {
@@ -1600,6 +1671,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   color: var(--text-muted);
   flex-shrink: 0;
+  transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .builder-op-arrow {
@@ -1627,6 +1699,12 @@ h1, h2, h3, h4, h5, h6 {
   border: 1px solid var(--border-dark);
   background-color: #FAFAFA;
   padding: 8px 12px;
+  transition: all 0.25s ease;
+}
+
+.spe-matrix-box.active-step {
+  border-color: var(--swiss-red) !important;
+  background-color: #FFFDFD !important;
 }
 
 .matrix-label {
@@ -1655,6 +1733,15 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 0.7rem;
   font-weight: 600;
   color: var(--text-primary);
+  padding: 1px 4px;
+  transition: all 0.2s ease;
+}
+
+.matrix-feat.active-feat {
+  background-color: var(--swiss-red) !important;
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+  transform: translateX(2px);
 }
 
 .matrix-feat.accent {
@@ -1668,10 +1755,21 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  transition: all 0.25s ease;
+}
+
+.rule-latex-box.active-step {
+  border-color: var(--swiss-red) !important;
+  background-color: #FFFDFD !important;
 }
 
 .latex-render-preview {
   padding: 6px 0;
+  transition: all 0.2s ease;
+}
+
+.latex-render-preview.active-preview {
+  transform: scale(1.03);
 }
 
 .math-rule-flex {

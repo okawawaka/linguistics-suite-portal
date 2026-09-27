@@ -1,36 +1,38 @@
 /**
- * Linguistics Suite Portal — Authentic Visual Interactive Demos
- * Matches the actual layouts and behaviors of the 4 standalone linguistics applications:
- * 1. Acoustic Annotator: Multi-tier Praat TextGrid, Waveform, STFT Spectrogram, F0 Pitch, LPC Formants, Minimap & LED VU
- * 2. IPA Editor: Scaled IPA Matrix Table, Category Tabs, Status Ticker, Action Keys, and Chao Tone Letters
- * 3. Syntax Tree Editor: Split-pane Penn Treebank Code Editor + Live Vector SVG Tree with Movement Arrows
- * 4. Phonological Rule Editor: Bi-directional Text Notation, 4-Block Builder, SPE Feature Matrix, and Live KaTeX
+ * Linguistics Suite Portal — Authentic & Fluid Visual Interactive Demos
+ * Pixel-perfect, high-frame-rate synchronized animations for all 4 linguistics tools:
+ * 1. Acoustic Annotator: Sweeping Playhead, Responsive DSP Waveform, STFT Spectrogram, Real-time Praat TextGrid & VU Meter
+ * 2. IPA Editor: Rhythmic Typing, IPA Chart Matrix Key-Strike, Smooth Status Ticker, and Chao Tone Synthesis
+ * 3. Syntax Tree Editor: Step-by-Step Bracket Parser & Dynamic Tree Node Pulse with Fluid Movement Dash Trace
+ * 4. Phonological Rule Editor: 4-Block Pipeline, Distinctive SPE Matrix Scanning, and KaTeX Equation Real-time Render
  */
 
 (function () {
   "use strict";
 
   /* ==========================================================================
-     DEMO 1: ACOUSTIC ANNOTATOR & PRAAT RUNTIME
+     DEMO 1: ACOUSTIC ANNOTATOR & PRAAT RUNTIME (SMOOTH PLAYHEAD SWEEP)
      ========================================================================== */
   const annotatorCanvas = document.getElementById("demo-annotator-canvas");
   const minimapCanvas = document.getElementById("demo-annotator-minimap");
   const minimapSlider = document.getElementById("minimap-slider");
   const inspectorText = document.getElementById("annotator-inspector-info");
   const vuLeds = Array.from({ length: 8 }, (_, i) => document.getElementById(`vu-${i}`));
+  const progTotal = document.getElementById("prog-total");
+  const progWord = document.getElementById("prog-word");
+  const progSel = document.getElementById("prog-sel");
 
   if (annotatorCanvas) {
     const ctx = annotatorCanvas.getContext("2d");
     let mCtx = minimapCanvas ? minimapCanvas.getContext("2d") : null;
     let width = 0;
     let height = 230;
-    let offset = 0;
 
     function resizeAnnotator() {
       const dpr = window.devicePixelRatio || 1;
       const rect = annotatorCanvas.parentElement.getBoundingClientRect();
-      width = rect.width || 480;
-      height = 230;
+      width = Math.floor(rect.width || 480);
+      height = Math.floor(rect.height || 230);
 
       annotatorCanvas.width = width * dpr;
       annotatorCanvas.height = height * dpr;
@@ -41,36 +43,22 @@
 
       if (minimapCanvas && mCtx) {
         const mRect = minimapCanvas.parentElement.getBoundingClientRect();
-        minimapCanvas.width = mRect.width * dpr;
-        minimapCanvas.height = 22 * dpr;
-        minimapCanvas.style.width = mRect.width + "px";
-        minimapCanvas.style.height = "22px";
+        const mW = Math.floor(mRect.width || width);
+        minimapCanvas.width = mW * dpr;
+        minimapCanvas.height = 20 * dpr;
+        minimapCanvas.style.width = mW + "px";
+        minimapCanvas.style.height = "20px";
         mCtx.setTransform(1, 0, 0, 1, 0, 0);
         mCtx.scale(dpr, dpr);
+        drawMinimap(mW, 20);
       }
     }
     window.addEventListener("resize", resizeAnnotator);
     window.addEventListener("load", resizeAnnotator);
-    resizeAnnotator();
 
-    // Phones tier segments
-    const phoneSegments = [
-      { label: "sil", dur: 45, type: "sil", f0: 0, f1: 0, f2: 0 },
-      { label: "s", dur: 70, type: "fric", f0: 0, f1: 350, f2: 4500 },
-      { label: "a", dur: 95, type: "vowel", f0: 172, f1: 740, f2: 1260 },
-      { label: "k", dur: 60, type: "stop", f0: 0, f1: 0, f2: 0 },
-      { label: "u", dur: 85, type: "vowel", f0: 185, f1: 380, f2: 1150 },
-      { label: "ɾ", dur: 50, type: "tap", f0: 160, f1: 420, f2: 1400 },
-      { label: "a", dur: 105, type: "vowel", f0: 154, f1: 760, f2: 1240 },
-      { label: "sil", dur: 50, type: "sil", f0: 0, f1: 0, f2: 0 }
-    ];
-    const totalPhoneCycle = phoneSegments.reduce((sum, s) => sum + s.dur, 0);
-
-    // Static minimap draw
-    function drawMinimap() {
-      if (!minimapCanvas || !mCtx) return;
-      const mW = minimapCanvas.width / (window.devicePixelRatio || 1);
-      const mH = 22;
+    // Static minimap envelope draw
+    function drawMinimap(mW, mH) {
+      if (!mCtx) return;
       mCtx.clearRect(0, 0, mW, mH);
       mCtx.fillStyle = "#1E1E1E";
       mCtx.fillRect(0, 0, mW, mH);
@@ -79,25 +67,42 @@
       mCtx.lineWidth = 1;
       mCtx.beginPath();
       for (let x = 0; x < mW; x += 3) {
-        const h = Math.abs(Math.sin(x * 0.08) * Math.cos(x * 0.03)) * (mH * 0.75);
+        const h = Math.abs(Math.sin(x * 0.08) * Math.cos(x * 0.025)) * (mH * 0.72);
         mCtx.moveTo(x, (mH - h) / 2);
         mCtx.lineTo(x, (mH + h) / 2);
       }
       mCtx.stroke();
     }
-    drawMinimap();
+
+    // Phone tier intervals (durations in ratio to total width)
+    const phoneList = [
+      { label: "sil", durRatio: 0.08, type: "sil", f0: 0, f1: 0, f2: 0, amp: 0.05 },
+      { label: "s", durRatio: 0.12, type: "fric", f0: 0, f1: 350, f2: 4500, amp: 0.45 },
+      { label: "a", durRatio: 0.16, type: "vowel", f0: 172, f1: 740, f2: 1260, amp: 0.85 },
+      { label: "k", durRatio: 0.11, type: "stop", f0: 0, f1: 0, f2: 0, amp: 0.25 },
+      { label: "u", durRatio: 0.15, type: "vowel", f0: 184, f1: 380, f2: 1150, amp: 0.75 },
+      { label: "ɾ", durRatio: 0.09, type: "tap", f0: 160, f1: 420, f2: 1400, amp: 0.4 },
+      { label: "a", durRatio: 0.18, type: "vowel", f0: 154, f1: 760, f2: 1240, amp: 0.82 },
+      { label: "sil", durRatio: 0.11, type: "sil", f0: 0, f1: 0, f2: 0, amp: 0.05 }
+    ];
+
+    let playProgress = 0; // 0.0 to 1.0
 
     function drawAnnotator() {
       if (width === 0) return;
       ctx.clearRect(0, 0, width, height);
 
-      const waveH = 75;
-      const specH = 95;
-      const tier1H = 28; // Words Tier
-      const tier2H = 32; // Phones Tier
+      // Proportional vertical layout
+      const waveH = Math.round(height * 0.35);
+      const specH = Math.round(height * 0.39);
+      const tier1H = Math.round(height * 0.12);
+      const tier2H = height - waveH - specH - tier1H;
+
+      const tier1Y = waveH + specH;
+      const tier2Y = tier1Y + tier1H;
 
       // ------------------------------------------------------------------
-      // 1. WAVEFORM AREA (0 to 75px)
+      // 1. WAVEFORM OSCILLOGRAM
       // ------------------------------------------------------------------
       ctx.fillStyle = "#FFFFFF";
       ctx.fillRect(0, 0, width, waveH);
@@ -105,14 +110,14 @@
       ctx.lineWidth = 1;
       ctx.strokeRect(0, 0, width, waveH);
 
-      // Grid line (0 amplitude)
+      // Center baseline
       ctx.strokeStyle = "rgba(17,17,17,0.15)";
       ctx.beginPath();
       ctx.moveTo(0, waveH / 2);
       ctx.lineTo(width, waveH / 2);
       ctx.stroke();
 
-      // Amplitude Scale
+      // Scale text
       ctx.fillStyle = "#9CA3AF";
       ctx.font = "bold 8px 'JetBrains Mono', monospace";
       ctx.textAlign = "left";
@@ -120,54 +125,69 @@
       ctx.fillText("0.0", 4, waveH / 2 + 3);
       ctx.fillText("-1.0", 4, waveH - 3);
 
-      // Waveform trace
+      // Static realistic audio waveform shape
       ctx.strokeStyle = "#111111";
       ctx.lineWidth = 1.2;
       ctx.beginPath();
-      let currentSampleAmp = 0;
 
       for (let x = 0; x < width; x += 2) {
-        const t = (x + offset) * 0.055;
-        const env = Math.sin((x + offset) * 0.01) * 0.5 + 0.5;
-        const wave = (Math.sin(t * 3.4) * 0.65 + Math.sin(t * 8.2) * 0.35) * (env * (waveH * 0.4));
+        const normX = x / width;
+        // Calculate envelope based on phone intervals
+        let segAmp = 0.1;
+        let acc = 0;
+        for (let p of phoneList) {
+          if (normX >= acc && normX < acc + p.durRatio) {
+            segAmp = p.amp;
+            break;
+          }
+          acc += p.durRatio;
+        }
+
+        const t = x * 0.12;
+        const wave = (Math.sin(t * 2.8) * 0.65 + Math.sin(t * 6.5) * 0.35) * (segAmp * waveH * 0.42);
         const y = waveH / 2 + wave;
         if (x === 0) ctx.moveTo(x, y);
         else ctx.lineTo(x, y);
-
-        if (Math.abs(x - width * 0.42) < 3) {
-          currentSampleAmp = Math.abs(wave) / (waveH * 0.4);
-        }
       }
       ctx.stroke();
 
-      // Top Tag
       ctx.fillStyle = "#111111";
       ctx.font = "bold 8.5px 'JetBrains Mono', monospace";
       ctx.fillText("OSCILLOGRAM (AUDIO WAVEFORM)", 38, 12);
 
       // ------------------------------------------------------------------
-      // 2. STFT SPECTROGRAM + F0 PITCH + FORMANT TRACKS (75 to 170px)
+      // 2. STFT SPECTROGRAM + F0 + LPC FORMANTS
       // ------------------------------------------------------------------
       ctx.fillStyle = "#111111";
       ctx.fillRect(0, waveH, width, specH);
 
-      // Spectrogram color frequency bands
+      // Frequency bands
       const colW = 4;
       for (let x = 0; x < width; x += colW) {
-        const specEnv = Math.sin((x + offset) * 0.018) * 0.5 + 0.5;
-        const f1Y = waveH + specH * 0.74 - specEnv * 18;
-        const f2Y = waveH + specH * 0.48 - specEnv * 22;
-        const f3Y = waveH + specH * 0.24 - specEnv * 14;
+        const normX = x / width;
+        let segAmp = 0.1;
+        let acc = 0;
+        for (let p of phoneList) {
+          if (normX >= acc && normX < acc + p.durRatio) {
+            segAmp = p.amp;
+            break;
+          }
+          acc += p.durRatio;
+        }
 
-        ctx.fillStyle = `rgba(227, 6, 19, ${0.16 + specEnv * 0.38})`;
+        const f1Y = waveH + specH * 0.74 - segAmp * 16;
+        const f2Y = waveH + specH * 0.48 - segAmp * 20;
+        const f3Y = waveH + specH * 0.24 - segAmp * 12;
+
+        ctx.fillStyle = `rgba(227, 6, 19, ${0.12 + segAmp * 0.4})`;
         ctx.fillRect(x, f1Y, colW - 1, 14);
 
-        ctx.fillStyle = `rgba(190, 195, 205, ${0.12 + specEnv * 0.24})`;
+        ctx.fillStyle = `rgba(180, 190, 205, ${0.1 + segAmp * 0.25})`;
         ctx.fillRect(x, f2Y, colW - 1, 10);
         ctx.fillRect(x, f3Y, colW - 1, 8);
       }
 
-      // Frequency scale markers (5000Hz, 2500Hz, 0Hz)
+      // Frequency markers
       ctx.fillStyle = "rgba(255,255,255,0.45)";
       ctx.font = "7.5px 'JetBrains Mono', monospace";
       ctx.textAlign = "right";
@@ -175,26 +195,45 @@
       ctx.fillText("2500Hz", width - 6, waveH + specH / 2);
       ctx.fillText("0Hz", width - 6, waveH + specH - 4);
 
-      // F0 Pitch dots (Cyan/Blue dots like Praat)
+      // F0 pitch contour (Cyan points)
       ctx.fillStyle = "#06B6D4";
       for (let x = 0; x < width; x += 7) {
-        const pitchEnv = Math.sin((x + offset) * 0.014) * 0.45 + 0.5;
-        if (pitchEnv > 0.28) {
-          const pitchY = waveH + specH * 0.82 - pitchEnv * 36;
+        const normX = x / width;
+        let f0Val = 0;
+        let acc = 0;
+        for (let p of phoneList) {
+          if (normX >= acc && normX < acc + p.durRatio) {
+            f0Val = p.f0;
+            break;
+          }
+          acc += p.durRatio;
+        }
+        if (f0Val > 0) {
+          const pitchY = waveH + specH * 0.84 - (f0Val / 300) * (specH * 0.38);
           ctx.beginPath();
           ctx.arc(x, pitchY, 1.8, 0, Math.PI * 2);
           ctx.fill();
         }
       }
 
-      // Burg LPC Formant Dots (Red dots F1-F3)
-      for (let x = 0; x < width; x += 10) {
-        const specEnv = Math.sin((x + offset) * 0.018) * 0.5 + 0.5;
-        if (specEnv > 0.25) {
+      // Burg LPC Formant dots (Red)
+      for (let x = 0; x < width; x += 9) {
+        const normX = x / width;
+        let f1 = 0, f2 = 0;
+        let acc = 0;
+        for (let p of phoneList) {
+          if (normX >= acc && normX < acc + p.durRatio) {
+            f1 = p.f1;
+            f2 = p.f2;
+            break;
+          }
+          acc += p.durRatio;
+        }
+        if (f1 > 0) {
           ctx.fillStyle = "#E30613";
           ctx.beginPath();
-          ctx.arc(x, waveH + specH * 0.74 - specEnv * 18 + 7, 1.8, 0, Math.PI * 2);
-          ctx.arc(x, waveH + specH * 0.48 - specEnv * 22 + 5, 1.8, 0, Math.PI * 2);
+          ctx.arc(x, waveH + specH - (f1 / 5000) * specH, 1.8, 0, Math.PI * 2);
+          ctx.arc(x, waveH + specH - (f2 / 5000) * specH, 1.8, 0, Math.PI * 2);
           ctx.fill();
         }
       }
@@ -205,11 +244,8 @@
       ctx.fillText("STFT SPECTROGRAM (0-5000Hz) & F0/LPC", 8, waveH + 13);
 
       // ------------------------------------------------------------------
-      // 3. PRAAT TEXTGRID TIERS (170px to 230px)
+      // 3. PRAAT TEXTGRID TIERS
       // ------------------------------------------------------------------
-      const tier1Y = waveH + specH;
-      const tier2Y = tier1Y + tier1H;
-
       // Tier 1: Words
       ctx.fillStyle = "#F9FAFB";
       ctx.fillRect(0, tier1Y, width, tier1H);
@@ -219,78 +255,85 @@
 
       ctx.fillStyle = "#6B7280";
       ctx.font = "bold 7.5px 'JetBrains Mono', monospace";
-      ctx.textAlign = "left";
-      ctx.fillText("1: Words", 6, tier1Y + 11);
+      ctx.fillText("1: Words", 6, tier1Y + tier1H / 2 + 3);
+
+      const wordStartX = width * 0.08;
+      const wordEndX = width * 0.89;
+
+      // Word boundary lines
+      ctx.strokeStyle = "#9CA3AF";
+      ctx.beginPath();
+      ctx.moveTo(wordStartX, tier1Y);
+      ctx.lineTo(wordStartX, tier1Y + tier1H);
+      ctx.moveTo(wordEndX, tier1Y);
+      ctx.lineTo(wordEndX, tier1Y + tier1H);
+      ctx.stroke();
+
+      ctx.fillStyle = "#111111";
+      ctx.font = "bold 11px 'JetBrains Mono', monospace";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText("[ sakura ]", (wordStartX + wordEndX) / 2, tier1Y + tier1H / 2);
 
       // Tier 2: Phones
       ctx.fillStyle = "#F3F4F6";
       ctx.fillRect(0, tier2Y, width, tier2H);
       ctx.strokeRect(0, tier2Y, width, tier2H);
 
-      ctx.fillText("2: Phones", 6, tier2Y + 11);
+      ctx.fillStyle = "#6B7280";
+      ctx.font = "bold 7.5px 'JetBrains Mono', monospace";
+      ctx.textAlign = "left";
+      ctx.fillText("2: Phones", 6, tier2Y + tier2H / 2 + 3);
 
-      // Moving boundaries across tiers
-      let startX = -(offset % totalPhoneCycle);
-      const playheadX = width * 0.42;
-      let activePhone = "a";
-      let activeF0 = 172;
-      let activeF1 = 740;
-      let activeF2 = 1260;
+      // Calculate Playhead Position
+      const playheadX = playProgress * width;
 
-      while (startX < width) {
-        let curX = startX;
-        for (let seg of phoneSegments) {
-          const nextX = curX + seg.dur;
-          if (nextX > 0 && curX < width) {
-            // Check if playhead is in this segment
-            const isSelected = playheadX >= curX && playheadX < nextX;
-            if (isSelected) {
-              activePhone = seg.label;
-              if (seg.f0 > 0) activeF0 = seg.f0;
-              if (seg.f1 > 0) activeF1 = seg.f1;
-              if (seg.f2 > 0) activeF2 = seg.f2;
+      // Draw Phone Intervals and highlight active one
+      let currentAccX = 0;
+      let activePhoneObj = phoneList[0];
 
-              // Highlight selected phone cell
-              ctx.fillStyle = "rgba(37, 99, 235, 0.12)";
-              ctx.fillRect(curX, tier2Y, seg.dur, tier2H);
-            }
+      for (let p of phoneList) {
+        const segW = p.durRatio * width;
+        const startX = currentAccX;
+        const endX = startX + segW;
+        const isCurrent = playheadX >= startX && playheadX < endX;
 
-            // Phone boundary line
-            ctx.strokeStyle = "#9CA3AF";
-            ctx.lineWidth = 1;
-            ctx.beginPath();
-            ctx.moveTo(curX, tier2Y);
-            ctx.lineTo(curX, tier2Y + tier2H);
-            ctx.stroke();
-
-            // Phone label
-            ctx.fillStyle = isSelected ? "#E30613" : "#111111";
-            ctx.font = isSelected ? "bold 12px 'Noto Sans JP', sans-serif" : "600 11px 'Noto Sans JP', sans-serif";
-            ctx.textAlign = "center";
-            ctx.textBaseline = "middle";
-            ctx.fillText(seg.label, (curX + nextX) / 2, tier2Y + tier2H / 2 + 1);
-          }
-          curX = nextX;
+        if (isCurrent) {
+          activePhoneObj = p;
+          // Active cell light-blue fill
+          ctx.fillStyle = "rgba(37, 99, 235, 0.18)";
+          ctx.fillRect(startX, tier2Y, segW, tier2H);
         }
-        startX += totalPhoneCycle;
+
+        // Boundary line
+        ctx.strokeStyle = "#9CA3AF";
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(startX, tier2Y);
+        ctx.lineTo(startX, tier2Y + tier2H);
+        ctx.stroke();
+
+        // Phone label
+        ctx.fillStyle = isCurrent ? "#E30613" : "#111111";
+        ctx.font = isCurrent ? "bold 12px 'Noto Sans JP', sans-serif" : "600 11px 'Noto Sans JP', sans-serif";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(p.label, (startX + endX) / 2, tier2Y + tier2H / 2);
+
+        currentAccX = endX;
       }
 
-      // Word level label: "sakura" centered in middle region
-      ctx.fillStyle = "#111111";
-      ctx.font = "bold 11px 'JetBrains Mono', monospace";
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      ctx.fillText("[ sakura ]", width * 0.46, tier1Y + tier1H / 2 + 1);
-
-      // Red Playhead Cursor Line
+      // ------------------------------------------------------------------
+      // 4. SWEEPING PLAYHEAD CURSOR (Praat Red Needle)
+      // ------------------------------------------------------------------
       ctx.strokeStyle = "#E30613";
-      ctx.lineWidth = 1.5;
+      ctx.lineWidth = 1.8;
       ctx.beginPath();
       ctx.moveTo(playheadX, 0);
       ctx.lineTo(playheadX, height);
       ctx.stroke();
 
-      // Cursor triangle at top
+      // Needle head triangle
       ctx.fillStyle = "#E30613";
       ctx.beginPath();
       ctx.moveTo(playheadX - 4, 0);
@@ -299,44 +342,76 @@
       ctx.closePath();
       ctx.fill();
 
-      // Update Inspector Info in status bar
+      // ------------------------------------------------------------------
+      // 5. UPDATE UI SYNCHRONIZATIONS
+      // ------------------------------------------------------------------
+      // Update text inspector
       if (inspectorText) {
-        const timeSec = ((offset * 0.003) % 2.45).toFixed(3);
-        inspectorText.textContent = `T: ${timeSec}s | [${activePhone}] F0: ${activeF0}Hz | F1: ${activeF1}Hz | F2: ${activeF2}Hz`;
+        const curSec = (playProgress * 2.45).toFixed(3);
+        const f0Disp = activePhoneObj.f0 > 0 ? `${activePhoneObj.f0}Hz` : "---";
+        const f1Disp = activePhoneObj.f1 > 0 ? `${activePhoneObj.f1}Hz` : "---";
+        const f2Disp = activePhoneObj.f2 > 0 ? `${activePhoneObj.f2}Hz` : "---";
+        inspectorText.textContent = `T: ${curSec}s | [${activePhoneObj.label}] F0: ${f0Disp} | F1: ${f1Disp} | F2: ${f2Disp}`;
       }
 
-      // Drive 8-Segment LED VU meter
+      // Update LED VU Meter based on active phone amplitude
       if (vuLeds.length === 8 && vuLeds[0]) {
-        const litCount = Math.min(8, Math.round(currentSampleAmp * 8.5));
+        const litCount = Math.min(8, Math.round(activePhoneObj.amp * 8.5));
         vuLeds.forEach((led, idx) => {
-          if (idx < litCount) {
-            led.classList.add("lit");
-          } else {
-            led.classList.remove("lit");
-          }
+          if (idx < litCount) led.classList.add("lit");
+          else led.classList.remove("lit");
         });
       }
 
-      // Update Minimap slider position
+      // Update Minimap Viewport slider
       if (minimapSlider) {
-        const sliderPos = ((offset * 0.05) % 60);
-        minimapSlider.style.left = `${20 + sliderPos}%`;
+        minimapSlider.style.left = `${playProgress * 62}%`;
       }
 
-      offset += 0.85;
+      // Update Praat PlayBars progress fills
+      if (progTotal) progTotal.style.width = `${playProgress * 100}%`;
+      if (progWord) {
+        const wStart = 0.08, wEnd = 0.89;
+        if (playProgress >= wStart && playProgress <= wEnd) {
+          progWord.style.width = `${((playProgress - wStart) / (wEnd - wStart)) * 100}%`;
+        } else {
+          progWord.style.width = playProgress > wEnd ? "100%" : "0%";
+        }
+      }
+      if (progSel) {
+        // Find current interval progress
+        let acc = 0;
+        for (let p of phoneList) {
+          if (playProgress >= acc && playProgress < acc + p.durRatio) {
+            progSel.style.width = `${((playProgress - acc) / p.durRatio) * 100}%`;
+            break;
+          }
+          acc += p.durRatio;
+        }
+      }
+
+      // Increment progress smoothly (approx 3.2s loop)
+      playProgress += 0.0035;
+      if (playProgress > 1) {
+        playProgress = 0;
+      }
+
       requestAnimationFrame(drawAnnotator);
     }
+
+    resizeAnnotator();
     requestAnimationFrame(drawAnnotator);
   }
 
   /* ==========================================================================
-     DEMO 2: IPA KEYBOARD & PHONETIC MATRIX (AUTHENTIC APP UI)
+     DEMO 2: IPA KEYBOARD & PHONETIC MATRIX (RHYTHMIC TYPING & FLASH)
      ========================================================================== */
   const ipaOutput = document.getElementById("demo-ipa-output");
   const ipaCharCounter = document.getElementById("ipa-char-counter");
   const ipaStatusSym = document.getElementById("ipa-status-symbol");
   const ipaStatusDesc = document.getElementById("ipa-status-desc");
   const matrixKeys = document.querySelectorAll(".demo-matrix-key, .demo-tone-btn");
+  const ipaClearBtn = document.getElementById("demo-ipa-clear");
 
   const ipaSymbolData = {
     "p": "無声両唇破裂音 / Voiceless bilabial plosive",
@@ -370,105 +445,119 @@
     "˧˥": "高上昇調 Chao Tone 35 (High Rising)"
   };
 
-  // Interactive typing sequence simulation
   if (ipaOutput) {
-    const sequence = [
-      { ipa: "t", desc: ipaSymbolData["t"] },
-      { ipa: "ʃ", desc: "無声後部歯茎破擦音 / Voiceless postalveolar affricate (合字結合)" },
-      { ipa: "˥˩", desc: ipaSymbolData["˥˩"] },
-      { ipa: "k", desc: ipaSymbolData["k"] },
-      { ipa: "j", desc: "硬口蓋接近音 / Voiced palatal approximant" },
-      { ipa: "o", desc: "半狭後舌円唇母音 / Close-mid back rounded vowel" },
-      { ipa: "ː", desc: "長音記号 / Length mark (Diacritic)" },
-      { ipa: "˧˥", desc: ipaSymbolData["˧˥"] }
+    const sequences = [
+      [
+        { ipa: "t", desc: ipaSymbolData["t"] },
+        { ipa: "ʃ", desc: "無声後部歯茎破擦音 / Voiceless postalveolar affricate [ ʧ ]" },
+        { ipa: "˥˩", desc: ipaSymbolData["˥˩"] }
+      ],
+      [
+        { ipa: "s", desc: ipaSymbolData["s"] },
+        { ipa: "a", desc: "非円唇前舌広母音 / Open front unrounded vowel" },
+        { ipa: "k", desc: ipaSymbolData["k"] },
+        { ipa: "u", desc: "円唇後舌狭母音 / Close back rounded vowel" },
+        { ipa: "ɾ", desc: "歯茎はじき音 / Alveolar tap" },
+        { ipa: "a", desc: "非円唇前舌広母音 / Open front unrounded vowel" }
+      ],
+      [
+        { ipa: "ɸ", desc: ipaSymbolData["ɸ"] },
+        { ipa: "u", desc: "円唇後舌狭母音 / Close back rounded vowel" },
+        { ipa: "d", desc: ipaSymbolData["d"] },
+        { ipa: "ʒ", desc: ipaSymbolData["ʒ"] },
+        { ipa: "i", desc: "非円唇前舌狭母音 / Close front unrounded vowel" }
+      ]
     ];
 
-    let seqIdx = 0;
-    let buffer = "";
+    let wordIdx = 0;
+    let charIdx = 0;
+    let currentBuffer = "";
 
     function stepIpaSimulation() {
-      if (seqIdx >= sequence.length) {
+      const currentWord = sequences[wordIdx];
+
+      if (charIdx >= currentWord.length) {
+        // Word complete: wait, then clear and next word
         setTimeout(() => {
-          buffer = "";
+          if (ipaClearBtn) {
+            ipaClearBtn.classList.add("act-highlight");
+            setTimeout(() => ipaClearBtn.classList.remove("act-highlight"), 200);
+          }
+          currentBuffer = "";
           ipaOutput.textContent = "";
           if (ipaCharCounter) ipaCharCounter.textContent = "0 CHARS";
-          seqIdx = 0;
-          stepIpaSimulation();
+          if (ipaStatusSym) ipaStatusSym.textContent = "[ READY ]";
+          if (ipaStatusDesc) ipaStatusDesc.textContent = "国際音声字母 (IPA) リアルタイム合字入力システム";
+          charIdx = 0;
+          wordIdx = (wordIdx + 1) % sequences.length;
+          setTimeout(stepIpaSimulation, 600);
         }, 2200);
         return;
       }
 
-      const item = sequence[seqIdx];
-      buffer += item.ipa;
-      ipaOutput.textContent = buffer;
-      if (ipaCharCounter) ipaCharCounter.textContent = `${buffer.length} CHARS`;
+      const item = currentWord[charIdx];
+      currentBuffer += item.ipa;
+      ipaOutput.textContent = currentBuffer;
+      if (ipaCharCounter) ipaCharCounter.textContent = `${currentBuffer.length} CHARS`;
+
       if (ipaStatusSym) ipaStatusSym.textContent = `[ ${item.ipa} ]`;
       if (ipaStatusDesc) ipaStatusDesc.textContent = item.desc;
 
-      // Highlight corresponding key in matrix table if present
+      // Strike matrix key highlight
       const matchBtn = Array.from(matrixKeys).find(btn => btn.getAttribute("data-ipa") === item.ipa);
       if (matchBtn) {
         matchBtn.classList.add("key-active");
         setTimeout(() => matchBtn.classList.remove("key-active"), 280);
       }
 
-      seqIdx++;
-      setTimeout(stepIpaSimulation, 650);
+      charIdx++;
+      setTimeout(stepIpaSimulation, 520);
     }
 
-    setTimeout(stepIpaSimulation, 1000);
+    setTimeout(stepIpaSimulation, 800);
 
-    // Allow user to click any matrix or tone key manually
+    // Interactive user clicks
     matrixKeys.forEach(btn => {
       btn.addEventListener("click", () => {
         const char = btn.getAttribute("data-ipa");
         if (!char) return;
-        buffer += char;
-        ipaOutput.textContent = buffer;
-        if (ipaCharCounter) ipaCharCounter.textContent = `${buffer.length} CHARS`;
+        currentBuffer += char;
+        ipaOutput.textContent = currentBuffer;
+        if (ipaCharCounter) ipaCharCounter.textContent = `${currentBuffer.length} CHARS`;
         if (ipaStatusSym) ipaStatusSym.textContent = `[ ${char} ]`;
         if (ipaStatusDesc) ipaStatusDesc.textContent = ipaSymbolData[char] || btn.getAttribute("data-desc") || "Phonetic Symbol";
         btn.classList.add("key-active");
-        setTimeout(() => btn.classList.remove("key-active"), 200);
+        setTimeout(() => btn.classList.remove("key-active"), 220);
       });
     });
 
-    // Clear and action buttons
-    const clearBtn = document.getElementById("demo-ipa-clear");
-    if (clearBtn) {
-      clearBtn.addEventListener("click", () => {
-        buffer = "";
+    if (ipaClearBtn) {
+      ipaClearBtn.addEventListener("click", () => {
+        currentBuffer = "";
         ipaOutput.textContent = "";
         if (ipaCharCounter) ipaCharCounter.textContent = "0 CHARS";
-      });
-    }
-
-    const backBtn = document.getElementById("demo-ipa-backspace");
-    if (backBtn) {
-      backBtn.addEventListener("click", () => {
-        buffer = buffer.slice(0, -1);
-        ipaOutput.textContent = buffer;
-        if (ipaCharCounter) ipaCharCounter.textContent = `${buffer.length} CHARS`;
       });
     }
   }
 
   /* ==========================================================================
-     DEMO 3: SYNTAX TREE EDITOR & PENN TREEBANK PARSER (AUTHENTIC SPLIT-PANE)
+     DEMO 3: SYNTAX TREE EDITOR (STEP-BY-STEP BRACKET & TREE NODE PULSE)
      ========================================================================== */
-  const btnSnp = document.getElementById("btn-tree-mode-snp");
-  const btnTpdp = document.getElementById("btn-tree-mode-tpdp");
   const treeNodes = ["node-tp", "node-dp1", "node-tbar", "node-vp"];
   const codeLines = document.querySelectorAll(".demo-tree-code-box .code-line");
+  const branchArrow = document.getElementById("branch-arrow");
+  const btnSnp = document.getElementById("btn-tree-mode-snp");
+  const btnTpdp = document.getElementById("btn-tree-mode-tpdp");
 
   if (treeNodes.length > 0) {
-    let activeNodeIdx = 0;
+    let step = 0;
 
-    function stepTreeHierarchy() {
+    function stepTreeParser() {
+      // 1. Highlight tree node
       treeNodes.forEach((id, idx) => {
         const el = document.getElementById(id);
         if (el) {
-          if (idx === activeNodeIdx) {
+          if (idx === step) {
             el.classList.add("node-pulsing");
           } else {
             el.classList.remove("node-pulsing");
@@ -476,55 +565,138 @@
         }
       });
 
-      // Synchronize code editor active line highlight
-      codeLines.forEach((line, lIdx) => {
-        if (lIdx === activeNodeIdx + 1) {
-          line.style.backgroundColor = "rgba(227, 6, 19, 0.08)";
+      // 2. Highlight code line in editor
+      codeLines.forEach((line, idx) => {
+        if (idx === step + 1) {
+          line.classList.add("active-line");
         } else {
-          line.style.backgroundColor = "transparent";
+          line.classList.remove("active-line");
         }
       });
 
-      activeNodeIdx = (activeNodeIdx + 1) % treeNodes.length;
-      setTimeout(stepTreeHierarchy, 1100);
+      // 3. Highlight movement arrow on VP step
+      if (branchArrow) {
+        if (step === 3) {
+          branchArrow.style.filter = "drop-shadow(0 0 4px #E30613)";
+        } else {
+          branchArrow.style.filter = "none";
+        }
+      }
+
+      step = (step + 1) % treeNodes.length;
+      setTimeout(stepTreeParser, 1300);
     }
-    stepTreeHierarchy();
+
+    stepTreeParser();
 
     // Toggle S/NP vs TP/DP framework
-    if (btnSnp && btnTpdp) {
-      btnSnp.addEventListener("click", () => {
-        btnSnp.classList.add("active-state");
-        btnTpdp.classList.remove("active-state");
+    function setGrammarFramework(mode) {
+      if (mode === "snp") {
+        if (btnSnp) btnSnp.classList.add("active-state");
+        if (btnTpdp) btnTpdp.classList.remove("active-state");
         const rootText = document.querySelector("#node-tp text");
         if (rootText) rootText.textContent = "S";
         const dpText = document.querySelector("#node-dp1 text");
         if (dpText) dpText.firstChild.textContent = "NP";
         const tbarText = document.querySelector("#node-tbar text");
         if (tbarText) tbarText.textContent = "VP";
-      });
-
-      btnTpdp.addEventListener("click", () => {
-        btnTpdp.classList.add("active-state");
-        btnSnp.classList.remove("active-state");
+      } else {
+        if (btnTpdp) btnTpdp.classList.add("active-state");
+        if (btnSnp) btnSnp.classList.remove("active-state");
         const rootText = document.querySelector("#node-tp text");
         if (rootText) rootText.textContent = "TP";
         const dpText = document.querySelector("#node-dp1 text");
         if (dpText) dpText.firstChild.textContent = "DP";
         const tbarText = document.querySelector("#node-tbar text");
         if (tbarText) tbarText.textContent = "T'";
-      });
+      }
+    }
+
+    if (btnSnp && btnTpdp) {
+      btnSnp.addEventListener("click", () => setGrammarFramework("snp"));
+      btnTpdp.addEventListener("click", () => setGrammarFramework("tpdp"));
+
+      // Gentle auto toggle to showcase both systems
+      let currentMode = "tpdp";
+      setInterval(() => {
+        currentMode = currentMode === "tpdp" ? "snp" : "tpdp";
+        setGrammarFramework(currentMode);
+      }, 7000);
     }
   }
 
   /* ==========================================================================
-     DEMO 4: PHONOLOGICAL RULE EDITOR & SPE MATRIX (AUTHENTIC APP UI)
+     DEMO 4: PHONOLOGICAL RULE EDITOR (PIPELINE & MATRIX SCANNING)
      ========================================================================== */
+  const ruleBlocks = [
+    document.getElementById("rule-b-target"),
+    document.getElementById("rule-b-change"),
+    document.getElementById("rule-b-env-r"),
+    document.getElementById("rule-part-matrix"),
+    document.getElementById("rule-part-latex")
+  ];
+
+  const synChunks = [
+    document.getElementById("syn-target"),
+    document.getElementById("syn-change"),
+    document.getElementById("syn-env")
+  ];
+
+  const matrixFeats = [
+    document.getElementById("feat-1"), // +coronal
+    document.getElementById("feat-2"), // -anterior
+    document.getElementById("feat-3")  // +delayed release
+  ];
+
   const btnOpArrow = document.getElementById("btn-op-arrow");
   const btnOpGreater = document.getElementById("btn-op-greater");
   const synOp = document.getElementById("demo-syn-op");
   const builderArrow = document.getElementById("builder-arrow");
   const mathArr = document.getElementById("math-arr");
+  const katexPreview = document.getElementById("demo-katex-rendered");
 
+  let pipelineStep = 0;
+
+  function stepRulePipeline() {
+    // Reset all highlights
+    ruleBlocks.forEach(b => b && b.classList.remove("active-step"));
+    synChunks.forEach(c => c && (c.style.color = "#111111"));
+    matrixFeats.forEach(f => f && f.classList.remove("active-feat"));
+    if (katexPreview) katexPreview.classList.remove("active-preview");
+
+    if (pipelineStep === 0) {
+      // Step 0: Target (/t/)
+      if (ruleBlocks[0]) ruleBlocks[0].classList.add("active-step");
+      if (synChunks[0]) synChunks[0].style.color = "#E30613";
+    } else if (pipelineStep === 1) {
+      // Step 1: Change ([tʃ])
+      if (ruleBlocks[1]) ruleBlocks[1].classList.add("active-step");
+      if (synChunks[1]) synChunks[1].style.color = "#E30613";
+    } else if (pipelineStep === 2) {
+      // Step 2: Environment (/ _ [i])
+      if (ruleBlocks[2]) ruleBlocks[2].classList.add("active-step");
+      if (synChunks[2]) synChunks[2].style.color = "#E30613";
+    } else if (pipelineStep === 3) {
+      // Step 3: Scan SPE Feature Matrix
+      if (ruleBlocks[3]) ruleBlocks[3].classList.add("active-step");
+      matrixFeats.forEach((f, idx) => {
+        setTimeout(() => {
+          if (f) f.classList.add("active-feat");
+        }, idx * 120);
+      });
+    } else if (pipelineStep === 4) {
+      // Step 4: Render Live KaTeX Formula
+      if (ruleBlocks[4]) ruleBlocks[4].classList.add("active-step");
+      if (katexPreview) katexPreview.classList.add("active-preview");
+    }
+
+    pipelineStep = (pipelineStep + 1) % 5;
+    setTimeout(stepRulePipeline, 1100);
+  }
+
+  stepRulePipeline();
+
+  // Operator toggle logic
   if (btnOpArrow && btnOpGreater) {
     function setOperator(type) {
       if (type === "arrow") {
@@ -545,11 +717,10 @@
     btnOpArrow.addEventListener("click", () => setOperator("arrow"));
     btnOpGreater.addEventListener("click", () => setOperator("greater"));
 
-    // Subtle automatic toggle cycle to showcase synchronic vs diachronic support
     let currentOp = "arrow";
     setInterval(() => {
       currentOp = currentOp === "arrow" ? "greater" : "arrow";
       setOperator(currentOp);
-    }, 4500);
+    }, 6000);
   }
 })();

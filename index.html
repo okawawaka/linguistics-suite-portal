@@ -235,12 +235,15 @@
             <!-- Praat-style PlayBars & Selection Bar -->
             <div class="praat-playbars">
               <div class="playbar-segment sel-segment" id="playbar-sel">
+                <div class="playbar-progress" id="prog-sel"></div>
                 <span class="playbar-label">0.120s (PHONE)</span>
               </div>
               <div class="playbar-segment word-segment" id="playbar-word">
+                <div class="playbar-progress" id="prog-word"></div>
                 <span class="playbar-label">0.680s (WORD)</span>
               </div>
               <div class="playbar-segment total-segment" id="playbar-total">
+                <div class="playbar-progress" id="prog-total"></div>
                 <span class="playbar-label">2.450s (TOTAL)</span>
               </div>
             </div>
@@ -248,7 +251,7 @@
             <div class="monitor-footer">
               <div class="monitor-status">
                 <span class="status-indicator"></span>
-                <span class="mono" id="annotator-inspector-info">T: 0.384s | F0: 172Hz | F1: 724Hz | F2: 1280Hz</span>
+                <span class="mono" id="annotator-inspector-info">T: 0.000s | [sil] F0: 0Hz | F1: 0Hz | F2: 0Hz</span>
               </div>
               <span class="mono text-swiss-red">PRAAT TEXTGRID COMPATIBLE</span>
             </div>
@@ -284,11 +287,11 @@
                 <div class="demo-ipa-display-wrap">
                   <div class="demo-ipa-meta-line">
                     <span class="output-label">INPUT BUFFER:</span>
-                    <span id="ipa-char-counter" class="mono">3 CHARS</span>
+                    <span id="ipa-char-counter" class="mono">0 CHARS</span>
                   </div>
                   <div class="demo-ipa-text-box">
                     <span class="output-bracket">[</span>
-                    <span id="demo-ipa-output" class="output-text">tʃ˥˩</span>
+                    <span id="demo-ipa-output" class="output-text"></span>
                     <span class="typing-cursor"></span>
                     <span class="output-bracket">]</span>
                   </div>
@@ -307,8 +310,8 @@
 
               <!-- Authentic Hover Status Ticker -->
               <div class="demo-status-ticker">
-                <span id="ipa-status-symbol" class="demo-ticker-sym">[ ʧ ]</span>
-                <span id="ipa-status-desc" class="demo-ticker-text">無声後部歯茎破擦音 / Voiceless postalveolar affricate</span>
+                <span id="ipa-status-symbol" class="demo-ticker-sym">[ READY ]</span>
+                <span id="ipa-status-desc" class="demo-ticker-text">国際音声字母 (IPA) リアルタイム合字入力システム</span>
               </div>
 
               <!-- Authentic Category Tabs -->
@@ -337,7 +340,7 @@
                       <td class="td-manner">破裂 (Plosive)</td>
                       <td><button type="button" class="demo-matrix-key" data-ipa="p">p</button><button type="button" class="demo-matrix-key" data-ipa="b">b</button></td>
                       <td class="cell-empty"></td>
-                      <td><button type="button" class="demo-matrix-key key-active" data-ipa="t">t</button><button type="button" class="demo-matrix-key" data-ipa="d">d</button></td>
+                      <td><button type="button" class="demo-matrix-key" data-ipa="t">t</button><button type="button" class="demo-matrix-key" data-ipa="d">d</button></td>
                       <td class="cell-empty"></td>
                       <td><button type="button" class="demo-matrix-key" data-ipa="k">k</button><button type="button" class="demo-matrix-key" data-ipa="ɡ">ɡ</button></td>
                       <td><button type="button" class="demo-matrix-key" data-ipa="ʔ">ʔ</button></td>
@@ -356,7 +359,7 @@
                       <td><button type="button" class="demo-matrix-key" data-ipa="ɸ">ɸ</button><button type="button" class="demo-matrix-key" data-ipa="β">β</button></td>
                       <td><button type="button" class="demo-matrix-key" data-ipa="f">f</button><button type="button" class="demo-matrix-key" data-ipa="v">v</button></td>
                       <td><button type="button" class="demo-matrix-key" data-ipa="s">s</button><button type="button" class="demo-matrix-key" data-ipa="z">z</button></td>
-                      <td><button type="button" class="demo-matrix-key key-active" data-ipa="ʃ">ʃ</button><button type="button" class="demo-matrix-key" data-ipa="ʒ">ʒ</button></td>
+                      <td><button type="button" class="demo-matrix-key" data-ipa="ʃ">ʃ</button><button type="button" class="demo-matrix-key" data-ipa="ʒ">ʒ</button></td>
                       <td><button type="button" class="demo-matrix-key" data-ipa="x">x</button><button type="button" class="demo-matrix-key" data-ipa="ɣ">ɣ</button></td>
                       <td><button type="button" class="demo-matrix-key" data-ipa="h">h</button></td>
                     </tr>
@@ -372,7 +375,7 @@
                 <button type="button" class="demo-tone-btn" data-ipa="˧" data-desc="Mid Level (33)">˧ 33</button>
                 <button type="button" class="demo-tone-btn" data-ipa="˨" data-desc="Mid Low (22)">˨ 22</button>
                 <button type="button" class="demo-tone-btn" data-ipa="˩" data-desc="Low Level (11)">˩ 11</button>
-                <button type="button" class="demo-tone-btn key-active tone-special" data-ipa="˥˩" data-desc="High Falling (51)">˥˩ 51</button>
+                <button type="button" class="demo-tone-btn tone-special" data-ipa="˥˩" data-desc="High Falling (51)">˥˩ 51</button>
                 <button type="button" class="demo-tone-btn tone-special" data-ipa="˧˥" data-desc="High Rising (35)">˧˥ 35</button>
               </div>
             </div>
@@ -652,34 +655,34 @@
               <div class="demo-rule-notation-row">
                 <span class="rule-input-tag">TEXT NOTATION:</span>
                 <div class="rule-input-field">
-                  <span class="rule-syn-chunk">/t/</span>
+                  <span class="rule-syn-chunk" id="syn-target">/t/</span>
                   <span class="rule-syn-op" id="demo-syn-op">→</span>
-                  <span class="rule-syn-chunk">[tʃ]</span>
-                  <span class="rule-syn-env">/ _ [i]</span>
+                  <span class="rule-syn-chunk" id="syn-change">[tʃ]</span>
+                  <span class="rule-syn-env" id="syn-env">/ _ [i]</span>
                   <span class="typing-cursor"></span>
                 </div>
               </div>
 
               <!-- Tier 2: Authentic 4-Block Structured Rule Builder -->
               <div class="rule-builder-blocks">
-                <div class="builder-block target-block">
+                <div class="builder-block target-block" id="rule-b-target">
                   <span class="block-tag">TARGET</span>
-                  <span class="block-val">/ t /</span>
+                  <span class="block-val" id="val-target">/ t /</span>
                 </div>
                 <span class="builder-op-arrow glowing-arrow" id="builder-arrow">→</span>
-                <div class="builder-block change-block">
+                <div class="builder-block change-block" id="rule-b-change">
                   <span class="block-tag">CHANGE</span>
-                  <span class="block-val">[ tʃ ]</span>
+                  <span class="block-val" id="val-change">[ tʃ ]</span>
                 </div>
                 <span class="builder-slash">/</span>
-                <div class="builder-block env-left-block">
+                <div class="builder-block env-left-block" id="rule-b-env-l">
                   <span class="block-tag">LEFT</span>
-                  <span class="block-val">∅</span>
+                  <span class="block-val" id="val-env-l">∅</span>
                 </div>
                 <span class="builder-slot">__</span>
-                <div class="builder-block env-right-block">
+                <div class="builder-block env-right-block" id="rule-b-env-r">
                   <span class="block-tag">RIGHT</span>
-                  <span class="block-val">[ i ]</span>
+                  <span class="block-val" id="val-env-r">[ i ]</span>
                 </div>
               </div>
 
@@ -689,12 +692,12 @@
                 <div class="spe-matrix-box" id="rule-part-matrix">
                   <div class="matrix-label">SPE DISTINCTIVE FEATURES</div>
                   <div class="matrix-brackets">
-                    <div class="matrix-content">
-                      <span class="matrix-feat">+consonantal</span>
-                      <span class="matrix-feat">+coronal</span>
-                      <span class="matrix-feat accent">-anterior</span>
-                      <span class="matrix-feat accent">+delayed release</span>
-                      <span class="matrix-feat">-voice</span>
+                    <div class="matrix-content" id="matrix-feat-list">
+                      <span class="matrix-feat" id="feat-0">+consonantal</span>
+                      <span class="matrix-feat" id="feat-1">+coronal</span>
+                      <span class="matrix-feat accent" id="feat-2">-anterior</span>
+                      <span class="matrix-feat accent" id="feat-3">+delayed release</span>
+                      <span class="matrix-feat" id="feat-4">-voice</span>
                     </div>
                   </div>
                 </div>
@@ -705,9 +708,9 @@
                   <div class="latex-render-preview" id="demo-katex-rendered">
                     <!-- Pure CSS KaTeX mathematical layout -->
                     <div class="math-rule-flex">
-                      <span class="m-term">/t/</span>
+                      <span class="m-term" id="katex-m-target">/t/</span>
                       <span class="m-arr" id="math-arr">⟶</span>
-                      <div class="m-mat">
+                      <div class="m-mat" id="katex-m-matrix">
                         <span class="m-mat-l">[</span>
                         <div class="m-mat-col">
                           <span>+cor</span>
@@ -717,10 +720,10 @@
                         <span class="m-mat-r">]</span>
                       </div>
                       <span class="m-slash">/</span>
-                      <span class="m-env"><u>&nbsp;&nbsp;&nbsp;&nbsp;</u>&nbsp;[i]</span>
+                      <span class="m-env" id="katex-m-env"><u>&nbsp;&nbsp;&nbsp;&nbsp;</u>&nbsp;[i]</span>
                     </div>
                   </div>
-                  <div class="latex-code-content">
+                  <div class="latex-code-content" id="latex-code-text">
                     <code>\text{/t/} \to \begin{bmatrix} \text{+cor} \\ \text{-ant} \end{bmatrix} \mathbin{/} \underline{\quad} \text{[i]}</code>
                   </div>
                 </div>
