@@ -794,7 +794,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .tool-header-group {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 20px;
   margin-bottom: 24px;
 }
@@ -808,6 +808,7 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  margin-top: 4px;
 }
 
 .tool-icon-box img {
@@ -830,32 +831,28 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 4px;
 }
 
-/* Built For / Developer Statement (Subtle, Clean & Typographic) */
+/* Built For / Developer Statement (Subtle, Clean & Integrated Typography) */
 .tool-built-for {
-  margin-top: 18px;
+  margin-top: 10px;
   display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  padding: 10px 14px;
-  background-color: var(--bg-secondary);
-  border-left: 2px solid var(--swiss-red);
-  font-size: 0.82rem;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 0.85rem;
   line-height: 1.55;
-  width: 100%;
-  box-sizing: border-box;
+  color: var(--text-secondary);
 }
 
 .built-for-tag {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
-  font-weight: 700;
+  font-size: 0.68rem;
+  font-weight: 800;
   letter-spacing: 0.08em;
   color: var(--swiss-red);
   flex-shrink: 0;
-  margin-top: 1px;
 }
 
 .built-for-text {
+  font-family: var(--font-sans);
   color: var(--text-secondary);
 }
 
@@ -2347,13 +2344,15 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .tool-built-for {
-    padding: 8px 10px;
-    margin-top: 14px;
-    font-size: 0.76rem;
-    gap: 8px;
+    padding: 0;
+    margin-top: 8px;
+    font-size: 0.78rem;
+    line-height: 1.5;
+    flex-wrap: wrap;
+    gap: 6px;
   }
   .built-for-tag {
-    font-size: 0.6rem;
+    font-size: 0.62rem;
   }
 
   /* Metrics Strip (Equal 3-column grid) */
