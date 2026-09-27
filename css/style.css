@@ -71,6 +71,18 @@ button {
   border: none;
 }
 
+/* Scroll Progress Line Indicator */
+.scroll-progress-line {
+  position: fixed;
+  top: var(--header-height);
+  left: 0;
+  height: 3px;
+  background-color: var(--swiss-red);
+  width: 0%;
+  z-index: 1001;
+  transition: width 0.08s ease-out;
+}
+
 /* ==========================================================================
    TYPOGRAPHY
    ========================================================================== */
@@ -220,6 +232,14 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   align-items: center;
   gap: 16px;
+}
+
+.realtime-pos-readout {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  padding: 4px 8px;
+  border: 1px solid var(--border-light);
+  background-color: #FAFAFA;
 }
 
 /* Swiss Segmented Language Switcher */
@@ -398,6 +418,57 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ==========================================================================
+   KINETIC TYPOGRAPHY TICKER MARQUEE (DYNAMIC RUNWAY)
+   ========================================================================== */
+
+.kinetic-marquee-bar {
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--bg-dark);
+  color: var(--text-inverse);
+  border-top: 1px solid var(--border-dark);
+  border-bottom: 1px solid var(--border-dark);
+  padding: 14px 0;
+  white-space: nowrap;
+  position: relative;
+  user-select: none;
+}
+
+.marquee-track {
+  display: inline-flex;
+  width: max-content;
+  animation: marqueeScroll 26s linear infinite;
+}
+
+.kinetic-marquee-bar:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marqueeScroll {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-content {
+  display: inline-flex;
+  align-items: center;
+}
+
+.marquee-item {
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  padding: 0 18px;
+}
+
+.marquee-bullet {
+  color: var(--swiss-red);
+  font-size: 0.65rem;
+  vertical-align: middle;
+}
+
+/* ==========================================================================
    TOOL FOCUS SECTIONS (DEDICATED FULL-WIDTH APPS)
    ========================================================================== */
 
@@ -533,6 +604,41 @@ h1, h2, h3, h4, h5, h6 {
   border-bottom: 1px solid var(--border-dark);
 }
 
+.monitor-indicators-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Real-time 8-Segment LED VU Meter */
+.vu-meter-container {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+  background-color: #000000;
+  padding: 3px 6px;
+  border: 1px solid #333333;
+}
+
+.vu-led {
+  width: 4px;
+  height: 12px;
+  background-color: #1F2937;
+  transition: background-color 0.05s ease;
+}
+
+.vu-led.lit {
+  background-color: #10B981;
+}
+
+.vu-led.yellow.lit {
+  background-color: #F59E0B;
+}
+
+.vu-led.red.lit {
+  background-color: #E30613;
+}
+
 .monitor-badge {
   background-color: var(--swiss-red);
   padding: 2px 8px;
@@ -597,10 +703,17 @@ h1, h2, h3, h4, h5, h6 {
   border: 1px solid var(--border-dark);
   padding: 14px 18px;
   background-color: #FAFAFA;
-  min-height: 84px;
+  min-height: 86px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.output-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
 }
 
 .output-label {
@@ -608,8 +721,16 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 0.68rem;
   font-weight: 700;
   color: var(--text-muted);
-  display: block;
-  margin-bottom: 4px;
+}
+
+.ipa-char-tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--swiss-red);
+  background-color: rgba(227, 6, 19, 0.08);
+  padding: 2px 6px;
+  border: 1px solid rgba(227, 6, 19, 0.3);
+  transition: all 0.2s ease;
 }
 
 .output-content {
@@ -689,11 +810,11 @@ h1, h2, h3, h4, h5, h6 {
   background-color: var(--swiss-red) !important;
   color: var(--text-inverse) !important;
   border-color: var(--swiss-red) !important;
-  transform: scale(0.95);
+  transform: scale(0.92);
 }
 
 /* ==========================================================================
-   DEMO 3: SYNTAX TREE SVG ANIMATION
+   DEMO 3: SYNTAX TREE SVG ANIMATION (FLOWING DASH TRACE)
    ========================================================================== */
 
 .demo-tree-wrapper {
@@ -721,12 +842,15 @@ h1, h2, h3, h4, h5, h6 {
   stroke-width: 2 !important;
 }
 
-.movement-arrow-group path {
-  transition: stroke-dashoffset 0.5s ease;
+/* Continuous Flowing Movement Dash Animation */
+.flowing-dash-path {
+  animation: dashFlow 1.4s linear infinite;
+  stroke-linecap: square;
 }
 
-.arrow-pulsing path {
-  stroke-width: 2.5;
+@keyframes dashFlow {
+  0% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -20; }
 }
 
 /* ==========================================================================
@@ -787,8 +911,18 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 1.4rem;
   font-weight: 700;
   color: var(--text-muted);
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
   flex-shrink: 0;
+}
+
+.glowing-arrow {
+  display: inline-block;
+  animation: pulseArrowGlow 2.2s ease-in-out infinite;
+}
+
+@keyframes pulseArrowGlow {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.15); color: var(--swiss-red); }
 }
 
 .rule-block.part-highlight, .rule-arrow.part-highlight, .rule-slash.part-highlight {
@@ -941,11 +1075,12 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   flex-direction: column;
   position: relative;
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .workflow-step:hover {
   background-color: #FAFAFB;
+  transform: translateY(-2px);
 }
 
 .wf-step-number {
@@ -972,7 +1107,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ==========================================================================
-   DESIGN POSTER SECTION (FUNCTIONAL AESTHETICS)
+   DESIGN POSTER SECTION (FUNCTIONAL AESTHETICS - INVERSION HOVER)
    ========================================================================== */
 
 .design-poster-section {
@@ -1000,11 +1135,26 @@ h1, h2, h3, h4, h5, h6 {
   flex-direction: column;
   position: relative;
   overflow: hidden;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
 }
 
 .poster-block:hover {
-  background-color: #FAFAFA;
+  background-color: var(--bg-dark);
+  color: #FFFFFF;
+  transform: translateY(-4px);
+}
+
+.poster-block:hover .poster-detail {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.poster-block:hover .poster-demo-box {
+  border-color: rgba(255, 255, 255, 0.3);
+  background-color: #1A1A1A;
+}
+
+.poster-block:hover .demo-tag {
+  color: #FFFFFF;
 }
 
 .poster-num {
@@ -1037,6 +1187,7 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--text-secondary);
   line-height: 1.65;
   margin-bottom: 28px;
+  transition: color 0.25s ease;
 }
 
 .poster-demo-box {
@@ -1048,6 +1199,7 @@ h1, h2, h3, h4, h5, h6 {
   justify-content: center;
   background-color: var(--bg-secondary);
   gap: 8px;
+  transition: all 0.25s ease;
 }
 
 .demo-tag {
@@ -1055,6 +1207,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   letter-spacing: 0.08em;
   color: var(--text-primary);
+  transition: color 0.25s ease;
 }
 
 .demo-tag.text-white {
@@ -1207,6 +1360,9 @@ h1, h2, h3, h4, h5, h6 {
 
 @media (max-width: 768px) {
   .nav-links {
+    display: none;
+  }
+  .realtime-pos-readout {
     display: none;
   }
   .hero-stats-grid {

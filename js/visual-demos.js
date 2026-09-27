@@ -1,16 +1,18 @@
 /**
  * Linguistics Suite Portal — Visual Interactive Demos (Robust & Pixel-Perfect)
- * 1. Acoustic Annotator: Real-time Audio Waveform, Spectrogram, F0 pitch & Praat TextGrid
- * 2. IPA Editor: Interactive typing simulation & Chao tone ligature assembly
- * 3. Syntax Tree Editor: Constant publication-quality tree with pulsing movement arrows
- * 4. Phonological Rule Editor: Structured SPE distinctive feature matrix with scan highlights
+ * 1. Acoustic Annotator: Real-time Audio Waveform, Spectrogram, F0 pitch, Praat TextGrid & LED VU Meter
+ * 2. IPA Editor: Interactive typing simulation, Chao tone ligature assembly & dynamic Unicode tags
+ * 3. Syntax Tree Editor: Constant publication-quality tree with continuous flowing dashed movement trace
+ * 4. Phonological Rule Editor: Structured SPE distinctive feature matrix with scan highlights & glowing arrow
  */
 
 (function () {
   /* ==========================================================================
-     DEMO 1: Acoustic Annotator Visual Simulator
+     DEMO 1: Acoustic Annotator Visual Simulator & 8-Segment LED VU Meter
      ========================================================================== */
   const annotatorCanvas = document.getElementById("demo-annotator-canvas");
+  const vuLeds = Array.from({ length: 8 }, (_, i) => document.getElementById(`vu-${i}`));
+
   if (annotatorCanvas) {
     const ctx = annotatorCanvas.getContext("2d");
     let width = 0, height = 280;
@@ -32,14 +34,14 @@
     resizeAnnotator();
 
     const segments = [
-      { label: "sil", dur: 50, type: "sil" },
-      { label: "s", dur: 85, type: "fric" },
-      { label: "a", dur: 110, type: "vowel", f0: 165 },
-      { label: "k", dur: 75, type: "stop" },
-      { label: "u", dur: 95, type: "vowel", f0: 175 },
-      { label: "ɾ", dur: 60, type: "tap" },
-      { label: "a", dur: 120, type: "vowel", f0: 145 },
-      { label: "sil", dur: 60, type: "sil" }
+      { label: "sil", dur: 50, type: "sil", power: 0.1 },
+      { label: "s", dur: 85, type: "fric", power: 0.5 },
+      { label: "a", dur: 110, type: "vowel", f0: 165, power: 0.85 },
+      { label: "k", dur: 75, type: "stop", power: 0.3 },
+      { label: "u", dur: 95, type: "vowel", f0: 175, power: 0.75 },
+      { label: "ɾ", dur: 60, type: "tap", power: 0.4 },
+      { label: "a", dur: 120, type: "vowel", f0: 145, power: 0.8 },
+      { label: "sil", dur: 60, type: "sil", power: 0.05 }
     ];
     const totalCycle = segments.reduce((sum, s) => sum + s.dur, 0);
 
@@ -69,6 +71,8 @@
       ctx.strokeStyle = "#111111";
       ctx.lineWidth = 1.2;
       ctx.beginPath();
+      let currentSampleAmp = 0;
+
       for (let x = 0; x < width; x += 2) {
         const t = (x + offset) * 0.05;
         const env = Math.sin((x + offset) * 0.009) * 0.5 + 0.5;
@@ -76,8 +80,25 @@
         const y = waveH / 2 + wave;
         if (x === 0) ctx.moveTo(x, y);
         else ctx.lineTo(x, y);
+
+        // Capture center amplitude for VU meter
+        if (Math.abs(x - width * 0.45) < 3) {
+          currentSampleAmp = Math.abs(wave) / (waveH * 0.38);
+        }
       }
       ctx.stroke();
+
+      // Drive 8-Segment LED VU meter
+      if (vuLeds.length === 8 && vuLeds[0]) {
+        const litCount = Math.round(currentSampleAmp * 8);
+        vuLeds.forEach((led, idx) => {
+          if (idx < litCount) {
+            led.classList.add("lit");
+          } else {
+            led.classList.remove("lit");
+          }
+        });
+      }
 
       // Top Tag
       ctx.fillStyle = "#111111";
@@ -178,29 +199,30 @@
   }
 
   /* ==========================================================================
-     DEMO 2: IPA Editor Interactive Typing Simulator
+     DEMO 2: IPA Editor Interactive Typing Simulator & Dynamic Unicode Tags
      ========================================================================== */
   const ipaInputBox = document.getElementById("demo-ipa-output");
+  const ipaTag = document.getElementById("ipa-active-tag");
   const ipaKeys = document.querySelectorAll(".demo-ipa-key");
 
   if (ipaInputBox && ipaKeys.length > 0) {
     const sequences = [
       [
-        { char: "t", keyId: "key-t" },
-        { char: "ʃ", keyId: "key-esh" },
-        { char: "oː", keyId: "key-colon" },
-        { char: "k", keyId: "key-k" },
-        { char: "j", keyId: "key-j" },
-        { char: "oː", keyId: "key-colon" },
-        { char: " ˥˩", keyId: "key-tone" }
+        { char: "t", keyId: "key-t", code: "U+0074 [ t ]" },
+        { char: "ʃ", keyId: "key-esh", code: "U+0283 [ ʃ ]" },
+        { char: "oː", keyId: "key-colon", code: "U+02D0 [ ː ]" },
+        { char: "k", keyId: "key-k", code: "U+006B [ k ]" },
+        { char: "j", keyId: "key-j", code: "U+006A [ j ]" },
+        { char: "oː", keyId: "key-colon", code: "U+02D0 [ ː ]" },
+        { char: " ˥˩", keyId: "key-tone", code: "U+02E5-U+02E9 [ ˥˩ ]" }
       ],
       [
-        { char: "n", keyId: "key-n" },
-        { char: "i", keyId: "key-i" },
-        { char: "h", keyId: "key-h" },
-        { char: "o", keyId: "key-o" },
-        { char: "ɴ", keyId: "key-cap-n" },
-        { char: " ˨˦", keyId: "key-tone" }
+        { char: "n", keyId: "key-n", code: "U+006E [ n ]" },
+        { char: "i", keyId: "key-i", code: "U+0069 [ i ]" },
+        { char: "h", keyId: "key-h", code: "U+0068 [ h ]" },
+        { char: "o", keyId: "key-o", code: "U+006F [ o ]" },
+        { char: "ɴ", keyId: "key-cap-n", code: "U+0274 [ ɴ ]" },
+        { char: " ˨˦", keyId: "key-tone", code: "U+02E8-U+02E6 [ ˨˦ ]" }
       ]
     ];
 
@@ -214,6 +236,7 @@
         setTimeout(() => {
           currentText = "";
           ipaInputBox.textContent = "";
+          if (ipaTag) ipaTag.textContent = "READY";
           charIdx = 0;
           wordIdx = (wordIdx + 1) % sequences.length;
           stepTyping();
@@ -226,7 +249,11 @@
 
       if (targetBtn) {
         targetBtn.classList.add("key-active");
-        setTimeout(() => targetBtn.classList.remove("key-active"), 240);
+        setTimeout(() => targetBtn.classList.remove("key-active"), 220);
+      }
+
+      if (ipaTag) {
+        ipaTag.textContent = item.code;
       }
 
       currentText += item.char;
@@ -258,11 +285,6 @@
           }
         }
       });
-
-      const arrow = document.getElementById("branch-arrow");
-      if (arrow) {
-        arrow.classList.toggle("arrow-pulsing");
-      }
 
       step = (step + 1) % nodes.length;
       setTimeout(pulseTree, 1200);

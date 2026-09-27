@@ -25,6 +25,9 @@
 </head>
 <body>
 
+  <!-- Dynamic Scroll Progress Indicator (Swiss Red Line) -->
+  <div id="scroll-progress" class="scroll-progress-line"></div>
+
   <!-- ========================================================================
        SWISS MASTHEAD / STICKY HEADER
        ======================================================================== -->
@@ -49,6 +52,7 @@
       </nav>
 
       <div class="header-controls">
+        <div class="realtime-pos-readout mono" id="header-coord-pos">X:000 Y:000</div>
         <div class="lang-switch" role="group" aria-label="Language Selector">
           <button type="button" id="lang-ja" class="lang-btn active" title="日本語 (Japanese)">JA</button>
           <button type="button" id="lang-en" class="lang-btn" title="English">EN</button>
@@ -102,6 +106,50 @@
   </section>
 
   <!-- ========================================================================
+       KINETIC TYPOGRAPHY TICKER MARQUEE (DYNAMIC RUNWAY)
+       ======================================================================== -->
+  <aside class="kinetic-marquee-bar" aria-hidden="true">
+    <div class="marquee-track">
+      <div class="marquee-content">
+        <span class="marquee-item">ACOUSTIC PHONETICS</span>
+        <span class="marquee-bullet">■</span>
+        <span class="marquee-item">PRAAT TEXTGRID</span>
+        <span class="marquee-bullet">■</span>
+        <span class="marquee-item">CHAO TONE LETTERS</span>
+        <span class="marquee-bullet">■</span>
+        <span class="marquee-item">339 IPA SYMBOLS</span>
+        <span class="marquee-bullet">■</span>
+        <span class="marquee-item">X-BAR THEORY</span>
+        <span class="marquee-bullet">■</span>
+        <span class="marquee-item">MOVEMENT ARROWS</span>
+        <span class="marquee-bullet">■</span>
+        <span class="marquee-item">SPE FEATURE MATRICES</span>
+        <span class="marquee-bullet">■</span>
+        <span class="marquee-item">100% CLIENT-SIDE</span>
+        <span class="marquee-bullet">■</span>
+      </div>
+      <div class="marquee-content">
+        <span class="marquee-item">ACOUSTIC PHONETICS</span>
+        <span class="marquee-bullet">■</span>
+        <span class="marquee-item">PRAAT TEXTGRID</span>
+        <span class="marquee-bullet">■</span>
+        <span class="marquee-item">CHAO TONE LETTERS</span>
+        <span class="marquee-bullet">■</span>
+        <span class="marquee-item">339 IPA SYMBOLS</span>
+        <span class="marquee-bullet">■</span>
+        <span class="marquee-item">X-BAR THEORY</span>
+        <span class="marquee-bullet">■</span>
+        <span class="marquee-item">MOVEMENT ARROWS</span>
+        <span class="marquee-bullet">■</span>
+        <span class="marquee-item">SPE FEATURE MATRICES</span>
+        <span class="marquee-bullet">■</span>
+        <span class="marquee-item">100% CLIENT-SIDE</span>
+        <span class="marquee-bullet">■</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ========================================================================
        TOOL 01: ACOUSTIC ANNOTATOR (FULL SECTION)
        ======================================================================== -->
   <section id="annotator" class="tool-focus-section">
@@ -137,12 +185,25 @@
           </div>
         </div>
 
-        <!-- Right: Animated Visual Simulator -->
+        <!-- Right: Animated Visual Simulator with Realtime VU Meter -->
         <div class="tool-visual-col slide-in-up">
           <div class="visual-monitor-frame">
             <div class="monitor-header">
               <span class="monitor-title">DSP SIGNAL & PRAAT TEXTGRID RUNTIME</span>
-              <span class="monitor-badge">44.1kHz / 16-bit PCM</span>
+              <div class="monitor-indicators-right">
+                <!-- 8-Segment LED VU Meter -->
+                <div class="vu-meter-container" title="Audio Level VU Meter">
+                  <span class="vu-led" id="vu-0"></span>
+                  <span class="vu-led" id="vu-1"></span>
+                  <span class="vu-led" id="vu-2"></span>
+                  <span class="vu-led" id="vu-3"></span>
+                  <span class="vu-led" id="vu-4"></span>
+                  <span class="vu-led yellow" id="vu-5"></span>
+                  <span class="vu-led yellow" id="vu-6"></span>
+                  <span class="vu-led red" id="vu-7"></span>
+                </div>
+                <span class="monitor-badge">44.1kHz / 16-bit PCM</span>
+              </div>
             </div>
             <div class="canvas-container">
               <canvas id="demo-annotator-canvas"></canvas>
@@ -175,9 +236,12 @@
             </div>
             
             <div class="demo-ipa-wrapper">
-              <!-- Output Text Display Box -->
+              <!-- Output Text Display Box with Dynamic Tag Pop -->
               <div class="demo-ipa-output-box">
-                <span class="output-label">PHONETIC OUTPUT:</span>
+                <div class="output-top-bar">
+                  <span class="output-label">PHONETIC OUTPUT:</span>
+                  <span id="ipa-active-tag" class="ipa-char-tag mono">U+02A7 [ ʧ ]</span>
+                </div>
                 <div class="output-content">
                   <span class="output-bracket">[</span>
                   <span id="demo-ipa-output" class="output-text"></span>
@@ -288,7 +352,7 @@
           </div>
         </div>
 
-        <!-- Right: Animated Visual Simulator -->
+        <!-- Right: Animated Visual Simulator with Flowing Dashed Arrow -->
         <div class="tool-visual-col slide-in-up">
           <div class="visual-monitor-frame">
             <div class="monitor-header">
@@ -333,10 +397,10 @@
                   <text x="440" y="240" fill="#111111" font-family="'Noto Sans JP', sans-serif" font-size="12" text-anchor="middle">analyze the acoustics</text>
                 </g>
 
-                <!-- Movement Arrow -->
+                <!-- Movement Arrow with Continuous Flowing Dash Pulse -->
                 <g id="branch-arrow" class="movement-arrow-group">
-                  <path d="M 130 188 C 130 262, 440 262, 440 248" fill="none" stroke="#E30613" stroke-width="2" stroke-dasharray="4,4" />
-                  <polygon points="440,246 435,256 445,256" fill="#E30613" />
+                  <path d="M 130 188 C 130 262, 440 262, 440 248" class="flowing-dash-path" fill="none" stroke="#E30613" stroke-width="2.2" stroke-dasharray="6,4" />
+                  <polygon points="440,246 434,256 446,256" fill="#E30613" />
                   <text x="285" y="262" fill="#E30613" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" text-anchor="middle">[ MOVEMENT TRACE ]</text>
                 </g>
               </svg>
@@ -371,13 +435,13 @@
 
             <!-- Up-Down 2-Tier Editor UI (No-wrap formula + SPE Matrix / LaTeX) -->
             <div class="demo-rule-wrapper" id="demo-rule-container">
-              <!-- Tier 1: Full-width Unbroken Formula Line -->
+              <!-- Tier 1: Full-width Unbroken Formula Line with Neon Pulse Arrow -->
               <div class="rule-formula-strip">
                 <div class="rule-block input-term" id="rule-part-input">
                   <span class="term-type">INPUT</span>
                   <span class="term-val">/ t /</span>
                 </div>
-                <span class="rule-arrow" id="rule-part-arrow">→</span>
+                <span class="rule-arrow glowing-arrow" id="rule-part-arrow">→</span>
                 <div class="rule-block output-term" id="rule-part-output">
                   <span class="term-type">OUTPUT</span>
                   <span class="term-val">[ tʃ ]</span>
@@ -520,7 +584,7 @@
         <h2 class="sec-title" data-i18n="secDesignSubtitle">言語学のための、徹底した機能美と合理性</h2>
       </div>
 
-      <!-- Kinetic Typographic Poster Grid -->
+      <!-- Kinetic Typographic Poster Grid with Interactive Inversion Hover -->
       <div class="poster-grid slide-in-up delay-1">
         <div class="poster-block">
           <span class="poster-num">01</span>

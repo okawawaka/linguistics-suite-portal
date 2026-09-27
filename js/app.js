@@ -1,23 +1,23 @@
 /**
  * Linguistics Suite Portal — Main Application Logic
- * Scroll interactions, kinetic typography observers, keyboard shortcuts
+ * Scroll progress line, kinetic typography observers, coordinate readouts & keyboard shortcuts
  */
 
 document.addEventListener("DOMContentLoaded", () => {
   // 1. Immediately reveal hero elements after load
   setTimeout(() => {
-    document.querySelectorAll(".hero-section .slide-in-up, .hero-section .slide-in-left").forEach((el) => {
+    document.querySelectorAll(".hero-section .slide-in-up").forEach((el) => {
       el.classList.add("is-visible");
     });
   }, 100);
 
   // 2. Intersection Observer for Scroll Kinetic Slide-In Animations
   const kineticElements = document.querySelectorAll(
-    ".slide-in-left, .slide-in-right, .slide-in-up, .workflow-step, .philosophy-card, .sec-header"
+    ".slide-in-up, .workflow-step, .poster-block, .sec-header, .poster-head"
   );
 
   const observerOptions = {
-    threshold: 0.12,
+    threshold: 0.1,
     rootMargin: "0px 0px -40px 0px"
   };
 
@@ -30,23 +30,42 @@ document.addEventListener("DOMContentLoaded", () => {
   }, observerOptions);
 
   kineticElements.forEach((el) => {
-    // Only observe elements not already visible (e.g. outside hero)
     if (!el.closest(".hero-section")) {
       observer.observe(el);
     }
   });
 
-  // 3. Sticky Header active border on scroll
+  // 3. Scroll Progress Indicator & Header Sticky Border
   const header = document.querySelector(".portal-header");
+  const progressBar = document.getElementById("scroll-progress");
+
   window.addEventListener("scroll", () => {
-    if (window.scrollY > 40) {
+    const scrollY = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+    if (progressBar && docHeight > 0) {
+      const progress = Math.min(100, Math.max(0, (scrollY / docHeight) * 100));
+      progressBar.style.width = progress + "%";
+    }
+
+    if (scrollY > 40) {
       header.classList.add("header-scrolled");
     } else {
       header.classList.remove("header-scrolled");
     }
   });
 
-  // 4. Smooth scroll for internal links
+  // 4. Precision Scientific Coordinate Readout (Mouse Tracking)
+  const posReadout = document.getElementById("header-coord-pos");
+  if (posReadout) {
+    window.addEventListener("mousemove", (e) => {
+      const x = String(e.clientX).padStart(4, "0");
+      const y = String(e.clientY).padStart(4, "0");
+      posReadout.textContent = `POS: X${x} Y${y}`;
+    });
+  }
+
+  // 5. Smooth scroll for internal links
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
       const targetId = this.getAttribute("href");
@@ -62,7 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // 5. Back to top button
+  // 6. Back to top button
   const topBtn = document.getElementById("back-to-top");
   if (topBtn) {
     topBtn.addEventListener("click", () => {
@@ -70,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 6. Academic Keyboard Shortcuts (Power-User Feature)
+  // 7. Academic Keyboard Shortcuts (Power-User Feature)
   window.addEventListener("keydown", (e) => {
     if (["INPUT", "TEXTAREA"].includes(document.activeElement.tagName)) return;
 
