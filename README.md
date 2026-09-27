@@ -1,9 +1,9 @@
-# 言語学ツールポータル (Linguistics Toolbox)
+# 言語学ツールボックス (Linguistics Toolbox)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Portal-brightgreen?logo=github)](https://okawawaka.github.io/linguistics-suite-portal/)
 
-言語学研究・学習のためのオープンソースWebツール群のポータルサイトです。
+言語学研究・学習のためのオープンソースWebツール群の統合ツールボックスサイトです。
 
 - 公開URL: https://okawawaka.github.io/linguistics-suite-portal/
 
@@ -65,5 +65,5 @@
 
 ## ライセンス
 
-本ポータルサイトは [MIT License](LICENSE) のもとで公開されています。
+本ツールボックスサイトは [MIT License](LICENSE) のもとで公開されています。
 各ツールのライセンスについては各リポジトリをご確認ください。

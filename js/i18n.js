@@ -66,7 +66,7 @@ const translations = {
     t4Category: "04 / 音韻論・歴史言語学",
     t4Title: "Phonological Rule Editor",
     t4Subtitle: "音韻規則・音変化エディタ & KaTeX出力",
-    t4BuiltFor: "音韻規則をパソコン上でも入力して、きれいな画像を作成したくて作りました。",
+    t4BuiltFor: "歴史言語学や音韻論で出てくる音韻規則を、パソコン上できれいに表示できるようにしたくて開発しました。",
     t4Spec1: "共時的音韻規則（→）と通時的音変化（>）の統合エディタ",
     t4Spec2: "Chomsky-Halle (SPE) 示差特徴マトリクスの自動整形",
     t4Spec3: "KaTeX（LaTeX）数式コード生成 & リアルタイムプレビュー",
@@ -163,7 +163,7 @@ const translations = {
     t4Category: "04 / PHONOLOGY & HISTORICAL LINGUISTICS",
     t4Title: "Phonological Rule Editor",
     t4Subtitle: "Phonological Rule & Sound Change Editor with KaTeX",
-    t4BuiltFor: "I wanted to input phonological rules on a PC and easily create clean images.",
+    t4BuiltFor: "I wanted to cleanly display phonological rules that appear in historical linguistics and phonology on a PC, so I developed this tool.",
     t4Spec1: "Unified editor for synchronic rules (→) and sound changes (>)",
     t4Spec2: "Chomsky-Halle (SPE) distinctive feature matrix formatting",
     t4Spec3: "KaTeX / LaTeX equation generation & real-time preview",
@@ -252,7 +252,7 @@ class I18nManager {
 
     // Update page title
     if (lang === "ja") {
-      document.title = "言語学ツールポータル";
+      document.title = "言語学ツールボックス";
     } else {
       document.title = "Linguistics Toolbox";
     }
