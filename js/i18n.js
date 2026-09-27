@@ -240,9 +240,9 @@ class I18nManager {
 
     // Update page title
     if (lang === "ja") {
-      document.title = "言語学・音声学ツールスイート — Linguistics Suite";
+      document.title = "言語学ツールポータル";
     } else {
-      document.title = "Linguistics & Phonetics Suite — Open Research Tools";
+      document.title = "Linguistics Suite Portal";
     }
 
     // Notify other components (e.g. Typewriter)
