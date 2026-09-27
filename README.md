@@ -4,7 +4,7 @@
 [![Design: Swiss Typographic Style](https://img.shields.io/badge/Design-Swiss%20Style-red.svg)](#)
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Portal-brightgreen?logo=github)](https://okawawaka.github.io/linguistics-suite-portal/)
 
-言語学・音声学研究のための、スイススタイル（国際タイポグラフィ様式）で統一されたオープンソースWebアプリケーション群の公式ポータル・ランディングページです。
+言語学専攻の学生による、言語学のためのオープンソースWebツール群の公式ポータルです。スイススタイル（国際タイポグラフィ様式）で統一された4つの専門Webアプリケーションを紹介しています。
 
 👉 **Live Portal**: [https://okawawaka.github.io/linguistics-suite-portal/](https://okawawaka.github.io/linguistics-suite-portal/)
 
@@ -23,24 +23,12 @@
 
 ## 🎨 デザイン設計思想（スイススタイル）
 
-ヨゼフ・ミューラー＝ブロックマンやマックス・ビル等の設計思想に基づき、学術・科学ツールの合理性と客観性を最大化する視覚言語を採用しています。
+ヨゼフ・ミューラー＝ブロックマン等の設計思想に基づき、学術・科学ツールの合理性と客観性を最大化する視覚言語を採用しています。
 
-- **角丸ゼロ (`border-radius: 0`)**: すべてのボタン、カード、入力域において装飾的な丸みを排除。
-- **装飾的シャドウの排除 (`box-shadow: none`)**: 疑似的な立体感を排し、純粋な平面とグリッド線で情報構造を明示。
-- **機能的カラーパレット**: Stark Black (`#111111`) と Pure White (`#FFFFFF`) の高コントラストをベースに、スイスレッド (`#E30613`) を信号・焦点として機能的に配置。
-- **タイポグラフィ**: `Noto Sans` / `Noto Sans JP` および等幅 `JetBrains Mono` による階層構造。
-- **キネティック・タイポグラフィ & インタラクティブ数理波形**: HTML5 Canvas による正弦波・調和波・座標グリッドのアニメーション。
-
----
-
-## 🌐 GitHub Pages への公開方法
-
-本リポジトリは完全な静的 Web サイト（Vanilla HTML/CSS/JS）であり、ビルド工程なしでそのまま GitHub Pages にホスト可能です。
-
-1. GitHub リポジトリの **Settings** > **Pages** に移動します。
-2. **Build and deployment** の Source で **Deploy from a branch** を選択します。
-3. Branch で `main`（またはアクティブブランチ）の `/ (root)` を選択し、**Save** をクリックします。
-4. 数分で `https://okawawaka.github.io/linguistics-suite-portal/` にて公開されます。
+- **ZERO CORNERS**: 角丸ゼロ・装飾シャドウの排除
+- **MODULAR GRID**: 数学的モジュラーグリッド
+- **STARK CONTRAST**: 白黒ベース ＋ スイスレッド (`#E30613`) の焦点シグナル
+- **100% LOCAL**: サーバー通信なし、完全クライアントサイド実行
 
 ---
 
