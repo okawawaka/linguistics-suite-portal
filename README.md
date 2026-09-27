@@ -1,4 +1,4 @@
-# 言語学・音声学ツールスイート ポータル (Linguistics Suite Portal)
+# 言語学ツールポータル (Linguistics Toolbox)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Design: Swiss Typographic Style](https://img.shields.io/badge/Design-Swiss%20Style-red.svg)](#)

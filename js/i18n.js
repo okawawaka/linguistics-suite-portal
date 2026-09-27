@@ -7,7 +7,7 @@
 const translations = {
   ja: {
     // Header
-    metaBrand: "LINGUISTICS SUITE",
+    metaBrand: "LINGUISTICS TOOLBOX",
     metaSub: "BUILT FOR LINGUISTS BY STUDENTS",
     navTools: "ツール",
     navFeatures: "ツールの特徴",
@@ -89,7 +89,7 @@ const translations = {
     feat3Bullet4: "SPE示差特徴マトリクス & KaTeX論文出力",
 
     // Footer
-    footerHeading: "LINGUISTICS SUITE",
+    footerHeading: "LINGUISTICS TOOLBOX",
     footerCopy: "© 2026 okawawaka. Built for linguistics by students.",
     footerBullet1: "全ツール完全無料・オープンソース（MIT / GPL v3）",
     footerBullet2: "学術研究・レポート・講義・教材作成に自由利用可能",
@@ -98,7 +98,7 @@ const translations = {
 
   en: {
     // Header
-    metaBrand: "LINGUISTICS SUITE",
+    metaBrand: "LINGUISTICS TOOLBOX",
     metaSub: "BUILT FOR LINGUISTS BY STUDENTS",
     navTools: "TOOLS",
     navFeatures: "FEATURES",
@@ -180,7 +180,7 @@ const translations = {
     feat3Bullet4: "SPE distinctive feature matrices & KaTeX math export",
 
     // Footer
-    footerHeading: "LINGUISTICS SUITE",
+    footerHeading: "LINGUISTICS TOOLBOX",
     footerCopy: "© 2026 okawawaka. Built for linguistics by students.",
     footerBullet1: "All tools free & open-source (MIT / GPL v3)",
     footerBullet2: "Free for academic research, coursework, and teaching",
@@ -242,7 +242,7 @@ class I18nManager {
     if (lang === "ja") {
       document.title = "言語学ツールポータル";
     } else {
-      document.title = "Linguistics Suite Portal";
+      document.title = "Linguistics Toolbox";
     }
 
     // Notify other components (e.g. Typewriter)
