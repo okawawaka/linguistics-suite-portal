@@ -830,6 +830,45 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 4px;
 }
 
+/* Motivation / Development Background Box (Swiss Manifesto Style) */
+.tool-motivation-box {
+  border-left: 3px solid var(--swiss-red);
+  background-color: var(--bg-secondary);
+  border-top: 1px solid var(--border-light);
+  border-right: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+  padding: 12px 16px;
+  margin-bottom: 24px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.motivation-tag {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--swiss-red);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.motivation-tag::before {
+  content: '■';
+  font-size: 0.55rem;
+  color: var(--swiss-red);
+}
+
+.motivation-text {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0;
+  font-weight: 400;
+}
+
 
 
 .tool-action-group {
@@ -2315,6 +2354,18 @@ h1, h2, h3, h4, h5, h6 {
   }
   .tool-subtitle {
     font-size: 0.76rem;
+  }
+
+  .tool-motivation-box {
+    padding: 10px 12px;
+    margin-bottom: 18px;
+  }
+  .motivation-tag {
+    font-size: 0.6rem;
+  }
+  .motivation-text {
+    font-size: 0.8rem;
+    line-height: 1.5;
   }
 
   /* Metrics Strip (Equal 3-column grid) */
