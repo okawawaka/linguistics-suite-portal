@@ -663,10 +663,13 @@ h1, h2, h3, h4, h5, h6 {
   left: max(32px, calc((100% - var(--container-max-width)) / 2 + 32px));
   font-family: var(--font-sans);
   font-weight: 900;
-  font-size: clamp(4.2rem, 11.5vw, 13.5rem);
-  line-height: 0.85;
+  font-size: clamp(3.5rem, 8vw, 9.5rem);
+  line-height: 0.88;
   letter-spacing: -0.04em;
-  white-space: nowrap;
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  max-width: calc(100% - 64px);
   color: rgba(0, 0, 0, 0.032);
   pointer-events: none;
   user-select: none;
@@ -2318,13 +2321,14 @@ h1, h2, h3, h4, h5, h6 {
 
   /* 4. Tool Sections (Comfortable spacing & compact layout) */
   .tool-focus-section {
-    padding: 85px 0 70px;
+    padding: 100px 0 70px;
     min-height: auto;
   }
   .tool-bg-watermark {
-    top: 18px;
+    top: 20px;
     left: 16px;
-    font-size: clamp(3.2rem, 15vw, 5.5rem);
+    font-size: clamp(2.4rem, 10vw, 3.8rem);
+    max-width: calc(100% - 32px);
   }
   .section-lead-band {
     margin-bottom: 28px;
