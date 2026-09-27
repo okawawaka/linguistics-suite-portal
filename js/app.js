@@ -105,4 +105,109 @@ document.addEventListener("DOMContentLoaded", () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   });
+
+  // ==========================================================================
+  // 8. Swiss Typographic Typewriter Effect for Hero & Major Headings
+  // ==========================================================================
+  class TypewriterEffect {
+    constructor() {
+      this.activeTimers = new Map();
+      this.init();
+    }
+
+    init() {
+      // 1. Hero Main Line 2 (Triggers on initial load)
+      const heroTarget = document.querySelector(".typewriter-hero");
+      if (heroTarget) {
+        setTimeout(() => {
+          this.play(heroTarget, 55, true);
+        }, 400);
+      }
+
+      // 2. Headings on Scroll
+      const headings = document.querySelectorAll(".typewriter-heading");
+      const headingObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !entry.target.dataset.hasTyped) {
+            entry.target.dataset.hasTyped = "true";
+            this.play(entry.target, 35, false);
+          }
+        });
+      }, { threshold: 0.25, rootMargin: "0px 0px -40px 0px" });
+
+      headings.forEach((el) => headingObserver.observe(el));
+
+      // 3. React to Language Switch (JA / EN)
+      window.addEventListener("portalLanguageChanged", () => {
+        if (heroTarget) {
+          heroTarget.removeAttribute("data-full-text");
+          this.play(heroTarget, 45, true);
+        }
+        headings.forEach((el) => {
+          el.removeAttribute("data-full-text");
+          if (el.dataset.hasTyped === "true") {
+            this.play(el, 30, false);
+          }
+        });
+      });
+    }
+
+    play(element, speed = 40, keepCursorBlinking = false) {
+      if (!element) return;
+
+      // Clear any active timer for this element
+      if (this.activeTimers.has(element)) {
+        clearInterval(this.activeTimers.get(element));
+        this.activeTimers.delete(element);
+      }
+
+      // Get target text from textContent (already updated by i18n)
+      let fullText = element.getAttribute("data-full-text");
+      if (!fullText) {
+        const textSpan = element.querySelector(".typewriter-text");
+        fullText = textSpan ? textSpan.textContent.trim() : element.textContent.trim();
+        if (fullText) {
+          element.setAttribute("data-full-text", fullText);
+        }
+      }
+
+      if (!fullText) return;
+
+      element.textContent = "";
+
+      const textSpan = document.createElement("span");
+      textSpan.className = "typewriter-text";
+      const cursorSpan = document.createElement("span");
+      cursorSpan.className = "typewriter-cursor";
+      if (!element.classList.contains("typewriter-hero")) {
+        cursorSpan.classList.add("cursor-dark");
+      }
+
+      element.appendChild(textSpan);
+      element.appendChild(cursorSpan);
+
+      let charIndex = 0;
+      const timer = setInterval(() => {
+        if (charIndex < fullText.length) {
+          textSpan.textContent += fullText.charAt(charIndex);
+          charIndex++;
+        } else {
+          clearInterval(timer);
+          this.activeTimers.delete(element);
+          if (!keepCursorBlinking) {
+            // Fade out cursor after 2s for headings
+            setTimeout(() => {
+              cursorSpan.style.transition = "opacity 0.4s ease";
+              cursorSpan.style.opacity = "0";
+              setTimeout(() => cursorSpan.remove(), 400);
+            }, 2000);
+          }
+        }
+      }, speed);
+
+      this.activeTimers.set(element, timer);
+    }
+  }
+
+  window.typewriterManager = new TypewriterEffect();
 });

@@ -244,6 +244,9 @@ class I18nManager {
     } else {
       document.title = "Linguistics & Phonetics Suite — Open Research Tools";
     }
+
+    // Notify other components (e.g. Typewriter)
+    window.dispatchEvent(new CustomEvent("portalLanguageChanged", { detail: { lang } }));
   }
 
   bindEvents() {

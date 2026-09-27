@@ -31,6 +31,7 @@
       ctx.scale(dpr, dpr);
     }
     window.addEventListener("resize", resizeAnnotator);
+    window.addEventListener("load", resizeAnnotator);
     resizeAnnotator();
 
     const segments = [

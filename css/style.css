@@ -342,6 +342,36 @@ h1, h2, h3, h4, h5, h6 {
   display: block;
 }
 
+/* Swiss Kinetic Typewriter Cursor */
+.typewriter-cursor {
+  display: inline-block;
+  width: 0.18em;
+  height: 0.85em;
+  background-color: var(--swiss-red);
+  margin-left: 3px;
+  vertical-align: -0.05em;
+  animation: typewriterBlink 0.75s steps(2, start) infinite;
+}
+
+.typewriter-cursor.cursor-dark {
+  background-color: var(--text-primary);
+}
+
+@keyframes typewriterBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.typewriter-hero {
+  display: inline-block;
+  min-height: 1.15em;
+}
+
+.typewriter-heading {
+  display: inline-block;
+  min-height: 1.15em;
+}
+
 .hero-lead {
   display: none;
 }
@@ -775,7 +805,9 @@ h1, h2, h3, h4, h5, h6 {
 .demo-tree-wrapper svg {
   width: 100%;
   max-width: 520px;
-  height: 270px;
+  height: auto;
+  aspect-ratio: 520 / 270;
+  display: block;
 }
 
 .tree-node-group text, .tree-node-group rect {
