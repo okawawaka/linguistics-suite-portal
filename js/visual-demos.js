@@ -74,16 +74,16 @@
       mCtx.stroke();
     }
 
-    // Phone tier intervals (durations in ratio to total width)
+    // Phone tier intervals (durations in ratio to total width) - [ sumomo ]
     const phoneList = [
       { label: "sil", durRatio: 0.08, type: "sil", f0: 0, f1: 0, f2: 0, amp: 0.05 },
       { label: "s", durRatio: 0.12, type: "fric", f0: 0, f1: 350, f2: 4500, amp: 0.45 },
-      { label: "a", durRatio: 0.16, type: "vowel", f0: 172, f1: 740, f2: 1260, amp: 0.85 },
-      { label: "k", durRatio: 0.11, type: "stop", f0: 0, f1: 0, f2: 0, amp: 0.25 },
-      { label: "u", durRatio: 0.15, type: "vowel", f0: 184, f1: 380, f2: 1150, amp: 0.75 },
-      { label: "ɾ", durRatio: 0.09, type: "tap", f0: 160, f1: 420, f2: 1400, amp: 0.4 },
-      { label: "a", durRatio: 0.18, type: "vowel", f0: 154, f1: 760, f2: 1240, amp: 0.82 },
-      { label: "sil", durRatio: 0.11, type: "sil", f0: 0, f1: 0, f2: 0, amp: 0.05 }
+      { label: "u", durRatio: 0.14, type: "vowel", f0: 178, f1: 360, f2: 1120, amp: 0.72 },
+      { label: "m", durRatio: 0.12, type: "nasal", f0: 164, f1: 300, f2: 1200, amp: 0.50 },
+      { label: "o", durRatio: 0.16, type: "vowel", f0: 172, f1: 520, f2: 950, amp: 0.85 },
+      { label: "m", durRatio: 0.12, type: "nasal", f0: 160, f1: 300, f2: 1200, amp: 0.48 },
+      { label: "o", durRatio: 0.16, type: "vowel", f0: 152, f1: 500, f2: 920, amp: 0.80 },
+      { label: "sil", durRatio: 0.10, type: "sil", f0: 0, f1: 0, f2: 0, amp: 0.05 }
     ];
 
     let playProgress = 0; // 0.0 to 1.0
@@ -273,7 +273,7 @@
       ctx.font = "bold 11px 'JetBrains Mono', monospace";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
-      ctx.fillText("[ sakura ]", (wordStartX + wordEndX) / 2, tier1Y + tier1H / 2);
+      ctx.fillText("[ sumomo ]", (wordStartX + wordEndX) / 2, tier1Y + tier1H / 2);
 
       // Tier 2: Phones
       ctx.fillStyle = "#F3F4F6";
@@ -471,30 +471,50 @@
     "˨": "中低平調 Chao Tone 22 (Mid Low)",
     "˩": "低平調 Chao Tone 11 (Low Level)",
     "˥˩": "急下降調 Chao Tone 51 (High Falling)",
-    "˧˥": "高上昇調 Chao Tone 35 (High Rising)"
+    "˧˥": "高上昇調 Chao Tone 35 (High Rising)",
+    "a": "非円唇前舌広母音 / Open front unrounded vowel",
+    "i": "非円唇前舌狭母音 / Close front unrounded vowel",
+    "u": "円唇後舌狭母音 / Close back rounded vowel",
+    "e": "非円唇前舌半狭母音 / Close-mid front unrounded vowel",
+    "o": "円唇後舌半狭母音 / Close-mid back rounded vowel"
   };
 
   if (ipaOutput) {
     const sequences = [
+      // 1. namamugi (生麦)
       [
+        { ipa: "n", desc: ipaSymbolData["n"] },
+        { ipa: "a", desc: ipaSymbolData["a"] },
+        { ipa: "m", desc: ipaSymbolData["m"] },
+        { ipa: "a", desc: ipaSymbolData["a"] },
+        { ipa: "m", desc: ipaSymbolData["m"] },
+        { ipa: "u", desc: ipaSymbolData["u"] },
+        { ipa: "ɡ", desc: ipaSymbolData["ɡ"] },
+        { ipa: "i", desc: ipaSymbolData["i"] }
+      ],
+      // 2. namagome (生米)
+      [
+        { ipa: "n", desc: ipaSymbolData["n"] },
+        { ipa: "a", desc: ipaSymbolData["a"] },
+        { ipa: "m", desc: ipaSymbolData["m"] },
+        { ipa: "a", desc: ipaSymbolData["a"] },
+        { ipa: "ɡ", desc: ipaSymbolData["ɡ"] },
+        { ipa: "o", desc: ipaSymbolData["o"] },
+        { ipa: "m", desc: ipaSymbolData["m"] },
+        { ipa: "e", desc: ipaSymbolData["e"] }
+      ],
+      // 3. namatamago (生卵)
+      [
+        { ipa: "n", desc: ipaSymbolData["n"] },
+        { ipa: "a", desc: ipaSymbolData["a"] },
+        { ipa: "m", desc: ipaSymbolData["m"] },
+        { ipa: "a", desc: ipaSymbolData["a"] },
         { ipa: "t", desc: ipaSymbolData["t"] },
-        { ipa: "ʃ", desc: "無声後部歯茎破擦音 / Voiceless postalveolar affricate [ ʧ ]" },
-        { ipa: "˥˩", desc: ipaSymbolData["˥˩"] }
-      ],
-      [
-        { ipa: "s", desc: ipaSymbolData["s"] },
-        { ipa: "a", desc: "非円唇前舌広母音 / Open front unrounded vowel" },
-        { ipa: "k", desc: ipaSymbolData["k"] },
-        { ipa: "u", desc: "円唇後舌狭母音 / Close back rounded vowel" },
-        { ipa: "ɾ", desc: "歯茎はじき音 / Alveolar tap" },
-        { ipa: "a", desc: "非円唇前舌広母音 / Open front unrounded vowel" }
-      ],
-      [
-        { ipa: "ɸ", desc: ipaSymbolData["ɸ"] },
-        { ipa: "u", desc: "円唇後舌狭母音 / Close back rounded vowel" },
-        { ipa: "d", desc: ipaSymbolData["d"] },
-        { ipa: "ʒ", desc: ipaSymbolData["ʒ"] },
-        { ipa: "i", desc: "非円唇前舌狭母音 / Close front unrounded vowel" }
+        { ipa: "a", desc: ipaSymbolData["a"] },
+        { ipa: "m", desc: ipaSymbolData["m"] },
+        { ipa: "a", desc: ipaSymbolData["a"] },
+        { ipa: "ɡ", desc: ipaSymbolData["ɡ"] },
+        { ipa: "o", desc: ipaSymbolData["o"] }
       ]
     ];
 
@@ -550,7 +570,7 @@
       }
 
       charIdx++;
-      scheduleIpaNext(520);
+      scheduleIpaNext(380);
     }
 
     const ipaContainer = ipaOutput.closest(".visual-monitor-frame") || ipaOutput;
@@ -753,11 +773,11 @@
     if (katexPreview) katexPreview.classList.remove("active-preview");
 
     if (pipelineStep === 0) {
-      // Step 0: Target (/t/)
+      // Step 0: Target (/s/)
       if (ruleBlocks[0]) ruleBlocks[0].classList.add("active-step");
       if (synChunks[0]) synChunks[0].style.color = "#E30613";
     } else if (pipelineStep === 1) {
-      // Step 1: Change ([tʃ])
+      // Step 1: Change ([ʃ])
       if (ruleBlocks[1]) ruleBlocks[1].classList.add("active-step");
       if (synChunks[1]) synChunks[1].style.color = "#E30613";
     } else if (pipelineStep === 2) {
