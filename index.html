@@ -44,7 +44,7 @@
         <a href="#syntax" class="nav-link">03 SYNTAX</a>
         <a href="#phonology" class="nav-link">04 PHONOLOGY</a>
         <a href="#workflow" class="nav-link" data-i18n="navWorkflow">ワークフロー</a>
-        <a href="#design" class="nav-link" data-i18n="navDesign">デザイン</a>
+        <a href="#design" class="nav-link" data-i18n="navDesign">機能美と設計</a>
         <a href="https://github.com/okawawaka" target="_blank" rel="noopener noreferrer" class="nav-link" data-i18n="navGithub">GITHUB</a>
       </nav>
 
@@ -356,7 +356,7 @@
   </section>
 
   <!-- ========================================================================
-       TOOL 04: PHONOLOGICAL RULE EDITOR (FULL SECTION)
+       TOOL 04: PHONOLOGICAL RULE EDITOR (FULL SECTION - FIXED LAYOUT)
        ======================================================================== -->
   <section id="phonology" class="tool-focus-section section-alt">
     <div class="container">
@@ -369,9 +369,10 @@
               <span class="monitor-badge">SYNCHRONIC & DIACHRONIC</span>
             </div>
 
+            <!-- Up-Down 2-Tier Editor UI (No-wrap formula + SPE Matrix / LaTeX) -->
             <div class="demo-rule-wrapper" id="demo-rule-container">
-              <!-- Visual Rule Builder Formula -->
-              <div class="rule-formula-display">
+              <!-- Tier 1: Full-width Unbroken Formula Line -->
+              <div class="rule-formula-strip">
                 <div class="rule-block input-term" id="rule-part-input">
                   <span class="term-type">INPUT</span>
                   <span class="term-val">/ t /</span>
@@ -388,16 +389,30 @@
                 </div>
               </div>
 
-              <!-- SPE Distinctive Feature Matrix Box -->
-              <div class="spe-matrix-box" id="rule-part-matrix">
-                <div class="matrix-label">SPE DISTINCTIVE FEATURE MATRIX</div>
-                <div class="matrix-brackets">
-                  <div class="matrix-content">
-                    <span class="matrix-feat">+consonantal</span>
-                    <span class="matrix-feat">+coronal</span>
-                    <span class="matrix-feat accent">-anterior</span>
-                    <span class="matrix-feat accent">+delayed release</span>
-                    <span class="matrix-feat">-voice</span>
+              <!-- Tier 2: 2-Column Subgrid: SPE Matrix & LaTeX Output -->
+              <div class="rule-sub-grid">
+                <!-- SPE Matrix -->
+                <div class="spe-matrix-box" id="rule-part-matrix">
+                  <div class="matrix-label">SPE DISTINCTIVE FEATURES</div>
+                  <div class="matrix-brackets">
+                    <div class="matrix-content">
+                      <span class="matrix-feat">+consonantal</span>
+                      <span class="matrix-feat">+coronal</span>
+                      <span class="matrix-feat accent">-anterior</span>
+                      <span class="matrix-feat accent">+delayed release</span>
+                      <span class="matrix-feat">-voice</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- LaTeX / KaTeX Code Preview -->
+                <div class="rule-latex-box" id="rule-part-latex">
+                  <div class="matrix-label">LATEX / KATEX CODE</div>
+                  <div class="latex-code-content">
+                    <code>\text{/t/} \to \text{[tʃ]} \mathbin{/} \underline{\quad}\text{[i]}</code>
+                  </div>
+                  <div class="latex-render-preview">
+                    <span>/t/ → [tʃ] / _[i]</span>
                   </div>
                 </div>
               </div>
@@ -452,43 +467,43 @@
   <section id="workflow" class="section-wrapper workflow-section">
     <div class="container">
       <div class="sec-header slide-in-up">
-        <span class="sec-index" data-i18n="secWorkflowTitle">RESEARCH PIPELINE</span>
-        <h2 class="sec-title" data-i18n="secWorkflowSubtitle">4つのツールがつながる、言語学研究のワークフロー</h2>
+        <span class="sec-index" data-i18n="secWorkflowTitle">02 / WORKFLOW: 音声から統語へ</span>
+        <h2 class="sec-title" data-i18n="secWorkflowSubtitle">生の音声データから理論的モデリングへ昇華する</h2>
         <p class="sec-lead" data-i18n="secWorkflowDesc">
-          音声収録から構文モデリングまで。分断されていた作業をブラウザ上でシームレスにつなぎます。
+          音声学の実験計測から統語論の階層モデルまで。分断されがちな研究・レポート作成のステップをシームレスにつなぎます。
         </p>
       </div>
 
       <div class="workflow-timeline">
         <div class="workflow-step slide-in-up delay-1">
           <span class="wf-step-number" data-i18n="wfStep1Num">01</span>
-          <h3 class="wf-step-title" data-i18n="wfStep1Title">音響分析 (Acoustic Phonetics)</h3>
+          <h3 class="wf-step-title" data-i18n="wfStep1Title">【計測】 音響分析 (Acoustic Phonetics)</h3>
           <p class="wf-step-desc" data-i18n="wfStep1Desc">
-            Acoustic Annotator で音声を録音・解析。フォルマントとF0を計測し、TextGrid区間をアノテーション。
+            発話音声を録音・解析。声道フォルマント（F1〜F3）とF0ピッチ軌跡から、母音・子音の物理的境界を客観的に同定・アノテーション。
           </p>
         </div>
 
         <div class="workflow-step slide-in-up delay-2">
           <span class="wf-step-number" data-i18n="wfStep2Num">02</span>
-          <h3 class="wf-step-title" data-i18n="wfStep2Title">記号転記 (Phonetic Transcription)</h3>
+          <h3 class="wf-step-title" data-i18n="wfStep2Title">【記述】 記号転記 (Phonetic Transcription)</h3>
           <p class="wf-step-desc" data-i18n="wfStep2Desc">
-            IPA Editor で音声を正確にテキスト化。声調バーや補助記号をきれいに合字合成。
+            音響データに裏付けられた発音・声調を、IPA Editor で精密にUnicodeテキスト化。声調バーや結合分音記号を直感的に合字合成。
           </p>
         </div>
 
         <div class="workflow-step slide-in-up delay-3">
           <span class="wf-step-number" data-i18n="wfStep3Num">03</span>
-          <h3 class="wf-step-title" data-i18n="wfStep3Title">規則モデル化 (Phonology)</h3>
+          <h3 class="wf-step-title" data-i18n="wfStep3Title">【定式化】 音韻規則モデル (Phonology)</h3>
           <p class="wf-step-desc" data-i18n="wfStep3Desc">
-            Phonological Rule Editor で音韻変化を定式化。示差特徴マトリクスとKaTeX数式を生成。
+            音標テキストから見出された異音交替や通時的音変化を、Chomsky-Halle (SPE) 弁別的素性を用いて数理的に一般化・LaTeX数式化。
           </p>
         </div>
 
         <div class="workflow-step slide-in-up delay-4">
           <span class="wf-step-number" data-i18n="wfStep4Num">04</span>
-          <h3 class="wf-step-title" data-i18n="wfStep4Title">構文解析 (Syntax)</h3>
+          <h3 class="wf-step-title" data-i18n="wfStep4Title">【構造化】 統語樹形図 (Formal Syntax)</h3>
           <p class="wf-step-desc" data-i18n="wfStep4Desc">
-            Syntax Tree Editor で文全体の階層構造を樹形図化。移動矢印とともに論文用画像を出力。
+            単語から文全体の階層構造へ。Xバー理論や移動の痕跡（Movement Trace）を樹形図として可視化し、論文やスライド用に出力。
           </p>
         </div>
       </div>
@@ -496,28 +511,32 @@
   </section>
 
   <!-- ========================================================================
-       SECTION: SWISS STYLE VISUAL POSTER (KINETIC TYPOGRAPHY & ZERO DECORATION)
+       SECTION: FUNCTIONAL AESTHETICS (SWISS STYLE ARCHITECTURE)
        ======================================================================== -->
   <section id="design" class="section-wrapper design-poster-section">
     <div class="container">
       <div class="poster-head slide-in-up">
-        <span class="sec-index" data-i18n="secDesignTitle">SWISS STYLE</span>
-        <h2 class="sec-title" data-i18n="secDesignSubtitle">美しさと合理性を追求したスイス・スタイル</h2>
+        <span class="sec-index" data-i18n="secDesignTitle">03 / FUNCTIONAL AESTHETICS</span>
+        <h2 class="sec-title" data-i18n="secDesignSubtitle">言語学のための、徹底した機能美と合理性</h2>
       </div>
 
       <!-- Kinetic Typographic Poster Grid -->
       <div class="poster-grid slide-in-up delay-1">
         <div class="poster-block">
           <span class="poster-num">01</span>
-          <h3 class="poster-keyword" data-i18n="designKey1">ZERO CORNERS</h3>
-          <p class="poster-label" data-i18n="designDesc1">角丸ゼロ・装飾シャドウの排除</p>
-          <div class="poster-demo-box zero-box"></div>
+          <h3 class="poster-keyword" data-i18n="designKey1">NO DISTRACTION</h3>
+          <span class="poster-subtitle" data-i18n="designDesc1">純粋なデータ可視化</span>
+          <p class="poster-detail" data-i18n="designDetail1">角丸や影など意味のない装飾を排し、複雑な言語データそのものを最も見やすく際立たせるミニマリズム。</p>
+          <div class="poster-demo-box zero-box">
+            <span class="demo-tag mono">BORDER-RADIUS: 0</span>
+          </div>
         </div>
 
         <div class="poster-block">
           <span class="poster-num">02</span>
-          <h3 class="poster-keyword" data-i18n="designKey2">MODULAR GRID</h3>
-          <p class="poster-label" data-i18n="designDesc2">数学的モジュラーグリッド</p>
+          <h3 class="poster-keyword" data-i18n="designKey2">MATHEMATICAL GRID</h3>
+          <span class="poster-subtitle" data-i18n="designDesc2">論理的な秩序</span>
+          <p class="poster-detail" data-i18n="designDetail2">緻密な方眼と整然とした分割線。学術ツールとしての論理的秩序と高い一覧性を実現。</p>
           <div class="poster-demo-box grid-box">
             <span></span><span></span><span></span><span></span>
           </div>
@@ -525,19 +544,22 @@
 
         <div class="poster-block">
           <span class="poster-num">03</span>
-          <h3 class="poster-keyword" data-i18n="designKey3">STARK CONTRAST</h3>
-          <p class="poster-label" data-i18n="designDesc3">スイスレッド (#E30613) の焦点シグナル</p>
+          <h3 class="poster-keyword" data-i18n="designKey3">SWISS RED SIGNAL</h3>
+          <span class="poster-subtitle" data-i18n="designDesc3">機能的な焦点</span>
+          <p class="poster-detail" data-i18n="designDetail3">白黒の高コントラストの中に、スイスレッド (#E30613) を操作の焦点・解析シグナルとして機能的にのみ配置。</p>
           <div class="poster-demo-box red-signal-box">
             <span class="red-signal-dot"></span>
+            <span class="demo-tag mono text-white">#E30613 FOCUS</span>
           </div>
         </div>
 
         <div class="poster-block">
           <span class="poster-num">04</span>
-          <h3 class="poster-keyword" data-i18n="designKey4">100% LOCAL</h3>
-          <p class="poster-label" data-i18n="designDesc4">サーバー不要・完全なプライバシー保護</p>
+          <h3 class="poster-keyword" data-i18n="designKey4">LOCAL SANDBOX</h3>
+          <span class="poster-subtitle" data-i18n="designDesc4">思考を止めない即応性</span>
+          <p class="poster-detail" data-i18n="designDetail4">外部サーバー通信ゼロ・完全クライアント完結。ミリ秒単位の即時レスポンスと絶対のデータプライバシー。</p>
           <div class="poster-demo-box local-box">
-            <span class="local-badge">SANDBOX</span>
+            <span class="local-badge mono">100% CLIENT-SIDE</span>
           </div>
         </div>
       </div>

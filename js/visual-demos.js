@@ -25,7 +25,7 @@
       annotatorCanvas.height = height * dpr;
       annotatorCanvas.style.width = width + "px";
       annotatorCanvas.style.height = height + "px";
-      ctx.setTransform(1, 0, 0, 1, 0, 0); // Reset transform
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.scale(dpr, dpr);
     }
     window.addEventListener("resize", resizeAnnotator);
@@ -211,7 +211,6 @@
     function stepTyping() {
       const currentWord = sequences[wordIdx];
       if (charIdx >= currentWord.length) {
-        // Word complete, hold display for 2.5s then smoothly start next
         setTimeout(() => {
           currentText = "";
           ipaInputBox.textContent = "";
@@ -249,7 +248,6 @@
     let step = 0;
 
     function pulseTree() {
-      // Rotate active highlight pulse through nodes
       nodes.forEach((id, idx) => {
         const el = document.getElementById(id);
         if (el) {
@@ -261,7 +259,6 @@
         }
       });
 
-      // Animate movement arrow trace
       const arrow = document.getElementById("branch-arrow");
       if (arrow) {
         arrow.classList.toggle("arrow-pulsing");
@@ -285,7 +282,8 @@
       "rule-part-output",
       "rule-part-slash",
       "rule-part-env",
-      "rule-part-matrix"
+      "rule-part-matrix",
+      "rule-part-latex"
     ];
 
     let activePartIdx = 0;

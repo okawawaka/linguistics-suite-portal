@@ -730,54 +730,65 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ==========================================================================
-   DEMO 4: PHONOLOGICAL RULE & SPE MATRIX ANIMATION
+   DEMO 4: PHONOLOGICAL RULE & SPE MATRIX (UP-DOWN 2-TIER REFINED)
    ========================================================================== */
 
 .demo-rule-wrapper {
-  padding: 24px;
+  padding: 20px 24px;
   background-color: var(--bg-primary);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   min-height: 280px;
+  justify-content: center;
 }
 
-.rule-formula-display {
+/* Tier 1: Full-width Unbroken Formula Line (No-wrap guaranteed) */
+.rule-formula-strip {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  font-family: var(--font-mono);
+  gap: 12px;
+  width: 100%;
+  white-space: nowrap;
+  background-color: #FAFAFA;
+  border: 1px solid var(--border-dark);
+  padding: 12px 16px;
+  overflow-x: auto;
 }
 
 .rule-block {
   border: 1px solid var(--border-dark);
-  padding: 8px 12px;
+  padding: 6px 14px;
   background-color: var(--bg-primary);
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
   align-items: center;
   transition: all 0.3s ease;
+  flex-shrink: 0;
 }
 
 .term-type {
-  font-size: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
   font-weight: 700;
   color: var(--text-muted);
 }
 
 .term-val {
+  font-family: var(--font-mono);
   font-size: 1.25rem;
   font-weight: 700;
   color: var(--text-primary);
 }
 
 .rule-arrow, .rule-slash {
+  font-family: var(--font-mono);
   font-size: 1.4rem;
   font-weight: 700;
   color: var(--text-muted);
   transition: color 0.3s ease;
+  flex-shrink: 0;
 }
 
 .rule-block.part-highlight, .rule-arrow.part-highlight, .rule-slash.part-highlight {
@@ -793,10 +804,18 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--text-inverse);
 }
 
+/* Tier 2: 2-Column Subgrid */
+.rule-sub-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  width: 100%;
+}
+
 .spe-matrix-box {
   border: 1px solid var(--border-dark);
   background-color: var(--bg-secondary);
-  padding: 14px 18px;
+  padding: 12px 16px;
   transition: all 0.3s ease;
 }
 
@@ -811,30 +830,63 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   letter-spacing: 0.08em;
   color: var(--swiss-red);
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .matrix-brackets {
   border-left: 2px solid var(--border-dark);
   border-right: 2px solid var(--border-dark);
-  padding: 4px 12px;
+  padding: 2px 10px;
 }
 
 .matrix-content {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 2px;
 }
 
 .matrix-feat {
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 600;
   color: var(--text-primary);
 }
 
 .matrix-feat.accent {
   color: var(--swiss-red);
+}
+
+.rule-latex-box {
+  border: 1px solid var(--border-dark);
+  background-color: var(--bg-secondary);
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+}
+
+.rule-latex-box.part-highlight {
+  border-color: var(--swiss-red);
+}
+
+.latex-code-content {
+  background-color: var(--bg-dark);
+  color: #A3E635;
+  padding: 6px 10px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 6px;
+}
+
+.latex-render-preview {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-primary);
 }
 
 /* ==========================================================================
@@ -906,20 +958,21 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .wf-step-title {
-  font-size: 1.12rem;
+  font-size: 1.1rem;
   font-weight: 700;
   letter-spacing: -0.02em;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+  line-height: 1.35;
 }
 
 .wf-step-desc {
   font-size: 0.88rem;
   color: var(--text-secondary);
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
 /* ==========================================================================
-   DESIGN POSTER SECTION (SWISS KINETIC POSTER)
+   DESIGN POSTER SECTION (FUNCTIONAL AESTHETICS)
    ========================================================================== */
 
 .design-poster-section {
@@ -942,7 +995,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .poster-block {
   background-color: var(--bg-primary);
-  padding: 36px 28px;
+  padding: 36px 26px;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -963,28 +1016,49 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .poster-keyword {
-  font-size: 1.45rem;
+  font-size: 1.35rem;
   font-weight: 800;
   letter-spacing: -0.02em;
   line-height: 1.15;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
-.poster-label {
+.poster-subtitle {
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--swiss-red);
+  margin-bottom: 10px;
+  display: block;
+}
+
+.poster-detail {
+  font-size: 0.85rem;
   color: var(--text-secondary);
-  margin-bottom: 32px;
+  line-height: 1.65;
+  margin-bottom: 28px;
 }
 
 .poster-demo-box {
   margin-top: auto;
-  height: 60px;
+  height: 56px;
   border: 1px solid var(--border-dark);
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: var(--bg-secondary);
+  gap: 8px;
+}
+
+.demo-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text-primary);
+}
+
+.demo-tag.text-white {
+  color: #FFFFFF;
 }
 
 .poster-demo-box.zero-box {
@@ -1009,15 +1083,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .red-signal-dot {
-  width: 14px;
-  height: 14px;
+  width: 12px;
+  height: 12px;
   background-color: var(--swiss-red);
   display: inline-block;
   animation: pulseIndicator 1.5s infinite;
 }
 
 .local-badge {
-  font-family: var(--font-mono);
   font-size: 0.72rem;
   font-weight: 700;
   color: var(--text-primary);
@@ -1145,7 +1218,7 @@ h1, h2, h3, h4, h5, h6 {
   .poster-grid {
     grid-template-columns: 1fr;
   }
-  .demo-rule-wrapper {
+  .rule-sub-grid {
     grid-template-columns: 1fr;
   }
   .footer-top {
