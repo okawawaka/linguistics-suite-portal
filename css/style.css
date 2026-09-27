@@ -343,12 +343,33 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero-lead {
-  font-size: clamp(1.05rem, 1.8vw, 1.22rem);
-  color: var(--text-secondary);
-  font-weight: 400;
-  line-height: 1.65;
-  max-width: 780px;
+  display: none;
+}
+
+.hero-bullets {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 820px;
   margin-bottom: 40px;
+  pointer-events: auto;
+}
+
+.hero-bullet-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: clamp(0.95rem, 1.6vw, 1.12rem);
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.hero-bullet-item::before {
+  content: '■';
+  font-size: 0.65rem;
+  color: var(--swiss-red);
+  flex-shrink: 0;
 }
 
 .hero-actions {
@@ -1007,6 +1028,10 @@ h1, h2, h3, h4, h5, h6 {
   color: rgba(255, 255, 255, 0.88);
 }
 
+.poster-block:hover .poster-bullet-item {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
 .poster-block:hover .poster-num {
   color: var(--swiss-red);
 }
@@ -1034,7 +1059,33 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 800;
   letter-spacing: -0.02em;
   line-height: 1.2;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
+}
+
+.poster-bullet-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.poster-bullet-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  transition: color 0.25s ease;
+}
+
+.poster-bullet-item::before {
+  content: '■';
+  font-size: 0.55rem;
+  color: var(--swiss-red);
+  margin-top: 5px;
+  flex-shrink: 0;
 }
 
 .poster-detail {
@@ -1130,10 +1181,30 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .footer-brand p {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 0.88rem;
-  max-width: 500px;
-  line-height: 1.6;
+  display: none;
+}
+
+.footer-bullets {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 520px;
+}
+
+.footer-bullet-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.footer-bullet-item::before {
+  content: '■';
+  font-size: 0.55rem;
+  color: var(--swiss-red);
+  flex-shrink: 0;
 }
 
 .footer-links-group {
