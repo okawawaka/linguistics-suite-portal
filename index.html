@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>言語学・音声学ツールスイート — Linguistics Suite</title>
+  <meta name="description" content="大学院・言語学・音声学研究のための、スイススタイルで統一された4つのオープンソースWebアプリケーション群。国際音声字母、音響分析、音韻規則、構文木。">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="alternate icon" type="image/png" href="assets/favicon.svg">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Linguistics & Phonetics Suite">
+  <meta property="og:description" content="大学院・言語学・音声学研究のための、スイススタイルで統一された4つのオープンソースWebアプリケーション群。">
+  <meta property="og:image" content="assets/favicon.svg">
+
+  <!-- Google Fonts: Noto Sans, Noto Sans JP, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;800&family=Noto+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ========================================================================
+       SWISS MASTHEAD / STICKY HEADER
+       ======================================================================== -->
+  <header class="portal-header">
+    <div class="container header-inner">
+      <a href="#" class="brand-unit">
+        <div class="brand-symbol">■</div>
+        <div class="brand-titles">
+          <span class="brand-main" data-i18n="metaBrand">LINGUISTICS SUITE</span>
+          <span class="brand-sub" data-i18n="metaSub">RESEARCH & EDUCATION TOOLS</span>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#tools" class="nav-link" data-i18n="navTools">ツール一覧</a>
+        <a href="#workflow" class="nav-link" data-i18n="navWorkflow">研究ワークフロー</a>
+        <a href="#philosophy" class="nav-link" data-i18n="navPhilosophy">設計思想</a>
+        <a href="https://github.com/okawawaka" target="_blank" rel="noopener noreferrer" class="nav-link" data-i18n="navGithub">GITHUB</a>
+      </nav>
+
+      <div class="header-controls">
+        <div class="lang-switch" role="group" aria-label="Language Selector">
+          <button type="button" id="lang-ja" class="lang-btn active" title="日本語 (Japanese)">JA</button>
+          <button type="button" id="lang-en" class="lang-btn" title="English">EN</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       HERO SECTION (KINETIC TYPOGRAPHY + HARMONIC CANVAS)
+       ======================================================================== -->
+  <section class="hero-section">
+    <canvas id="hero-canvas"></canvas>
+
+    <div class="container hero-content">
+      <div class="hero-overline" data-i18n="heroOverline">AN OPEN SUITE FOR PHONETICS & THEORETICAL LINGUISTICS</div>
+      
+      <h1 class="hero-headline">
+        <span class="headline-line" data-i18n="heroTitleLine1">言語学・音声学を、</span>
+        <span class="headline-line" data-i18n="heroTitleLine2">極めて精緻に。</span>
+        <span class="headline-line" style="color: var(--swiss-red);" data-i18n="heroTitleLine3">ブラウザで完結する。</span>
+      </h1>
+
+      <p class="hero-lead" data-i18n="heroLead">
+        国際音声字母、音響分析、音韻規則、構文木。研究と教育を刷新する、スイススタイルで統一された4つのオープンソースWebアプリケーション群。
+      </p>
+
+      <div class="hero-actions">
+        <a href="#tools" class="swiss-btn swiss-btn-primary" data-i18n="heroCtaExplore">ツールを体験する ↓</a>
+        <a href="#workflow" class="swiss-btn swiss-btn-outline" data-i18n="heroCtaWorkflow">ワークフローを見る →</a>
+      </div>
+
+      <div class="hero-stats-grid">
+        <div class="stat-cell">
+          <span class="stat-cell-num">04</span>
+          <span class="stat-cell-label" data-i18n="heroStatTools">4つの特化ツール</span>
+        </div>
+        <div class="stat-cell">
+          <span class="stat-cell-num">100%</span>
+          <span class="stat-cell-label" data-i18n="heroStatServerless">100% クライアント完結</span>
+        </div>
+        <div class="stat-cell">
+          <span class="stat-cell-num">SWISS</span>
+          <span class="stat-cell-label" data-i18n="heroStatDesign">国際タイポグラフィ様式</span>
+        </div>
+        <div class="stat-cell">
+          <span class="stat-cell-num">OSS</span>
+          <span class="stat-cell-label" data-i18n="heroStatLicense">オープンソース (MIT / GPL)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       SECTION 01: TOOL SUITE SHOWCASE
+       ======================================================================== -->
+  <section id="tools" class="section-wrapper">
+    <div class="container">
+      <div class="sec-header">
+        <span class="sec-index" data-i18n="secToolsTitle">01 / TOOL SUITE</span>
+        <h2 class="sec-title" data-i18n="secToolsSubtitle">専門性の高い4つの独立Webアプリケーション</h2>
+        <p class="sec-lead" data-i18n="secToolsDesc">
+          各ツールはインストール不要・サーバー不要でブラウザ上で即座に動作し、高度な計算・描画を完全クライアントサイドで処理します。
+        </p>
+      </div>
+
+      <div class="tools-grid">
+
+        <!-- Tool 1: Acoustic Annotator -->
+        <article class="swiss-card" id="tool-annotator">
+          <div>
+            <div class="card-top">
+              <span class="card-category" data-i18n="t1Category">音響音声学 / DSP & アノテーション</span>
+              <span class="card-index">[ 01 ]</span>
+            </div>
+            <div class="card-icon-wrap">
+              <img src="assets/acoustic-annotator.svg" alt="Acoustic Annotator Icon">
+            </div>
+            <h3 class="card-title" data-i18n="t1Title">Acoustic Annotator</h3>
+            <span class="card-subtitle" data-i18n="t1Subtitle">ブラウザ音響分析 & Praat TextGrid エディタ</span>
+            <p class="card-desc" data-i18n="t1Desc">
+              大学院・音声学研究のためのWebネイティブ音響分析スイート。ブラウザ内マイクから16-bit PCM高音質録音を行い、LPC フォルマント軌跡 (Burg法)、F0ピッチ抽出、母音四辺形プロット、音響VADによる自動区間分割を瞬時に実行します。
+            </p>
+            <ul class="card-specs">
+              <li class="card-spec-item" data-i18n="t1Spec1">自己相関F0ピッチ & Burg LPCフォルマント (F1-F3)</li>
+              <li class="card-spec-item" data-i18n="t1Spec2">STFT 高精細スペクトログラム ＆ 音響VAD無音検出</li>
+              <li class="card-spec-item" data-i18n="t1Spec3">F1-F2 音響母音四辺形プロット ＆ CSV出力</li>
+              <li class="card-spec-item" data-i18n="t1Spec4">Praat TextGrid 双方向インポート・エクスポート</li>
+            </ul>
+          </div>
+          <div class="card-actions">
+            <a href="https://okawawaka.github.io/acoustic-annotator/" target="_blank" rel="noopener noreferrer" class="card-action-launch" data-i18n="t1ActionLaunch">アプリを起動する ↗</a>
+            <a href="https://github.com/okawawaka/acoustic-annotator" target="_blank" rel="noopener noreferrer" class="card-action-repo" data-i18n="t1ActionRepo">リポジトリ (GitHub)</a>
+          </div>
+        </article>
+
+        <!-- Tool 2: IPA Editor -->
+        <article class="swiss-card" id="tool-ipa">
+          <div>
+            <div class="card-top">
+              <span class="card-category" data-i18n="t2Category">音声学・音標文字 / 字母入力</span>
+              <span class="card-index">[ 02 ]</span>
+            </div>
+            <div class="card-icon-wrap">
+              <img src="assets/ipa-editor.svg" alt="IPA Editor Icon">
+            </div>
+            <h3 class="card-title" data-i18n="t2Title">IPA Editor</h3>
+            <span class="card-subtitle" data-i18n="t2Subtitle">国際音声字母エディタ & 声調記号入力</span>
+            <p class="card-desc" data-i18n="t2Desc">
+              スイススタイルによる合理的・現代的な国際音声字母（IPA）Webエディタ。339記号を完全網羅し、子音表・母音四辺形・結合分音記号・声調バー（Chao Tone Letters）の合字合成をワンクリックで自在に入力できます。
+            </p>
+            <ul class="card-specs">
+              <li class="card-spec-item" data-i18n="t2Spec1">全339 IPA記号・非肺気流子音・補助記号を完全網羅</li>
+              <li class="card-spec-item" data-i18n="t2Spec2">SIL国際規格に準拠した声調バー自動合字（Ligature）</li>
+              <li class="card-spec-item" data-i18n="t2Spec3">基底文字とダイアクリティカルマークの非破壊自動結合</li>
+              <li class="card-spec-item" data-i18n="t2Spec4">ワンクリッククリップボードコピー ＆ 国際化UI</li>
+            </ul>
+          </div>
+          <div class="card-actions">
+            <a href="https://okawawaka.github.io/ipa-editor/" target="_blank" rel="noopener noreferrer" class="card-action-launch" data-i18n="t2ActionLaunch">アプリを起動する ↗</a>
+            <a href="https://github.com/okawawaka/ipa-editor" target="_blank" rel="noopener noreferrer" class="card-action-repo" data-i18n="t2ActionRepo">リポジトリ (GitHub)</a>
+          </div>
+        </article>
+
+        <!-- Tool 3: Syntax Tree Editor -->
+        <article class="swiss-card" id="tool-syntax">
+          <div>
+            <div class="card-top">
+              <span class="card-category" data-i18n="t3Category">統語論・形式文法 / 樹形図描画</span>
+              <span class="card-index">[ 03 ]</span>
+            </div>
+            <div class="card-icon-wrap">
+              <img src="assets/syntax-tree-editor.svg" alt="Syntax Tree Editor Icon">
+            </div>
+            <h3 class="card-title" data-i18n="t3Title">Syntax Tree Editor</h3>
+            <span class="card-subtitle" data-i18n="t3Subtitle">構文木エディタ & 統語階層可視化</span>
+            <p class="card-desc" data-i18n="t3Desc">
+              言語学・統語論のための Penn Treebank 形式構文木エディタ。ブラケット記法からのリアルタイム描画、Xバー理論・学術体系（TP/DP/vP）の即時切替、三角形省略、構成素移動矢印、LaTeX・SVG・高解像度PNG出力に対応します。
+            </p>
+            <ul class="card-specs">
+              <li class="card-spec-item" data-i18n="t3Spec1">ブラケット記法（Penn Treebank）リアルタイム構文解析</li>
+              <li class="card-spec-item" data-i18n="t3Spec2">伝統的体系（S/NP）と生成文法学術体系（TP/DP）の切替</li>
+              <li class="card-spec-item" data-i18n="t3Spec3">構成素移動矢印（Movement Arrows）と三角形省略記法</li>
+              <li class="card-spec-item" data-i18n="t3Spec4">LaTeX（forest / qtree / tikz-qtree）・SVG・PNGエクスポート</li>
+            </ul>
+          </div>
+          <div class="card-actions">
+            <a href="https://okawawaka.github.io/syntax-tree-editor/" target="_blank" rel="noopener noreferrer" class="card-action-launch" data-i18n="t3ActionLaunch">アプリを起動する ↗</a>
+            <a href="https://github.com/okawawaka/syntax-tree-editor" target="_blank" rel="noopener noreferrer" class="card-action-repo" data-i18n="t3ActionRepo">リポジトリ (GitHub)</a>
+          </div>
+        </article>
+
+        <!-- Tool 4: Phonological Rule Editor -->
+        <article class="swiss-card" id="tool-phonology">
+          <div>
+            <div class="card-top">
+              <span class="card-category" data-i18n="t4Category">音韻論・歴史言語学 / 規則記述</span>
+              <span class="card-index">[ 04 ]</span>
+            </div>
+            <div class="card-icon-wrap">
+              <img src="assets/phonological-rule-editor.svg" alt="Phonological Rule Editor Icon">
+            </div>
+            <h3 class="card-title" data-i18n="t4Title">Phonological Rule Editor</h3>
+            <span class="card-subtitle" data-i18n="t4Subtitle">音韻規則・音変化エディタ & KaTeX出力</span>
+            <p class="card-desc" data-i18n="t4Desc">
+              音韻規則（共時的規則: A → B / C _ D）および音変化（通時的変化: A > B / C _ D）の構造化記述Webエディタ。SPE示差特徴マトリクス、環境条件のビジュアル整形、KaTeX数式描画、論文用高解像度エクスポートをサポートします。
+            </p>
+            <ul class="card-specs">
+              <li class="card-spec-item" data-i18n="t4Spec1">共時的音韻規則（→）と通時的音変化（>）の統合記述</li>
+              <li class="card-spec-item" data-i18n="t4Spec2">Chomsky-Halle (SPE) 示差特徴マトリクスの自動整形</li>
+              <li class="card-spec-item" data-i18n="t4Spec3">KaTeX（LaTeX）数式コード生成 ＆ リアルタイム表示</li>
+              <li class="card-spec-item" data-i18n="t4Spec4">SVGベクターグラフィック ＆ 論文用高解像度PNG出力</li>
+            </ul>
+          </div>
+          <div class="card-actions">
+            <a href="https://okawawaka.github.io/phonological-rule-editor/" target="_blank" rel="noopener noreferrer" class="card-action-launch" data-i18n="t4ActionLaunch">アプリを起動する ↗</a>
+            <a href="https://github.com/okawawaka/phonological-rule-editor" target="_blank" rel="noopener noreferrer" class="card-action-repo" data-i18n="t4ActionRepo">リポジトリ (GitHub)</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       SECTION 02: INTEGRATED WORKFLOW PIPELINE
+       ======================================================================== -->
+  <section id="workflow" class="section-wrapper workflow-section">
+    <div class="container">
+      <div class="sec-header">
+        <span class="sec-index" data-i18n="secWorkflowTitle">02 / INTEGRATED WORKFLOW</span>
+        <h2 class="sec-title" data-i18n="secWorkflowSubtitle">実証的データから形式理論までをつなぐ一連の研究サイクル</h2>
+        <p class="sec-lead" data-i18n="secWorkflowDesc">
+          本スイートは、音声学の実験的録音・音響分析から、文字転記、音韻構造の定式化、文構造の統語モデル化まで、言語科学の研究パイプライン全体をシームレスに横断します。
+        </p>
+      </div>
+
+      <div class="workflow-timeline">
+        <div class="workflow-step">
+          <span class="wf-step-number" data-i18n="wfStep1Num">01</span>
+          <h3 class="wf-step-title" data-i18n="wfStep1Title">音響分析 (Acoustic Phonetics)</h3>
+          <p class="wf-step-desc" data-i18n="wfStep1Desc">
+            Acoustic Annotator で音声を収録。Burg LPC と自己相関法により、基本周波数 (F0) と声道フォルマント (F1-F3) を物理的・定量的に計測・区間アノテーションします。
+          </p>
+        </div>
+
+        <div class="workflow-step">
+          <span class="wf-step-number" data-i18n="wfStep2Num">02</span>
+          <h3 class="wf-step-title" data-i18n="wfStep2Title">音声記号転記 (Phonetic Transcription)</h3>
+          <p class="wf-step-desc" data-i18n="wfStep2Desc">
+            得られた音響特徴に基づき、IPA Editor で精密な国際音声字母を入力。声調バーや結合分音記号を直感的に付与し、国際規格のUnicodeテキストを抽出します。
+          </p>
+        </div>
+
+        <div class="workflow-step">
+          <span class="wf-step-number" data-i18n="wfStep3Num">03</span>
+          <h3 class="wf-step-title" data-i18n="wfStep3Title">音韻規則化 (Phonological Modeling)</h3>
+          <p class="wf-step-desc" data-i18n="wfStep3Desc">
+            音標テキスト間の交替・変化パターンを Phonological Rule Editor で定式化。示差特徴マトリクスを用いて、同化・脱落・通時的音変化を数理的に可視化・LaTeX化します。
+          </p>
+        </div>
+
+        <div class="workflow-step">
+          <span class="wf-step-number" data-i18n="wfStep4Num">04</span>
+          <h3 class="wf-step-title" data-i18n="wfStep4Title">統語構造解析 (Syntactic Tree Modeling)</h3>
+          <p class="wf-step-desc" data-i18n="wfStep4Desc">
+            発話全体の構造を Syntax Tree Editor でモデリング。Xバー理論やミニマリスト・プログラムの仮定に基づき、移動矢印と階層構造を備えた学術品質の樹形図を完成させます。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       SECTION 03: SWISS STYLE PHILOSOPHY & SPECS
+       ======================================================================== -->
+  <section id="philosophy" class="section-wrapper">
+    <div class="container">
+      <div class="sec-header">
+        <span class="sec-index" data-i18n="secPhilosophyTitle">03 / SWISS STYLE & PHILOSOPHY</span>
+        <h2 class="sec-title" data-i18n="secPhilosophySubtitle">スイススタイル（国際タイポグラフィ様式）の美学と設計思想</h2>
+        <p class="sec-lead" data-i18n="secPhilosophyDesc">
+          ヨゼフ・ミューラー＝ブロックマンやマックス・ビルに端を発するスイスデザインの客観主義・合理主義を、デジタル学術ツールの設計に完全適用しました。
+        </p>
+      </div>
+
+      <div class="philosophy-grid">
+        <div class="philosophy-card">
+          <div class="phil-mark"></div>
+          <h3 class="phil-title" data-i18n="phil1Title">角丸ゼロ・装飾シャドウの排除</h3>
+          <p class="phil-desc" data-i18n="phil1Desc">
+            情緒的な装飾や疑似的な立体感（ドロップシャドウ・角丸）を排し、純粋な幾何学平面と境界線によって構造の厳密性を視覚化しています。
+          </p>
+        </div>
+
+        <div class="philosophy-card">
+          <div class="phil-mark"></div>
+          <h3 class="phil-title" data-i18n="phil2Title">数学的モジュラーグリッド</h3>
+          <p class="phil-desc" data-i18n="phil2Desc">
+            画面全体のレイアウトは厳格な比率のグリッドシステムに基づき、学術情報・データ・操作パネルが常に整然とした論理的秩序を持って配置されます。
+          </p>
+        </div>
+
+        <div class="philosophy-card">
+          <div class="phil-mark"></div>
+          <h3 class="phil-title" data-i18n="phil3Title">機能的タイポグラフィと色彩</h3>
+          <p class="phil-desc" data-i18n="phil3Desc">
+            Stark Black (#111111) と Pure White (#FFFFFF) の強固なコントラストの中に、スイスレッド (#E30613) を焦点・シグナルとして機能的にのみ配置します。
+          </p>
+        </div>
+
+        <div class="philosophy-card">
+          <div class="phil-mark"></div>
+          <h3 class="phil-title" data-i18n="phil4Title">100% クライアントサイド & プライバシー保護</h3>
+          <p class="phil-desc" data-i18n="phil4Desc">
+            研究用音声や言語データは外部サーバーに一切送信されません。すべてのDSP計算・パーサー・レンダリングがブラウザ内部で完結するため、機密性の高いフィールドワークデータも安全です。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       FOOTER (SWISS COLOPHON)
+       ======================================================================== -->
+  <footer class="portal-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <h2 data-i18n="footerHeading">LINGUISTICS SUITE</h2>
+          <p data-i18n="footerLicenseNote">
+            本スイートの各アプリケーションはオープンソース（MIT / GPL v3）ライセンスのもとで公開されています。研究論文・授業・教材・学術発表での自由な利用を歓迎します。
+          </p>
+        </div>
+
+        <div class="footer-links-group">
+          <div>
+            <h4 class="footer-col-title">APPLICATIONS</h4>
+            <ul class="footer-link-list">
+              <li><a href="https://okawawaka.github.io/acoustic-annotator/" target="_blank" rel="noopener noreferrer">Acoustic Annotator ↗</a></li>
+              <li><a href="https://okawawaka.github.io/ipa-editor/" target="_blank" rel="noopener noreferrer">IPA Editor ↗</a></li>
+              <li><a href="https://okawawaka.github.io/syntax-tree-editor/" target="_blank" rel="noopener noreferrer">Syntax Tree Editor ↗</a></li>
+              <li><a href="https://okawawaka.github.io/phonological-rule-editor/" target="_blank" rel="noopener noreferrer">Phonological Rule Editor ↗</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="footer-col-title">SOURCE CODE</h4>
+            <ul class="footer-link-list">
+              <li><a href="https://github.com/okawawaka/acoustic-annotator" target="_blank" rel="noopener noreferrer">acoustic-annotator</a></li>
+              <li><a href="https://github.com/okawawaka/ipa-editor" target="_blank" rel="noopener noreferrer">ipa-editor</a></li>
+              <li><a href="https://github.com/okawawaka/syntax-tree-editor" target="_blank" rel="noopener noreferrer">syntax-tree-editor</a></li>
+              <li><a href="https://github.com/okawawaka/phonological-rule-editor" target="_blank" rel="noopener noreferrer">phonological-rule-editor</a></li>
+              <li><a href="https://github.com/okawawaka/linguistics-suite-portal" target="_blank" rel="noopener noreferrer">linguistics-suite-portal</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span data-i18n="footerCopy">© 2026 okawawaka. All tools are open-source and free for research and education.</span>
+        <button type="button" id="back-to-top" class="btn-back-to-top" data-i18n="footerBackToTop">TOP ↑</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/i18n.js"></script>
+  <script src="js/canvas-bg.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

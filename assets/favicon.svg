@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect width="64" height="64" rx="12" fill="#111111"/>
+  <rect x="2" y="2" width="60" height="60" rx="10" fill="none" stroke="#27272a" stroke-width="1.5"/>
+  <!-- Acoustic Waveform Bars (Stark White) -->
+  <line x1="14" y1="24" x2="14" y2="40" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round"/>
+  <line x1="21" y1="17" x2="21" y2="47" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round"/>
+  <line x1="28" y1="12" x2="28" y2="52" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round"/>
+  <line x1="35" y1="9"  x2="35" y2="55" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round"/>
+  <line x1="42" y1="15" x2="42" y2="49" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round"/>
+  <line x1="49" y1="23" x2="49" y2="41" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round"/>
+  <!-- Pitch / Formant F0 Contour in Swiss Red -->
+  <path d="M 10 38 C 19 23, 27 43, 37 25 C 43 14, 50 20, 54 18" fill="none" stroke="#E30613" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="37" cy="25" r="3.2" fill="#E30613"/>
+</svg>
