@@ -1589,34 +1589,336 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 768px) {
+  :root {
+    --header-height: 54px;
+  }
+
+  body {
+    padding-top: var(--header-height);
+  }
+
+  .container {
+    padding: 0 16px;
+  }
+
+  /* 1. Header (Clean, Compact, No-Overlap) */
+  .portal-header {
+    height: var(--header-height);
+  }
+  .brand-unit {
+    gap: 10px;
+  }
+  .brand-emblem-svg {
+    width: 22px;
+    height: 22px;
+  }
+  .brand-main {
+    font-size: 0.88rem;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+  }
+  .brand-sub {
+    display: none;
+  }
   .nav-links {
     display: none;
   }
   .realtime-pos-readout {
     display: none;
   }
+  .lang-btn {
+    padding: 4px 10px;
+    font-size: 0.72rem;
+  }
+
+  /* 2. Vertical Ruler */
   .vertical-ruler {
     display: none;
   }
+
+  /* 3. Hero Section (Balanced typography, no awkward wraps) */
+  .hero-section {
+    min-height: auto;
+    padding: 42px 0 54px 0;
+  }
+  .hero-content {
+    padding: 0;
+    max-width: 100%;
+  }
+  .hero-overline {
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    margin-bottom: 14px;
+    line-height: 1.4;
+  }
+  .hero-overline::before {
+    width: 8px;
+    height: 8px;
+  }
+  .hero-headline {
+    font-size: 1.85rem;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+    margin-bottom: 20px;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+  .hero-bullets {
+    margin-bottom: 28px;
+    gap: 10px;
+  }
+  .hero-bullet-item {
+    font-size: 0.84rem;
+    line-height: 1.5;
+  }
+  .hero-actions {
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+  .hero-actions .swiss-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 13px 20px;
+  }
+
+  /* 4. Tool Sections (Comfortable spacing & compact layout) */
   .tool-focus-section {
-    padding: 100px 0;
+    padding: 56px 0;
     min-height: auto;
   }
   .section-lead-band {
-    margin-bottom: 36px;
+    margin-bottom: 26px;
+    padding-bottom: 14px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+  .lead-band-tag {
+    font-size: 0.74rem;
+    letter-spacing: 0.08em;
+  }
+  .lead-band-tag::before {
+    width: 6px;
+    height: 6px;
+  }
+  .lead-band-coords {
+    font-size: 0.64rem;
+  }
+  .tool-split-layout {
+    gap: 32px;
+  }
+  .tool-index-tag {
+    font-size: 0.72rem;
+    margin-bottom: 12px;
+  }
+  .tool-header-group {
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  .tool-icon-box {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+  }
+  .tool-icon-box img {
+    width: 24px;
+    height: 24px;
+  }
+  .tool-title {
+    font-size: 1.45rem;
+  }
+  .tool-subtitle {
+    font-size: 0.76rem;
+  }
+
+  /* Metrics Strip (Equal 3-column grid) */
+  .metrics-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    padding: 10px 10px;
+    margin-bottom: 22px;
+  }
+  .metric-val {
+    font-size: 1.15rem;
+  }
+  .metric-lbl {
+    font-size: 0.56rem;
+    letter-spacing: 0.02em;
+    line-height: 1.25;
+  }
+
+  /* Feature List */
+  .tool-feature-list {
+    margin-bottom: 28px;
+  }
+  .tool-feature-item,
+  .stagger-item {
+    font-size: 0.82rem;
+    padding: 10px 0;
+    line-height: 1.5;
+  }
+
+  /* Action Buttons */
+  .tool-action-group {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+  .tool-action-group .swiss-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 12px 18px;
+  }
+
+  /* 5. Simulators & Visual Monitors */
+  .visual-monitor-frame {
+    margin-top: 6px;
+  }
+  .monitor-header {
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
+    padding: 10px 12px;
+  }
+  .monitor-title {
+    font-size: 0.66rem;
+    line-height: 1.3;
+  }
+  .monitor-indicators-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .monitor-badge {
+    font-size: 0.62rem;
+    padding: 2px 6px;
+  }
+  .monitor-footer {
+    padding: 8px 12px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    font-size: 0.68rem;
+  }
+
+  /* 01 Annotator */
+  .canvas-container {
+    height: 200px;
+  }
+  #demo-annotator-canvas {
+    height: 200px !important;
+  }
+
+  /* 02 IPA Keypad */
+  .demo-ipa-output-box {
+    padding: 12px;
+  }
+  .output-text {
+    font-size: 1.35rem;
+  }
+  .demo-ipa-keypad {
+    padding: 10px 8px;
+    gap: 6px;
+  }
+  .keypad-row {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 4px;
+  }
+  .demo-ipa-key {
+    min-width: 0;
+    height: 38px;
+    font-size: 0.88rem;
+    padding: 2px 0;
+  }
+  .demo-ipa-key.accent-key {
+    font-size: 0.62rem;
+    letter-spacing: -0.02em;
+    padding: 0 1px;
+  }
+
+  /* 03 Syntax Tree */
+  .demo-tree-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 12px 4px;
+  }
+  #demo-tree-svg {
+    min-width: 390px;
+    height: auto;
+  }
+
+  /* 04 Phonological Rule Formula */
+  .rule-formula-strip {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 12px 8px;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+  .rule-block {
+    padding: 6px 10px;
+    flex-shrink: 0;
+  }
+  .term-val {
+    font-size: 1.05rem;
   }
   .rule-sub-grid {
     grid-template-columns: 1fr;
+    gap: 12px;
   }
+  .spe-matrix-box, .rule-latex-box {
+    padding: 14px;
+  }
+  .latex-code-content {
+    overflow-x: auto;
+    font-size: 0.72rem;
+    padding: 8px;
+  }
+
+  /* 6. Features Grid (ツールの特徴) */
+  .poster-head {
+    margin-bottom: 28px;
+  }
+  .sec-index {
+    font-size: 0.75rem;
+  }
+  .sec-title {
+    font-size: 1.6rem;
+  }
+  .features-grid-3col {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .poster-block {
+    padding: 24px 18px;
+  }
+  .poster-num {
+    font-size: 2.2rem;
+  }
+  .poster-keyword {
+    font-size: 1.3rem;
+  }
+  .poster-bullet-item {
+    font-size: 0.84rem;
+  }
+
+  /* 7. Footer */
   .footer-top {
     flex-direction: column;
     gap: 32px;
   }
+  .footer-brand h2 {
+    font-size: 1.45rem;
+  }
   .footer-links-group {
-    flex-wrap: wrap;
-    gap: 32px;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
   }
 }
