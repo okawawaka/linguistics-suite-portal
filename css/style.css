@@ -660,8 +660,7 @@ h1, h2, h3, h4, h5, h6 {
 .tool-bg-watermark {
   position: absolute;
   top: 36px;
-  left: 50%;
-  transform: translateX(-50%);
+  left: max(32px, calc((100% - var(--container-max-width)) / 2 + 32px));
   font-family: var(--font-sans);
   font-weight: 900;
   font-size: clamp(4.2rem, 11.5vw, 13.5rem);
@@ -672,8 +671,7 @@ h1, h2, h3, h4, h5, h6 {
   pointer-events: none;
   user-select: none;
   z-index: 0;
-  width: 100%;
-  text-align: center;
+  text-align: left;
 }
 
 .tool-focus-section .container {
@@ -2325,6 +2323,7 @@ h1, h2, h3, h4, h5, h6 {
   }
   .tool-bg-watermark {
     top: 18px;
+    left: 16px;
     font-size: clamp(3.2rem, 15vw, 5.5rem);
   }
   .section-lead-band {
