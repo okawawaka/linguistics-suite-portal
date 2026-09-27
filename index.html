@@ -185,7 +185,7 @@
         <div class="tool-visual-col slide-in-up">
           <div class="visual-monitor-frame">
             <div class="monitor-header">
-              <span class="monitor-title">DSP SIGNAL & PRAAT TEXTGRID RUNTIME</span>
+              <span class="monitor-title">ACOUSTIC ANNOTATOR & PRAAT RUNTIME</span>
               <div class="monitor-indicators-right">
                 <!-- 8-Segment LED VU Meter -->
                 <div class="vu-meter-container" title="Audio Level VU Meter">
@@ -201,15 +201,55 @@
                 <span class="monitor-badge">44.1kHz / 16-bit PCM</span>
               </div>
             </div>
+
+            <!-- Authentic App Mini Toolbar -->
+            <div class="app-mini-toolbar">
+              <div class="mini-toolbar-group">
+                <button type="button" class="mini-tool-btn rec-btn" id="btn-demo-rec">● REC</button>
+                <button type="button" class="mini-tool-btn play-btn" id="btn-demo-play">▶ PLAY (1.0x)</button>
+              </div>
+              <div class="mini-toolbar-group">
+                <span class="mini-tool-tag">ZOOM:</span>
+                <button type="button" class="mini-tool-btn" id="btn-demo-zoom-in">+</button>
+                <button type="button" class="mini-tool-btn" id="btn-demo-zoom-out">-</button>
+                <button type="button" class="mini-tool-btn" id="btn-demo-zoom-all">ALL</button>
+              </div>
+              <div class="mini-toolbar-group desktop-only-tools">
+                <span class="mini-badge-active">F0: 75-300Hz</span>
+                <span class="mini-badge-active">FORMANT: F1-F3</span>
+              </div>
+            </div>
+
+            <!-- Authentic Overview Minimap -->
+            <div class="demo-annotator-minimap-wrap">
+              <canvas id="demo-annotator-minimap" height="20"></canvas>
+              <div class="minimap-viewport-slider" id="minimap-slider"></div>
+            </div>
+
+            <!-- Main DSP Canvas (Waveform + Spectrogram + 2 Tiers TextGrid) -->
             <div class="canvas-container">
               <canvas id="demo-annotator-canvas"></canvas>
             </div>
+
+            <!-- Praat-style PlayBars & Selection Bar -->
+            <div class="praat-playbars">
+              <div class="playbar-segment sel-segment" id="playbar-sel">
+                <span class="playbar-label">0.120s (PHONE)</span>
+              </div>
+              <div class="playbar-segment word-segment" id="playbar-word">
+                <span class="playbar-label">0.680s (WORD)</span>
+              </div>
+              <div class="playbar-segment total-segment" id="playbar-total">
+                <span class="playbar-label">2.450s (TOTAL)</span>
+              </div>
+            </div>
+
             <div class="monitor-footer">
               <div class="monitor-status">
                 <span class="status-indicator"></span>
-                <span class="mono">STATUS: DSP ENGINE ACTIVE</span>
+                <span class="mono" id="annotator-inspector-info">T: 0.384s | F0: 172Hz | F1: 724Hz | F2: 1280Hz</span>
               </div>
-              <span class="mono" style="color: var(--swiss-red);">LPC ORDER: 16 | BURG ROOT</span>
+              <span class="mono text-swiss-red">PRAAT TEXTGRID COMPATIBLE</span>
             </div>
           </div>
         </div>
@@ -233,45 +273,106 @@
         <div class="tool-visual-col slide-in-up">
           <div class="visual-monitor-frame">
             <div class="monitor-header">
-              <span class="monitor-title">IPA INPUT & CHAO TONE LIGATURE ENGINE</span>
+              <span class="monitor-title">IPA KEYBOARD & PHONETIC MATRIX</span>
               <span class="monitor-badge">SIL LIGATURE SPEC</span>
             </div>
             
             <div class="demo-ipa-wrapper">
-              <!-- Output Text Display Box with Dynamic Tag Pop -->
-              <div class="demo-ipa-output-box">
-                <div class="output-top-bar">
-                  <span class="output-label">PHONETIC OUTPUT:</span>
-                  <span id="ipa-active-tag" class="ipa-char-tag mono">U+02A7 [ ʧ ]</span>
+              <!-- Authentic Sticky Header Input Row -->
+              <div class="demo-ipa-input-panel">
+                <div class="demo-ipa-display-wrap">
+                  <div class="demo-ipa-meta-line">
+                    <span class="output-label">INPUT BUFFER:</span>
+                    <span id="ipa-char-counter" class="mono">3 CHARS</span>
+                  </div>
+                  <div class="demo-ipa-text-box">
+                    <span class="output-bracket">[</span>
+                    <span id="demo-ipa-output" class="output-text">tʃ˥˩</span>
+                    <span class="typing-cursor"></span>
+                    <span class="output-bracket">]</span>
+                  </div>
                 </div>
-                <div class="output-content">
-                  <span class="output-bracket">[</span>
-                  <span id="demo-ipa-output" class="output-text"></span>
-                  <span class="typing-cursor"></span>
-                  <span class="output-bracket">]</span>
+
+                <!-- Authentic Action Key Grid -->
+                <div class="demo-ipa-action-grid">
+                  <button type="button" class="mini-ipa-act-btn btn-black" id="demo-ipa-copy">COPY</button>
+                  <button type="button" class="mini-ipa-act-btn" id="demo-ipa-undo">UNDO</button>
+                  <button type="button" class="mini-ipa-act-btn" id="demo-ipa-bracket">[ &nbsp; ]</button>
+                  <button type="button" class="mini-ipa-act-btn" id="demo-ipa-slash">/ &nbsp; /</button>
+                  <button type="button" class="mini-ipa-act-btn" id="demo-ipa-backspace">⌫ DEL</button>
+                  <button type="button" class="mini-ipa-act-btn" id="demo-ipa-clear">CLEAR</button>
                 </div>
               </div>
 
-              <!-- Interactive Virtual Keypad -->
-              <div class="demo-ipa-keypad">
-                <div class="keypad-row">
-                  <button type="button" class="demo-ipa-key" id="key-t">t</button>
-                  <button type="button" class="demo-ipa-key" id="key-esh">ʃ</button>
-                  <button type="button" class="demo-ipa-key" id="key-k">k</button>
-                  <button type="button" class="demo-ipa-key" id="key-j">j</button>
-                  <button type="button" class="demo-ipa-key" id="key-colon">ː</button>
-                  <button type="button" class="demo-ipa-key accent-key" id="key-tone">˥˩ (Tone)</button>
-                </div>
-                <div class="keypad-row">
-                  <button type="button" class="demo-ipa-key" id="key-n">n</button>
-                  <button type="button" class="demo-ipa-key" id="key-i">i</button>
-                  <button type="button" class="demo-ipa-key" id="key-h">h</button>
-                  <button type="button" class="demo-ipa-key" id="key-o">o</button>
-                  <button type="button" class="demo-ipa-key" id="key-cap-n">ɴ</button>
-                  <span class="demo-ipa-key small">ɯ</span>
-                  <span class="demo-ipa-key small">ɾ</span>
-                  <span class="demo-ipa-key small">ɡ</span>
-                </div>
+              <!-- Authentic Hover Status Ticker -->
+              <div class="demo-status-ticker">
+                <span id="ipa-status-symbol" class="demo-ticker-sym">[ ʧ ]</span>
+                <span id="ipa-status-desc" class="demo-ticker-text">無声後部歯茎破擦音 / Voiceless postalveolar affricate</span>
+              </div>
+
+              <!-- Authentic Category Tabs -->
+              <div class="demo-ipa-tabs">
+                <button type="button" class="demo-tab-btn active" data-tab="pulmonic">肺臓気流子音 (PULMONIC)</button>
+                <button type="button" class="demo-tab-btn" data-tab="vowels">母音 (VOWELS)</button>
+                <button type="button" class="demo-tab-btn" data-tab="tones">声調バー (CHAO TONES)</button>
+              </div>
+
+              <!-- Authentic Scaled IPA Matrix Table -->
+              <div class="demo-ipa-matrix-wrap">
+                <table class="demo-ipa-table">
+                  <thead>
+                    <tr>
+                      <th class="th-manner">調音法 \ 位置</th>
+                      <th>両唇</th>
+                      <th>唇歯</th>
+                      <th>歯茎</th>
+                      <th>後部歯茎</th>
+                      <th>軟口蓋</th>
+                      <th>声門</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="td-manner">破裂 (Plosive)</td>
+                      <td><button type="button" class="demo-matrix-key" data-ipa="p">p</button><button type="button" class="demo-matrix-key" data-ipa="b">b</button></td>
+                      <td class="cell-empty"></td>
+                      <td><button type="button" class="demo-matrix-key key-active" data-ipa="t">t</button><button type="button" class="demo-matrix-key" data-ipa="d">d</button></td>
+                      <td class="cell-empty"></td>
+                      <td><button type="button" class="demo-matrix-key" data-ipa="k">k</button><button type="button" class="demo-matrix-key" data-ipa="ɡ">ɡ</button></td>
+                      <td><button type="button" class="demo-matrix-key" data-ipa="ʔ">ʔ</button></td>
+                    </tr>
+                    <tr>
+                      <td class="td-manner">鼻音 (Nasal)</td>
+                      <td><button type="button" class="demo-matrix-key" data-ipa="m">m</button></td>
+                      <td><button type="button" class="demo-matrix-key" data-ipa="ɱ">ɱ</button></td>
+                      <td><button type="button" class="demo-matrix-key" data-ipa="n">n</button></td>
+                      <td class="cell-empty"></td>
+                      <td><button type="button" class="demo-matrix-key" data-ipa="ŋ">ŋ</button></td>
+                      <td class="cell-empty"></td>
+                    </tr>
+                    <tr>
+                      <td class="td-manner">摩擦 (Fricative)</td>
+                      <td><button type="button" class="demo-matrix-key" data-ipa="ɸ">ɸ</button><button type="button" class="demo-matrix-key" data-ipa="β">β</button></td>
+                      <td><button type="button" class="demo-matrix-key" data-ipa="f">f</button><button type="button" class="demo-matrix-key" data-ipa="v">v</button></td>
+                      <td><button type="button" class="demo-matrix-key" data-ipa="s">s</button><button type="button" class="demo-matrix-key" data-ipa="z">z</button></td>
+                      <td><button type="button" class="demo-matrix-key key-active" data-ipa="ʃ">ʃ</button><button type="button" class="demo-matrix-key" data-ipa="ʒ">ʒ</button></td>
+                      <td><button type="button" class="demo-matrix-key" data-ipa="x">x</button><button type="button" class="demo-matrix-key" data-ipa="ɣ">ɣ</button></td>
+                      <td><button type="button" class="demo-matrix-key" data-ipa="h">h</button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Chao Tone Bar Quick Selector Strip -->
+              <div class="demo-tone-strip">
+                <span class="tone-strip-label">CHAO TONE:</span>
+                <button type="button" class="demo-tone-btn" data-ipa="˥" data-desc="High Level (55)">˥ 55</button>
+                <button type="button" class="demo-tone-btn" data-ipa="˦" data-desc="Mid High (44)">˦ 44</button>
+                <button type="button" class="demo-tone-btn" data-ipa="˧" data-desc="Mid Level (33)">˧ 33</button>
+                <button type="button" class="demo-tone-btn" data-ipa="˨" data-desc="Mid Low (22)">˨ 22</button>
+                <button type="button" class="demo-tone-btn" data-ipa="˩" data-desc="Low Level (11)">˩ 11</button>
+                <button type="button" class="demo-tone-btn key-active tone-special" data-ipa="˥˩" data-desc="High Falling (51)">˥˩ 51</button>
+                <button type="button" class="demo-tone-btn tone-special" data-ipa="˧˥" data-desc="High Rising (35)">˧˥ 35</button>
               </div>
             </div>
 
@@ -384,66 +485,122 @@
           </div>
         </div>
 
-        <!-- Right: Animated Visual Simulator with Flowing Dashed Arrow -->
+        <!-- Right: Animated Visual Simulator with Authentic Split-Pane UI -->
         <div class="tool-visual-col slide-in-up">
           <div class="visual-monitor-frame">
             <div class="monitor-header">
-              <span class="monitor-title">X-BAR PARSER & CONSTITUENT MOVEMENT TRACE</span>
-              <span class="monitor-badge">PENN TREEBANK</span>
+              <span class="monitor-title">SYNTAX TREE EDITOR & PENN TREEBANK PARSER</span>
+              <span class="monitor-badge">X-BAR THEORY</span>
             </div>
 
-            <div class="demo-tree-wrapper">
-              <svg id="demo-tree-svg" viewBox="0 0 520 270" preserveAspectRatio="xMidYMid meet">
-                <!-- Root TP -->
-                <g id="node-tp" class="tree-node-group">
-                  <rect x="230" y="12" width="60" height="28" fill="#111111" />
-                  <text x="260" y="31" fill="#FFFFFF" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="700" text-anchor="middle">TP</text>
-                  <!-- Branches down -->
-                  <line x1="250" y1="40" x2="130" y2="85" stroke="#111111" stroke-width="1.5" />
-                  <line x1="270" y1="40" x2="380" y2="85" stroke="#111111" stroke-width="1.5" />
-                </g>
+            <!-- Authentic Mini Toolbar -->
+            <div class="app-mini-toolbar syntax-mini-toolbar">
+              <div class="mini-toolbar-group">
+                <span class="mini-tool-tag">FRAMEWORK:</span>
+                <button type="button" class="mini-tool-btn" id="btn-tree-mode-snp">S / NP</button>
+                <button type="button" class="mini-tool-btn active-state" id="btn-tree-mode-tpdp">TP / DP</button>
+              </div>
+              <div class="mini-toolbar-group desktop-only-tools">
+                <span class="mini-preset-tag">PRESET: WH-MOVEMENT</span>
+              </div>
+              <div class="mini-toolbar-group">
+                <button type="button" class="mini-tool-btn" id="btn-tree-format">整形</button>
+                <button type="button" class="mini-tool-btn btn-export-highlight" id="btn-tree-svg-export">SVG</button>
+                <button type="button" class="mini-tool-btn" id="btn-tree-latex-export">LaTeX</button>
+              </div>
+            </div>
 
-                <!-- Subject DP -->
-                <g id="node-dp1" class="tree-node-group">
-                  <rect x="100" y="85" width="60" height="28" fill="#FFFFFF" stroke="#111111" stroke-width="1.5" />
-                  <text x="130" y="104" fill="#111111" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="700" text-anchor="middle">DP</text>
-                  <line x1="130" y1="113" x2="130" y2="155" stroke="#111111" stroke-width="1.5" />
-                  <text x="130" y="174" fill="#111111" font-family="'Noto Sans JP', sans-serif" font-size="13" font-weight="600" text-anchor="middle">The linguist</text>
-                </g>
+            <!-- Authentic Split-Pane Interface (Left: Code, Right: Graphical Tree) -->
+            <div class="demo-tree-split-container">
+              <!-- Left Pane: Code Editor -->
+              <div class="demo-tree-editor-pane">
+                <div class="demo-tree-pane-header">
+                  <span class="pane-title">BRACKET CODE</span>
+                  <div class="quick-sym-strip">
+                    <span class="sym-chip">X'</span>
+                    <span class="sym-chip">_i</span>
+                    <span class="sym-chip">[t_i]</span>
+                    <span class="sym-chip">[^]</span>
+                  </div>
+                </div>
+                <div class="demo-tree-code-box">
+                  <div class="code-line"><span class="line-num">1</span><span class="code-text"><span class="c-bracket">[</span><span class="c-cat">TP</span></span></div>
+                  <div class="code-line"><span class="line-num">2</span><span class="code-text">&nbsp;&nbsp;<span class="c-bracket">[</span><span class="c-cat">DP</span> [D The] [N linguist]<span class="c-bracket">]</span><span class="c-idx">_i</span></span></div>
+                  <div class="code-line"><span class="line-num">3</span><span class="code-text">&nbsp;&nbsp;<span class="c-bracket">[</span><span class="c-cat">T'</span> [T will]</span></div>
+                  <div class="code-line"><span class="line-num">4</span><span class="code-text">&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-bracket">[</span><span class="c-cat">VP</span> <span class="c-trace">[t_i]</span></span></div>
+                  <div class="code-line"><span class="line-num">5</span><span class="code-text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-bracket">[</span><span class="c-cat">V'</span> [V analyze]</span></div>
+                  <div class="code-line"><span class="line-num">6</span><span class="code-text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-tri">[^ the acoustics]</span><span class="c-bracket">]]]]]</span></span></div>
+                </div>
+                <div class="demo-tree-yield-bar">
+                  <span class="yield-lbl">YIELD:</span>
+                  <span class="yield-val">The linguist will analyze the acoustics</span>
+                </div>
+              </div>
 
-                <!-- T' -->
-                <g id="node-tbar" class="tree-node-group">
-                  <rect x="350" y="85" width="60" height="28" fill="#FFFFFF" stroke="#111111" stroke-width="1.5" />
-                  <text x="380" y="104" fill="#111111" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="700" text-anchor="middle">T'</text>
-                  <line x1="365" y1="113" x2="310" y2="155" stroke="#111111" stroke-width="1.5" />
-                  <line x1="395" y1="113" x2="440" y2="155" stroke="#111111" stroke-width="1.5" />
-                  <text x="310" y="174" fill="#E30613" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="600" text-anchor="middle">will</text>
-                </g>
+              <!-- Right Pane: SVG Tree Visualizer -->
+              <div class="demo-tree-render-pane">
+                <div class="demo-tree-pane-header">
+                  <span class="pane-title">LIVE RENDER</span>
+                  <div class="tree-zoom-strip">
+                    <span class="zoom-btn">-</span>
+                    <span class="zoom-btn">100%</span>
+                    <span class="zoom-btn">+</span>
+                  </div>
+                </div>
+                <div class="demo-tree-svg-canvas">
+                  <svg id="demo-tree-svg" viewBox="0 0 380 230" preserveAspectRatio="xMidYMid meet">
+                    <!-- Root TP -->
+                    <g id="node-tp" class="tree-node-group">
+                      <rect x="160" y="10" width="50" height="22" fill="#111111" />
+                      <text x="185" y="25" fill="#FFFFFF" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" text-anchor="middle">TP</text>
+                      <!-- Branches down -->
+                      <line x1="175" y1="32" x2="85" y2="65" stroke="#111111" stroke-width="1.2" />
+                      <line x1="195" y1="32" x2="270" y2="65" stroke="#111111" stroke-width="1.2" />
+                    </g>
 
-                <!-- VP with triangle -->
-                <g id="node-vp" class="tree-node-group">
-                  <rect x="410" y="155" width="60" height="28" fill="#FFFFFF" stroke="#111111" stroke-width="1.5" />
-                  <text x="440" y="174" fill="#111111" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="700" text-anchor="middle">VP</text>
-                  <!-- Triangle notation for abbreviation -->
-                  <polygon points="440,183 385,225 495,225" fill="none" stroke="#111111" stroke-width="1.5" />
-                  <text x="440" y="240" fill="#111111" font-family="'Noto Sans JP', sans-serif" font-size="12" text-anchor="middle">analyze the acoustics</text>
-                </g>
+                    <!-- Subject DP -->
+                    <g id="node-dp1" class="tree-node-group">
+                      <rect x="60" y="65" width="50" height="22" fill="#FFFFFF" stroke="#111111" stroke-width="1.2" />
+                      <text x="85" y="80" fill="#111111" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" text-anchor="middle">DP<tspan font-size="8" fill="#E30613"> i</tspan></text>
+                      <line x1="85" y1="87" x2="85" y2="120" stroke="#111111" stroke-width="1.2" />
+                      <text x="85" y="135" fill="#111111" font-family="'Noto Sans JP', sans-serif" font-size="10.5" font-weight="600" text-anchor="middle">The linguist</text>
+                    </g>
 
-                <!-- Movement Arrow with Continuous Flowing Dash Pulse -->
-                <g id="branch-arrow" class="movement-arrow-group">
-                  <path d="M 130 188 C 130 262, 440 262, 440 248" class="flowing-dash-path" fill="none" stroke="#E30613" stroke-width="2.2" stroke-dasharray="6,4" />
-                  <polygon points="440,246 434,256 446,256" fill="#E30613" />
-                  <text x="285" y="262" fill="#E30613" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" text-anchor="middle">[ MOVEMENT TRACE ]</text>
-                </g>
-              </svg>
+                    <!-- T' -->
+                    <g id="node-tbar" class="tree-node-group">
+                      <rect x="245" y="65" width="50" height="22" fill="#FFFFFF" stroke="#111111" stroke-width="1.2" />
+                      <text x="270" y="80" fill="#111111" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" text-anchor="middle">T'</text>
+                      <line x1="258" y1="87" x2="215" y2="120" stroke="#111111" stroke-width="1.2" />
+                      <line x1="282" y1="87" x2="310" y2="120" stroke="#111111" stroke-width="1.2" />
+                      <text x="215" y="135" fill="#E30613" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" text-anchor="middle">will</text>
+                    </g>
+
+                    <!-- VP with triangle -->
+                    <g id="node-vp" class="tree-node-group">
+                      <rect x="285" y="120" width="50" height="22" fill="#FFFFFF" stroke="#111111" stroke-width="1.2" />
+                      <text x="310" y="135" fill="#111111" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" text-anchor="middle">VP</text>
+                      <!-- Triangle notation for abbreviation -->
+                      <polygon points="310,142 255,182 365,182" fill="none" stroke="#111111" stroke-width="1.2" />
+                      <text x="310" y="196" fill="#111111" font-family="'Noto Sans JP', sans-serif" font-size="10" text-anchor="middle">analyze the acoustics</text>
+                    </g>
+
+                    <!-- Movement Arrow with Continuous Flowing Dash Pulse -->
+                    <g id="branch-arrow" class="movement-arrow-group">
+                      <path d="M 85 145 C 85 220, 310 220, 310 205" class="flowing-dash-path" fill="none" stroke="#E30613" stroke-width="1.8" stroke-dasharray="5,3" />
+                      <polygon points="310,203 305,212 315,212" fill="#E30613" />
+                      <text x="195" y="218" fill="#E30613" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="700" text-anchor="middle">[ MOVEMENT TRACE @1 ]</text>
+                    </g>
+                  </svg>
+                </div>
+              </div>
             </div>
 
             <div class="monitor-footer">
               <div class="monitor-status">
                 <span class="status-indicator"></span>
-                <span class="mono">TREE STATUS: RENDERED</span>
+                <span class="mono">PARSER: 0 ERRORS</span>
               </div>
-              <span class="mono">TP / DP / vP ACADEMIC SYSTEM</span>
+              <span class="mono">LATEX FOREST / QTREE & VECTOR SVG</span>
             </div>
           </div>
         </div>
@@ -467,33 +624,67 @@
         <div class="tool-visual-col slide-in-up">
           <div class="visual-monitor-frame">
             <div class="monitor-header">
-              <span class="monitor-title">CHOMSKY-HALLE (SPE) MATRIX & KATEX SYNTAX</span>
+              <span class="monitor-title">PHONOLOGICAL RULE EDITOR & SPE MATRIX</span>
               <span class="monitor-badge">SYNCHRONIC & DIACHRONIC</span>
             </div>
 
-            <!-- Up-Down 2-Tier Editor UI (No-wrap formula + SPE Matrix / LaTeX) -->
+            <!-- Authentic Mini Toolbar -->
+            <div class="app-mini-toolbar phonology-mini-toolbar">
+              <div class="mini-toolbar-group">
+                <span class="mini-tool-tag">OPERATOR:</span>
+                <button type="button" class="mini-tool-btn active-state" id="btn-op-arrow" title="共時的音韻規則">→ (共時)</button>
+                <button type="button" class="mini-tool-btn" id="btn-op-greater" title="通時的音変化">&gt; (通時)</button>
+              </div>
+              <div class="mini-toolbar-group desktop-only-tools">
+                <span class="mini-preset-tag">PRESET: サ行子音の口蓋化</span>
+              </div>
+              <div class="mini-toolbar-group">
+                <button type="button" class="mini-tool-btn btn-export-highlight" id="btn-demo-katex-copy">KaTeX</button>
+                <button type="button" class="mini-tool-btn" id="btn-demo-rule-svg">SVG</button>
+                <button type="button" class="mini-tool-btn" id="btn-demo-rule-png">PNG</button>
+              </div>
+            </div>
+
+            <!-- Authentic Multi-tier Editor UI -->
             <div class="demo-rule-wrapper" id="demo-rule-container">
-              <!-- Tier 1: Full-width Unbroken Formula Line with Neon Pulse Arrow -->
-              <div class="rule-formula-strip">
-                <div class="rule-block input-term" id="rule-part-input">
-                  <span class="term-type">INPUT</span>
-                  <span class="term-val">/ t /</span>
-                </div>
-                <span class="rule-arrow glowing-arrow" id="rule-part-arrow">→</span>
-                <div class="rule-block output-term" id="rule-part-output">
-                  <span class="term-type">OUTPUT</span>
-                  <span class="term-val">[ tʃ ]</span>
-                </div>
-                <span class="rule-slash" id="rule-part-slash">/</span>
-                <div class="rule-block env-term" id="rule-part-env">
-                  <span class="term-type">ENV</span>
-                  <span class="term-val">__ [ i ]</span>
+              <!-- Tier 1: Prominent Text Notation Input Row -->
+              <div class="demo-rule-notation-row">
+                <span class="rule-input-tag">TEXT NOTATION:</span>
+                <div class="rule-input-field">
+                  <span class="rule-syn-chunk">/t/</span>
+                  <span class="rule-syn-op" id="demo-syn-op">→</span>
+                  <span class="rule-syn-chunk">[tʃ]</span>
+                  <span class="rule-syn-env">/ _ [i]</span>
+                  <span class="typing-cursor"></span>
                 </div>
               </div>
 
-              <!-- Tier 2: 2-Column Subgrid: SPE Matrix & LaTeX Output -->
+              <!-- Tier 2: Authentic 4-Block Structured Rule Builder -->
+              <div class="rule-builder-blocks">
+                <div class="builder-block target-block">
+                  <span class="block-tag">TARGET</span>
+                  <span class="block-val">/ t /</span>
+                </div>
+                <span class="builder-op-arrow glowing-arrow" id="builder-arrow">→</span>
+                <div class="builder-block change-block">
+                  <span class="block-tag">CHANGE</span>
+                  <span class="block-val">[ tʃ ]</span>
+                </div>
+                <span class="builder-slash">/</span>
+                <div class="builder-block env-left-block">
+                  <span class="block-tag">LEFT</span>
+                  <span class="block-val">∅</span>
+                </div>
+                <span class="builder-slot">__</span>
+                <div class="builder-block env-right-block">
+                  <span class="block-tag">RIGHT</span>
+                  <span class="block-val">[ i ]</span>
+                </div>
+              </div>
+
+              <!-- Tier 3: 2-Column SPE Distinctive Feature Matrix & Live KaTeX Output -->
               <div class="rule-sub-grid">
-                <!-- SPE Matrix -->
+                <!-- Authentic SPE Matrix -->
                 <div class="spe-matrix-box" id="rule-part-matrix">
                   <div class="matrix-label">SPE DISTINCTIVE FEATURES</div>
                   <div class="matrix-brackets">
@@ -507,14 +698,29 @@
                   </div>
                 </div>
 
-                <!-- LaTeX / KaTeX Code Preview -->
+                <!-- Authentic KaTeX / LaTeX Code Box -->
                 <div class="rule-latex-box" id="rule-part-latex">
-                  <div class="matrix-label">LATEX / KATEX CODE</div>
-                  <div class="latex-code-content">
-                    <code>\text{/t/} \to \text{[tʃ]} \mathbin{/} \underline{\quad}\text{[i]}</code>
+                  <div class="matrix-label">LIVE KATEX RENDERING</div>
+                  <div class="latex-render-preview" id="demo-katex-rendered">
+                    <!-- Pure CSS KaTeX mathematical layout -->
+                    <div class="math-rule-flex">
+                      <span class="m-term">/t/</span>
+                      <span class="m-arr" id="math-arr">⟶</span>
+                      <div class="m-mat">
+                        <span class="m-mat-l">[</span>
+                        <div class="m-mat-col">
+                          <span>+cor</span>
+                          <span>-ant</span>
+                          <span>+del rel</span>
+                        </div>
+                        <span class="m-mat-r">]</span>
+                      </div>
+                      <span class="m-slash">/</span>
+                      <span class="m-env"><u>&nbsp;&nbsp;&nbsp;&nbsp;</u>&nbsp;[i]</span>
+                    </div>
                   </div>
-                  <div class="latex-render-preview">
-                    <span>/t/ → [tʃ] / _[i]</span>
+                  <div class="latex-code-content">
+                    <code>\text{/t/} \to \begin{bmatrix} \text{+cor} \\ \text{-ant} \end{bmatrix} \mathbin{/} \underline{\quad} \text{[i]}</code>
                   </div>
                 </div>
               </div>
@@ -525,7 +731,7 @@
                 <span class="status-indicator"></span>
                 <span class="mono">KATEX ENGINE: RENDERED</span>
               </div>
-              <span class="mono">VECTOR SVG / PNG EXPORT</span>
+              <span class="mono">CHOMSKY-HALLE (1968) GENERATIVE SPEC</span>
             </div>
           </div>
         </div>

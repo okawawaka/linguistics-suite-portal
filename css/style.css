@@ -930,169 +930,571 @@ h1, h2, h3, h4, h5, h6 {
 
 .canvas-container {
   width: 100%;
-  height: 280px;
+  height: 230px;
   background-color: #111111;
   position: relative;
   overflow: hidden;
 }
 
 /* ==========================================================================
-   DEMO 2: IPA INTERACTIVE TYPING SIMULATOR
+   AUTHENTIC APP MINI TOOLBAR (COMMON FOR SIMULATORS)
    ========================================================================== */
 
-.demo-ipa-wrapper {
-  padding: 24px;
-  background-color: var(--bg-primary);
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  min-height: 280px;
-  justify-content: center;
-}
-
-.demo-ipa-output-box {
-  border: 1px solid var(--border-dark);
-  padding: 14px 18px;
-  background-color: #FAFAFA;
-  min-height: 86px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.output-top-bar {
+.app-mini-toolbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 4px;
-}
-
-.output-label {
+  padding: 6px 12px;
+  background-color: #FAFAFA;
+  border-bottom: 1px solid var(--border-medium);
   font-family: var(--font-mono);
   font-size: 0.68rem;
-  font-weight: 700;
-  color: var(--text-muted);
-}
-
-.ipa-char-tag {
-  font-size: 0.7rem;
-  font-weight: 700;
-  color: var(--swiss-red);
-  background-color: rgba(227, 6, 19, 0.08);
-  padding: 2px 6px;
-  border: 1px solid rgba(227, 6, 19, 0.3);
-  transition: all 0.2s ease;
-}
-
-.output-content {
-  display: flex;
-  align-items: center;
-  font-family: var(--font-sans);
-  font-size: 2.1rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  overflow: hidden;
-}
-
-.output-bracket {
-  color: var(--swiss-red);
-}
-
-.output-text {
-  margin: 0 4px;
-  color: var(--text-primary);
-  min-width: 120px;
-}
-
-.typing-cursor {
-  display: inline-block;
-  width: 3px;
-  height: 1.8rem;
-  background-color: var(--swiss-red);
-  margin-left: 4px;
-  animation: blinkCursor 0.8s infinite;
-}
-
-@keyframes blinkCursor {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
-}
-
-.demo-ipa-keypad {
-  display: flex;
-  flex-direction: column;
   gap: 8px;
-}
-
-.keypad-row {
-  display: flex;
-  gap: 6px;
   flex-wrap: wrap;
 }
 
-.demo-ipa-key {
-  border: 1px solid var(--border-dark);
+.mini-toolbar-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.mini-tool-btn {
   background-color: var(--bg-primary);
-  padding: 8px 14px;
-  font-family: var(--font-sans);
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  transition: all 0.15s ease;
-  line-height: 1;
-}
-
-.demo-ipa-key.accent-key {
-  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-dark);
+  padding: 3px 7px;
   font-family: var(--font-mono);
-  font-size: 0.82rem;
+  font-size: 0.65rem;
   font-weight: 700;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  line-height: 1.2;
+}
+
+.mini-tool-btn:hover {
+  background-color: var(--text-primary);
+  color: var(--text-inverse);
+}
+
+.mini-tool-btn.active-state {
+  background-color: var(--swiss-red);
+  color: #FFFFFF;
+  border-color: var(--swiss-red);
+}
+
+.mini-tool-btn.rec-btn {
   color: var(--swiss-red);
+  border-color: var(--swiss-red);
 }
 
-.demo-ipa-key.small {
-  padding: 5px 8px;
-  font-size: 0.85rem;
-  border-color: var(--border-light);
+.mini-tool-btn.rec-btn:hover {
+  background-color: var(--swiss-red);
+  color: #FFFFFF;
+}
+
+.mini-tool-btn.btn-export-highlight {
+  background-color: #111111;
+  color: #FFFFFF;
+}
+
+.mini-tool-tag {
   color: var(--text-muted);
+  font-weight: 700;
+  margin-right: 2px;
 }
 
-.demo-ipa-key.key-active {
-  background-color: var(--swiss-red) !important;
-  color: var(--text-inverse) !important;
-  border-color: var(--swiss-red) !important;
-  transform: scale(0.92);
+.mini-preset-tag {
+  color: var(--text-secondary);
+  font-weight: 600;
+  background-color: var(--bg-secondary);
+  padding: 2px 6px;
+  border: 1px solid var(--border-light);
+}
+
+.mini-badge-active {
+  background-color: rgba(227, 6, 19, 0.08);
+  border: 1px solid rgba(227, 6, 19, 0.3);
+  color: var(--swiss-red);
+  padding: 2px 5px;
+  font-weight: 700;
 }
 
 /* ==========================================================================
-   DEMO 3: SYNTAX TREE SVG ANIMATION (FLOWING DASH TRACE)
+   DEMO 1: ACOUSTIC ANNOTATOR (MINIMAP + MULTI-TIER + PRAAT PLAYBARS)
    ========================================================================== */
 
-.demo-tree-wrapper {
-  padding: 12px 16px;
-  background-color: var(--bg-primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 280px;
-  overflow: hidden;
+.demo-annotator-minimap-wrap {
+  width: 100%;
+  height: 22px;
+  background-color: #1A1A1A;
+  position: relative;
+  border-bottom: 1px solid #333333;
 }
 
-.demo-tree-wrapper svg {
+.demo-annotator-minimap-wrap canvas {
   width: 100%;
-  max-width: 520px;
-  height: auto;
-  aspect-ratio: 520 / 270;
+  height: 100%;
   display: block;
 }
 
-.tree-node-group text, .tree-node-group rect {
-  transition: all 0.3s ease;
+.minimap-viewport-slider {
+  position: absolute;
+  top: 1px;
+  height: 20px;
+  width: 38%;
+  left: 20%;
+  border: 1px solid var(--swiss-red);
+  background-color: rgba(227, 6, 19, 0.15);
+  pointer-events: none;
+  transition: left 0.1s linear;
 }
 
-.node-pulsing rect {
-  stroke: var(--swiss-red) !important;
-  stroke-width: 2 !important;
+.praat-playbars {
+  display: flex;
+  flex-direction: column;
+  background-color: #E5E7EB;
+  border-top: 1px solid var(--border-dark);
+}
+
+.playbar-segment {
+  border-bottom: 1px solid #D1D5DB;
+  padding: 2px 10px;
+  background-color: #F3F4F6;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: #374151;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.15s ease;
+  cursor: pointer;
+}
+
+.playbar-segment:hover {
+  background-color: #E5E7EB;
+}
+
+.playbar-segment:last-child {
+  border-bottom: none;
+}
+
+.playbar-segment.sel-segment {
+  background-color: #DBEAFE;
+  color: #1E40AF;
+  border-left: 3px solid #2563EB;
+}
+
+.playbar-segment.word-segment {
+  background-color: #F3F4F6;
+}
+
+.playbar-segment.total-segment {
+  background-color: #E5E7EB;
+}
+
+/* ==========================================================================
+   DEMO 2: IPA KEYBOARD & PHONETIC MATRIX (AUTHENTIC APP UI)
+   ========================================================================== */
+
+.demo-ipa-wrapper {
+  padding: 12px 16px;
+  background-color: var(--bg-primary);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.demo-ipa-input-panel {
+  display: flex;
+  gap: 12px;
+  background-color: #FAFAFA;
+  border: 1px solid var(--border-dark);
+  padding: 10px 14px;
+}
+
+.demo-ipa-display-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.demo-ipa-meta-line {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-bottom: 2px;
+}
+
+.demo-ipa-text-box {
+  display: flex;
+  align-items: center;
+  font-family: var(--font-sans);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.demo-ipa-action-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  align-self: center;
+}
+
+.mini-ipa-act-btn {
+  padding: 4px 6px;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  border: 1px solid var(--border-dark);
+  background-color: #FFFFFF;
+  cursor: pointer;
+  line-height: 1.1;
+  transition: all 0.15s ease;
+}
+
+.mini-ipa-act-btn:hover {
+  background-color: var(--text-primary);
+  color: var(--text-inverse);
+}
+
+.mini-ipa-act-btn.btn-black {
+  background-color: #111111;
+  color: #FFFFFF;
+}
+
+.demo-status-ticker {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  padding: 4px 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+}
+
+.demo-ticker-sym {
+  color: var(--swiss-red);
+  font-weight: 800;
+  font-size: 0.85rem;
+}
+
+.demo-ticker-text {
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.demo-ipa-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border-dark);
+  gap: 2px;
+}
+
+.demo-tab-btn {
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-bottom: none;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.demo-tab-btn.active {
+  background-color: #111111;
+  color: #FFFFFF;
+  border-color: #111111;
+}
+
+.demo-ipa-matrix-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border-dark);
+}
+
+.demo-ipa-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  text-align: center;
+  background-color: #FFFFFF;
+}
+
+.demo-ipa-table th {
+  background-color: #F3F4F6;
+  border: 1px solid #E5E7EB;
+  padding: 3px 4px;
+  font-weight: 700;
+  font-size: 0.62rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.demo-ipa-table th.th-manner {
+  text-align: left;
+  padding-left: 6px;
+  width: 90px;
+  background-color: #E5E7EB;
+  color: #111111;
+}
+
+.demo-ipa-table td {
+  border: 1px solid #E5E7EB;
+  padding: 2px;
+  vertical-align: middle;
+  height: 26px;
+}
+
+.demo-ipa-table td.td-manner {
+  text-align: left;
+  padding-left: 6px;
+  font-weight: 600;
+  font-size: 0.62rem;
+  background-color: #FAFAFA;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.demo-matrix-key {
+  border: 1px solid #D1D5DB;
+  background-color: #FFFFFF;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 1px 5px;
+  margin: 0 1px;
+  cursor: pointer;
+  transition: all 0.12s ease;
+  line-height: 1;
+}
+
+.demo-matrix-key:hover {
+  border-color: var(--text-primary);
+  background-color: #F3F4F6;
+}
+
+.demo-matrix-key.key-active {
+  background-color: var(--swiss-red) !important;
+  color: #FFFFFF !important;
+  border-color: var(--swiss-red) !important;
+  transform: scale(0.94);
+}
+
+.demo-tone-strip {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px;
+  background-color: #FAFAFA;
+  border: 1px solid var(--border-light);
+  overflow-x: auto;
+}
+
+.tone-strip-label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  white-space: nowrap;
+  margin-right: 4px;
+}
+
+.demo-tone-btn {
+  border: 1px solid var(--border-dark);
+  background-color: #FFFFFF;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 3px 6px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.demo-tone-btn.tone-special {
+  color: var(--swiss-red);
+}
+
+.demo-tone-btn:hover {
+  background-color: var(--text-primary);
+  color: #FFFFFF;
+}
+
+.demo-tone-btn.key-active {
+  background-color: var(--swiss-red) !important;
+  color: #FFFFFF !important;
+  border-color: var(--swiss-red) !important;
+}
+
+/* ==========================================================================
+   DEMO 3: SYNTAX TREE EDITOR (AUTHENTIC SPLIT-PANE UI)
+   ========================================================================== */
+
+.demo-tree-split-container {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  background-color: var(--bg-primary);
+  border-bottom: 1px solid var(--border-dark);
+  min-height: 250px;
+}
+
+.demo-tree-editor-pane {
+  background-color: #FAFAFA;
+  border-right: 1px solid var(--border-medium);
+  display: flex;
+  flex-direction: column;
+}
+
+.demo-tree-pane-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 8px;
+  background-color: #EEEEEE;
+  border-bottom: 1px solid #E0E0E0;
+}
+
+.pane-title {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.quick-sym-strip {
+  display: flex;
+  gap: 2px;
+}
+
+.sym-chip {
+  background-color: #FFFFFF;
+  border: 1px solid #CCCCCC;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 700;
+  padding: 1px 3px;
+  line-height: 1;
+}
+
+.demo-tree-code-box {
+  padding: 6px 8px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  line-height: 1.35;
+  flex: 1;
+  background-color: #FFFFFF;
+  overflow-y: auto;
+}
+
+.code-line {
+  display: flex;
+  white-space: nowrap;
+}
+
+.line-num {
+  width: 14px;
+  color: #9CA3AF;
+  user-select: none;
+  font-size: 0.6rem;
+}
+
+.code-text {
+  color: #111111;
+}
+
+.c-bracket {
+  color: #9CA3AF;
+  font-weight: 700;
+}
+
+.c-cat {
+  color: var(--swiss-red);
+  font-weight: 700;
+}
+
+.c-idx {
+  color: #2563EB;
+  font-weight: 700;
+}
+
+.c-trace {
+  color: #D97706;
+  font-weight: 700;
+}
+
+.c-tri {
+  color: #059669;
+}
+
+.demo-tree-yield-bar {
+  padding: 4px 8px;
+  background-color: #F3F4F6;
+  border-top: 1px solid #E5E7EB;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  display: flex;
+  gap: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.yield-lbl {
+  color: var(--text-muted);
+  font-weight: 700;
+}
+
+.yield-val {
+  color: #111111;
+  font-weight: 600;
+}
+
+.demo-tree-render-pane {
+  display: flex;
+  flex-direction: column;
+  background-color: #FFFFFF;
+}
+
+.tree-zoom-strip {
+  display: flex;
+  gap: 2px;
+}
+
+.zoom-btn {
+  background-color: #FFFFFF;
+  border: 1px solid #CCCCCC;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 700;
+  padding: 1px 4px;
+  line-height: 1;
+}
+
+.demo-tree-svg-canvas {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+}
+
+.demo-tree-svg-canvas svg {
+  width: 100%;
+  max-width: 380px;
+  height: auto;
+  aspect-ratio: 380 / 230;
 }
 
 .flowing-dash-path {
@@ -1102,68 +1504,106 @@ h1, h2, h3, h4, h5, h6 {
 
 @keyframes dashFlow {
   0% { stroke-dashoffset: 0; }
-  100% { stroke-dashoffset: -20; }
+  100% { stroke-dashoffset: -16; }
 }
 
 /* ==========================================================================
-   DEMO 4: PHONOLOGICAL RULE & SPE MATRIX (UP-DOWN 2-TIER REFINED)
+   DEMO 4: PHONOLOGICAL RULE EDITOR (AUTHENTIC APP UI)
    ========================================================================== */
 
 .demo-rule-wrapper {
-  padding: 20px 24px;
+  padding: 12px 16px;
   background-color: var(--bg-primary);
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  min-height: 280px;
-  justify-content: center;
+  gap: 10px;
 }
 
-.rule-formula-strip {
+.demo-rule-notation-row {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 12px;
-  width: 100%;
-  white-space: nowrap;
+  gap: 8px;
   background-color: #FAFAFA;
   border: 1px solid var(--border-dark);
-  padding: 12px 16px;
-  overflow-x: auto;
-}
-
-.rule-block {
-  border: 1px solid var(--border-dark);
-  padding: 6px 14px;
-  background-color: var(--bg-primary);
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  transition: all 0.3s ease;
-  flex-shrink: 0;
-}
-
-.term-type {
+  padding: 6px 10px;
   font-family: var(--font-mono);
+}
+
+.rule-input-tag {
   font-size: 0.62rem;
   font-weight: 700;
   color: var(--text-muted);
+  white-space: nowrap;
 }
 
-.term-val {
-  font-family: var(--font-mono);
-  font-size: 1.25rem;
+.rule-input-field {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.88rem;
   font-weight: 700;
-  color: var(--text-primary);
+  color: #111111;
+  flex: 1;
 }
 
-.rule-arrow, .rule-slash {
+.rule-syn-chunk {
+  color: #111111;
+}
+
+.rule-syn-op {
+  color: var(--swiss-red);
+  font-weight: 800;
+}
+
+.rule-syn-env {
+  color: #4B5563;
+}
+
+.rule-builder-blocks {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 10px;
+  background-color: #FFFFFF;
+  border: 1px solid var(--border-medium);
+  overflow-x: auto;
+}
+
+.builder-block {
+  border: 1px solid var(--border-dark);
+  padding: 4px 8px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #FAFAFA;
+  flex-shrink: 0;
+}
+
+.block-tag {
   font-family: var(--font-mono);
-  font-size: 1.4rem;
+  font-size: 0.55rem;
   font-weight: 700;
   color: var(--text-muted);
-  transition: all 0.3s ease;
+}
+
+.block-val {
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #111111;
+}
+
+.builder-op-arrow, .builder-slash, .builder-slot {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-muted);
   flex-shrink: 0;
+}
+
+.builder-op-arrow {
+  color: var(--swiss-red);
 }
 
 .glowing-arrow {
@@ -1176,62 +1616,43 @@ h1, h2, h3, h4, h5, h6 {
   50% { opacity: 1; transform: scale(1.15); color: var(--swiss-red); }
 }
 
-.rule-block.part-highlight, .rule-arrow.part-highlight, .rule-slash.part-highlight {
-  border-color: var(--swiss-red);
-  color: var(--swiss-red);
-}
-
-.output-term.part-highlight {
-  background-color: var(--swiss-red);
-}
-
-.output-term.part-highlight .term-val, .output-term.part-highlight .term-type {
-  color: var(--text-inverse);
-}
-
 .rule-sub-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 14px;
+  gap: 10px;
   width: 100%;
 }
 
 .spe-matrix-box {
   border: 1px solid var(--border-dark);
-  background-color: var(--bg-secondary);
-  padding: 12px 16px;
-  transition: all 0.3s ease;
-}
-
-.spe-matrix-box.part-highlight {
-  border-color: var(--swiss-red);
-  background-color: #FFF5F5;
+  background-color: #FAFAFA;
+  padding: 8px 12px;
 }
 
 .matrix-label {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   color: var(--swiss-red);
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .matrix-brackets {
   border-left: 2px solid var(--border-dark);
   border-right: 2px solid var(--border-dark);
-  padding: 2px 10px;
+  padding: 2px 8px;
 }
 
 .matrix-content {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 1px;
 }
 
 .matrix-feat {
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: 0.7rem;
   font-weight: 600;
   color: var(--text-primary);
 }
@@ -1242,35 +1663,74 @@ h1, h2, h3, h4, h5, h6 {
 
 .rule-latex-box {
   border: 1px solid var(--border-dark);
-  background-color: var(--bg-secondary);
-  padding: 12px 16px;
+  background-color: #FAFAFA;
+  padding: 8px 12px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: all 0.3s ease;
 }
 
-.rule-latex-box.part-highlight {
-  border-color: var(--swiss-red);
+.latex-render-preview {
+  padding: 6px 0;
+}
+
+.math-rule-flex {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 0.95rem;
+}
+
+.m-term {
+  font-weight: 700;
+}
+
+.m-arr {
+  color: var(--swiss-red);
+  font-size: 1.1rem;
+}
+
+.m-mat {
+  display: flex;
+  align-items: center;
+  font-size: 0.65rem;
+  font-family: var(--font-mono);
+}
+
+.m-mat-l, .m-mat-r {
+  font-size: 1.3rem;
+  font-family: 'Times New Roman', serif;
+}
+
+.m-mat-col {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+  padding: 0 2px;
+  color: var(--swiss-red);
+  font-weight: 700;
+}
+
+.m-slash {
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+}
+
+.m-env {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
 }
 
 .latex-code-content {
   background-color: var(--bg-dark);
   color: #A3E635;
-  padding: 6px 10px;
+  padding: 4px 8px;
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.62rem;
   white-space: nowrap;
   overflow-x: hidden;
   text-overflow: ellipsis;
-  margin-bottom: 6px;
-}
-
-.latex-render-preview {
-  font-family: var(--font-mono);
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: var(--text-primary);
 }
 
 /* ==========================================================================
@@ -1802,79 +2262,103 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 0.68rem;
   }
 
+  /* 5. Simulators & Visual Monitors */
+  .visual-monitor-frame {
+    margin-top: 6px;
+  }
+  .monitor-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 10px 12px;
+  }
+  .monitor-title {
+    font-size: 0.66rem;
+    line-height: 1.3;
+  }
+  .monitor-indicators-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .monitor-badge {
+    font-size: 0.62rem;
+    padding: 2px 6px;
+  }
+  .monitor-footer {
+    padding: 8px 12px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    font-size: 0.68rem;
+  }
+
+  .desktop-only-tools {
+    display: none !important;
+  }
+
   /* 01 Annotator */
   .canvas-container {
-    height: 200px;
+    height: 180px;
   }
   #demo-annotator-canvas {
-    height: 200px !important;
+    height: 180px !important;
+  }
+  .praat-playbars {
+    font-size: 0.58rem;
   }
 
-  /* 02 IPA Keypad */
-  .demo-ipa-output-box {
-    padding: 12px;
+  /* 02 IPA Matrix */
+  .demo-ipa-input-panel {
+    flex-direction: column;
+    gap: 8px;
   }
-  .output-text {
-    font-size: 1.35rem;
+  .demo-ipa-text-box {
+    font-size: 1.4rem;
   }
-  .demo-ipa-keypad {
-    padding: 10px 8px;
-    gap: 6px;
-  }
-  .keypad-row {
-    display: grid;
+  .demo-ipa-action-grid {
     grid-template-columns: repeat(6, 1fr);
-    gap: 4px;
+    width: 100%;
   }
-  .demo-ipa-key {
-    min-width: 0;
-    height: 38px;
-    font-size: 0.88rem;
-    padding: 2px 0;
+  .mini-ipa-act-btn {
+    padding: 3px 2px;
+    font-size: 0.58rem;
   }
-  .demo-ipa-key.accent-key {
-    font-size: 0.62rem;
-    letter-spacing: -0.02em;
-    padding: 0 1px;
+  .demo-ipa-table th, .demo-ipa-table td {
+    padding: 2px 1px;
+    font-size: 0.6rem;
   }
 
-  /* 03 Syntax Tree */
-  .demo-tree-wrapper {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    padding: 12px 4px;
+  /* 03 Syntax Tree Split */
+  .demo-tree-split-container {
+    grid-template-columns: 1fr;
   }
-  #demo-tree-svg {
-    min-width: 390px;
+  .demo-tree-editor-pane {
+    border-right: none;
+    border-bottom: 1px solid var(--border-medium);
+  }
+  .demo-tree-code-box {
+    max-height: 110px;
+  }
+  .demo-tree-svg-canvas svg {
+    max-width: 100%;
     height: auto;
   }
 
   /* 04 Phonological Rule Formula */
-  .rule-formula-strip {
+  .rule-builder-blocks {
+    justify-content: flex-start;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    padding: 12px 8px;
-    justify-content: flex-start;
-    gap: 10px;
   }
-  .rule-block {
-    padding: 6px 10px;
-    flex-shrink: 0;
+  .builder-block {
+    padding: 3px 6px;
   }
-  .term-val {
-    font-size: 1.05rem;
+  .block-val {
+    font-size: 0.95rem;
   }
   .rule-sub-grid {
     grid-template-columns: 1fr;
-    gap: 12px;
-  }
-  .spe-matrix-box, .rule-latex-box {
-    padding: 14px;
-  }
-  .latex-code-content {
-    overflow-x: auto;
-    font-size: 0.72rem;
-    padding: 8px;
+    gap: 10px;
   }
 
   /* 6. Features Grid (ツールの特徴) */
