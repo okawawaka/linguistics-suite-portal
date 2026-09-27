@@ -41,7 +41,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;700&family=Noto+Sans:wght@400;700&display=swap">
   </noscript>
 
-  <link rel="stylesheet" href="css/style.css?v=20260927-9">
+  <link rel="stylesheet" href="css/style.css?v=20260927-10">
 </head>
 <body>
 
@@ -546,19 +546,18 @@
                 <div class="demo-tree-pane-header">
                   <span class="pane-title">BRACKET CODE</span>
                   <div class="quick-sym-strip">
-                    <span class="sym-chip">X'</span>
-                    <span class="sym-chip">_i</span>
-                    <span class="sym-chip">[t_i]</span>
+                    <span class="sym-chip">TP</span>
+                    <span class="sym-chip">DP</span>
+                    <span class="sym-chip">V'</span>
                     <span class="sym-chip">[^]</span>
                   </div>
                 </div>
                 <div class="demo-tree-code-box">
-                  <div class="code-line"><span class="line-num">1</span><span class="code-text"><span class="c-bracket">[</span><span class="c-cat">TP</span></span></div>
-                  <div class="code-line"><span class="line-num">2</span><span class="code-text">&nbsp;&nbsp;<span class="c-bracket">[</span><span class="c-cat">DP</span> She<span class="c-bracket">]</span><span class="c-idx">_i</span></span></div>
-                  <div class="code-line"><span class="line-num">3</span><span class="code-text">&nbsp;&nbsp;<span class="c-bracket">[</span><span class="c-cat">T'</span> [T -s]</span></div>
-                  <div class="code-line"><span class="line-num">4</span><span class="code-text">&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-bracket">[</span><span class="c-cat">VP</span> <span class="c-trace">[t_i]</span></span></div>
-                  <div class="code-line"><span class="line-num">5</span><span class="code-text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-bracket">[</span><span class="c-cat">V'</span> [V sell] [DP seashells]</span></div>
-                  <div class="code-line"><span class="line-num">6</span><span class="code-text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-tri">[^ by the seashore]</span><span class="c-bracket">]]]]]</span></span></div>
+                  <div class="code-line"><span class="line-num">1</span><span class="code-text"><span class="c-bracket">[</span><span class="c-cat" id="tree-cat-root">TP</span></span></div>
+                  <div class="code-line"><span class="line-num">2</span><span class="code-text">&nbsp;&nbsp;<span class="c-bracket">[</span><span class="c-cat" id="tree-cat-subj">DP</span> She<span class="c-bracket">]</span></span></div>
+                  <div class="code-line"><span class="line-num">3</span><span class="code-text">&nbsp;&nbsp;<span class="c-bracket">[</span><span class="c-cat">VP</span></span></div>
+                  <div class="code-line"><span class="line-num">4</span><span class="code-text">&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-bracket">[</span><span class="c-cat">V'</span> [V sells] [<span id="tree-cat-obj-code">DP</span> seashells]<span class="c-bracket">]</span></span></div>
+                  <div class="code-line"><span class="line-num">5</span><span class="code-text">&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-tri">[^ by the seashore]</span><span class="c-bracket">]]]</span></span></div>
                 </div>
                 <div class="demo-tree-yield-bar">
                   <span class="yield-lbl">YIELD:</span>
@@ -577,47 +576,63 @@
                   </div>
                 </div>
                 <div class="demo-tree-svg-canvas">
-                  <svg id="demo-tree-svg" viewBox="0 0 380 230" preserveAspectRatio="xMidYMid meet">
+                  <svg id="demo-tree-svg" viewBox="0 0 380 220" preserveAspectRatio="xMidYMid meet">
                     <!-- Root TP -->
                     <g id="node-tp" class="tree-node-group">
-                      <rect x="160" y="10" width="50" height="22" fill="#111111" />
-                      <text x="185" y="25" fill="#FFFFFF" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" text-anchor="middle">TP</text>
+                      <rect x="165" y="10" width="50" height="22" fill="#111111" />
+                      <text id="svg-root-label" x="190" y="25" fill="#FFFFFF" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" text-anchor="middle">TP</text>
                       <!-- Branches down -->
                       <line x1="175" y1="32" x2="85" y2="65" stroke="#111111" stroke-width="1.2" />
-                      <line x1="195" y1="32" x2="270" y2="65" stroke="#111111" stroke-width="1.2" />
+                      <line x1="205" y1="32" x2="265" y2="65" stroke="#111111" stroke-width="1.2" />
                     </g>
 
-                    <!-- Subject DP -->
+                    <!-- Subject DP (She) -->
                     <g id="node-dp1" class="tree-node-group">
                       <rect x="60" y="65" width="50" height="22" fill="#FFFFFF" stroke="#111111" stroke-width="1.2" />
-                      <text x="85" y="80" fill="#111111" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" text-anchor="middle">DP<tspan font-size="8" fill="#E30613"> i</tspan></text>
-                      <line x1="85" y1="87" x2="85" y2="120" stroke="#111111" stroke-width="1.2" />
-                      <text x="85" y="135" fill="#111111" font-family="'Noto Sans JP', sans-serif" font-size="10.5" font-weight="600" text-anchor="middle">She</text>
+                      <text id="svg-subj-label" x="85" y="80" fill="#111111" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" text-anchor="middle">DP</text>
+                      <line x1="85" y1="87" x2="85" y2="125" stroke="#111111" stroke-width="1.2" />
+                      <text x="85" y="142" fill="#111111" font-family="'Noto Sans JP', sans-serif" font-size="11" font-weight="600" text-anchor="middle">She</text>
                     </g>
 
-                    <!-- T' -->
-                    <g id="node-tbar" class="tree-node-group">
-                      <rect x="245" y="65" width="50" height="22" fill="#FFFFFF" stroke="#111111" stroke-width="1.2" />
-                      <text x="270" y="80" fill="#111111" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" text-anchor="middle">T'</text>
-                      <line x1="258" y1="87" x2="215" y2="120" stroke="#111111" stroke-width="1.2" />
-                      <line x1="282" y1="87" x2="310" y2="120" stroke="#111111" stroke-width="1.2" />
-                      <text x="215" y="135" fill="#E30613" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" text-anchor="middle">-s</text>
-                    </g>
-
-                    <!-- VP with triangle -->
+                    <!-- Predicate VP -->
                     <g id="node-vp" class="tree-node-group">
-                      <rect x="285" y="120" width="50" height="22" fill="#FFFFFF" stroke="#111111" stroke-width="1.2" />
-                      <text x="310" y="135" fill="#111111" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" text-anchor="middle">VP</text>
-                      <!-- Triangle notation for abbreviation -->
-                      <polygon points="310,142 245,182 375,182" fill="none" stroke="#111111" stroke-width="1.2" />
-                      <text x="310" y="196" fill="#111111" font-family="'Noto Sans JP', sans-serif" font-size="9.5" text-anchor="middle">seashells by the seashore</text>
+                      <rect x="240" y="65" width="50" height="22" fill="#FFFFFF" stroke="#111111" stroke-width="1.2" />
+                      <text x="265" y="80" fill="#111111" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" text-anchor="middle">VP</text>
+                      <!-- Left branch to V' -->
+                      <line x1="255" y1="87" x2="195" y2="112" stroke="#111111" stroke-width="1.2" />
+                      <!-- Right branch to PP -->
+                      <line x1="275" y1="87" x2="310" y2="112" stroke="#111111" stroke-width="1.2" />
                     </g>
 
-                    <!-- Movement Arrow with Continuous Flowing Dash Pulse -->
-                    <g id="branch-arrow" class="movement-arrow-group">
-                      <path d="M 85 145 C 85 220, 310 220, 310 205" class="flowing-dash-path" fill="none" stroke="#E30613" stroke-width="1.8" stroke-dasharray="5,3" />
-                      <polygon points="310,203 305,212 315,212" fill="#E30613" />
-                      <text x="195" y="218" fill="#E30613" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="700" text-anchor="middle">[ MOVEMENT TRACE @1 ]</text>
+                    <!-- Intermediate V' -->
+                    <g id="node-vbar" class="tree-node-group">
+                      <rect x="175" y="112" width="40" height="20" fill="#FFFFFF" stroke="#111111" stroke-width="1.2" />
+                      <text x="195" y="126" fill="#111111" font-family="'JetBrains Mono', monospace" font-size="10.5" font-weight="700" text-anchor="middle">V'</text>
+                      <!-- Branch to V (sells) -->
+                      <line x1="185" y1="132" x2="155" y2="152" stroke="#111111" stroke-width="1.2" />
+                      <!-- Branch to DP (seashells) -->
+                      <line x1="205" y1="132" x2="225" y2="152" stroke="#111111" stroke-width="1.2" />
+
+                      <!-- V (sells) -->
+                      <rect x="140" y="152" width="30" height="18" fill="#FFFFFF" stroke="#111111" stroke-width="1.2" />
+                      <text x="155" y="165" fill="#111111" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" text-anchor="middle">V</text>
+                      <line x1="155" y1="170" x2="155" y2="185" stroke="#111111" stroke-width="1.2" />
+                      <text x="155" y="198" fill="#E30613" font-family="'Noto Sans JP', sans-serif" font-size="10.5" font-weight="600" text-anchor="middle">sells</text>
+
+                      <!-- DP/NP (seashells) -->
+                      <rect x="210" y="152" width="32" height="18" fill="#FFFFFF" stroke="#111111" stroke-width="1.2" />
+                      <text id="svg-obj-label" x="226" y="165" fill="#111111" font-family="'JetBrains Mono', monospace" font-size="9.5" font-weight="700" text-anchor="middle">DP</text>
+                      <line x1="226" y1="170" x2="226" y2="185" stroke="#111111" stroke-width="1.2" />
+                      <text x="226" y="198" fill="#111111" font-family="'Noto Sans JP', sans-serif" font-size="9.5" font-weight="600" text-anchor="middle">seashells</text>
+                    </g>
+
+                    <!-- PP Adjunct with triangle -->
+                    <g id="node-pp" class="tree-node-group">
+                      <rect x="290" y="112" width="40" height="20" fill="#FFFFFF" stroke="#111111" stroke-width="1.2" />
+                      <text x="310" y="126" fill="#111111" font-family="'JetBrains Mono', monospace" font-size="10.5" font-weight="700" text-anchor="middle">PP</text>
+                      <!-- Triangle notation for abbreviation -->
+                      <polygon points="310,132 260,172 360,172" fill="none" stroke="#111111" stroke-width="1.2" />
+                      <text x="310" y="188" fill="#111111" font-family="'Noto Sans JP', sans-serif" font-size="9" text-anchor="middle">by the seashore</text>
                     </g>
                   </svg>
                 </div>
@@ -924,7 +939,7 @@
   <!-- Scripts (Deferred for instant HTML parsing & FCP) -->
   <script defer src="js/i18n.js?v=20260927-5"></script>
   <script defer src="js/canvas-bg.js"></script>
-  <script defer src="js/visual-demos.js?v=20260927-9"></script>
-  <script defer src="js/app.js?v=20260927-9"></script>
+  <script defer src="js/visual-demos.js?v=20260927-10"></script>
+  <script defer src="js/app.js?v=20260927-10"></script>
 </body>
 </html>

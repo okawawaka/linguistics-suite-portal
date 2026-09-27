@@ -624,9 +624,8 @@
   /* ==========================================================================
      DEMO 3: SYNTAX TREE EDITOR (STEP-BY-STEP BRACKET & TREE NODE PULSE)
      ========================================================================== */
-  const treeNodes = ["node-tp", "node-dp1", "node-tbar", "node-vp"];
+  const treeNodes = ["node-tp", "node-dp1", "node-vp", "node-vbar", "node-pp"];
   const codeLines = document.querySelectorAll(".demo-tree-code-box .code-line");
-  const branchArrow = document.getElementById("branch-arrow");
   const btnSnp = document.getElementById("btn-tree-mode-snp");
   const btnTpdp = document.getElementById("btn-tree-mode-tpdp");
 
@@ -648,21 +647,12 @@
 
       // 2. Highlight code line in editor
       codeLines.forEach((line, idx) => {
-        if (idx === step + 1) {
+        if (idx === step) {
           line.classList.add("active-line");
         } else {
           line.classList.remove("active-line");
         }
       });
-
-      // 3. Highlight movement arrow on VP step
-      if (branchArrow) {
-        if (step === 3) {
-          branchArrow.style.filter = "drop-shadow(0 0 4px #E30613)";
-        } else {
-          branchArrow.style.filter = "none";
-        }
-      }
 
       step = (step + 1) % treeNodes.length;
       if (syntaxActive) {
@@ -699,24 +689,31 @@
 
     // Toggle S/NP vs TP/DP framework
     function setGrammarFramework(mode) {
+      const rootText = document.getElementById("svg-root-label");
+      const subjText = document.getElementById("svg-subj-label");
+      const objText = document.getElementById("svg-obj-label");
+      const codeRoot = document.getElementById("tree-cat-root");
+      const codeSubj = document.getElementById("tree-cat-subj");
+      const codeObj = document.getElementById("tree-cat-obj-code");
+
       if (mode === "snp") {
         if (btnSnp) btnSnp.classList.add("active-state");
         if (btnTpdp) btnTpdp.classList.remove("active-state");
-        const rootText = document.querySelector("#node-tp text");
         if (rootText) rootText.textContent = "S";
-        const dpText = document.querySelector("#node-dp1 text");
-        if (dpText) dpText.firstChild.textContent = "NP";
-        const tbarText = document.querySelector("#node-tbar text");
-        if (tbarText) tbarText.textContent = "VP";
+        if (subjText) subjText.textContent = "NP";
+        if (objText) objText.textContent = "NP";
+        if (codeRoot) codeRoot.textContent = "S";
+        if (codeSubj) codeSubj.textContent = "NP";
+        if (codeObj) codeObj.textContent = "NP";
       } else {
         if (btnTpdp) btnTpdp.classList.add("active-state");
         if (btnSnp) btnSnp.classList.remove("active-state");
-        const rootText = document.querySelector("#node-tp text");
         if (rootText) rootText.textContent = "TP";
-        const dpText = document.querySelector("#node-dp1 text");
-        if (dpText) dpText.firstChild.textContent = "DP";
-        const tbarText = document.querySelector("#node-tbar text");
-        if (tbarText) tbarText.textContent = "T'";
+        if (subjText) subjText.textContent = "DP";
+        if (objText) objText.textContent = "DP";
+        if (codeRoot) codeRoot.textContent = "TP";
+        if (codeSubj) codeSubj.textContent = "DP";
+        if (codeObj) codeObj.textContent = "DP";
       }
     }
 
