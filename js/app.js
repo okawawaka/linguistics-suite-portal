@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 2. Intersection Observer for Scroll Kinetic Slide-In Animations
   const kineticElements = document.querySelectorAll(
-    ".slide-in-up, .workflow-step, .poster-block, .sec-header, .poster-head"
+    ".slide-in-up, .poster-block, .sec-header, .poster-head"
   );
 
   const observerOptions = {

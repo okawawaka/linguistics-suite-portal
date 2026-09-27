@@ -1,6 +1,6 @@
 /**
  * Linguistics Suite Portal — Internationalization (i18n) Module
- * Swiss Typographic Style / Bilingual Dictionary (JA / EN)
+ * Bilingual Dictionary (JA / EN)
  * Concise, Impactful, Student-Driven Academic Language
  */
 
@@ -10,8 +10,7 @@ const translations = {
     metaBrand: "LINGUISTICS SUITE",
     metaSub: "BUILT FOR LINGUISTS BY STUDENTS",
     navTools: "ツール",
-    navWorkflow: "ワークフロー",
-    navDesign: "機能美と設計",
+    navFeatures: "ツールの特徴",
     navGithub: "GITHUB",
 
     // Hero
@@ -20,11 +19,7 @@ const translations = {
     heroTitleLine2: "言語学のためのツール",
     heroLead: "音声分析、IPA入力、構文木、音韻規則。研究とレポートを快適にする、完全無料・ブラウザ完結のオープンソースWebツール群。",
     heroCtaExplore: "ツールを見る ↓",
-    heroCtaWorkflow: "ワークフロー →",
-    heroStatTools: "4つの特化ツール",
-    heroStatServerless: "100% ブラウザ完結",
-    heroStatDesign: "スイススタイル",
-    heroStatLicense: "完全オープンソース",
+    heroCtaFeatures: "ツールの特徴 →",
 
     // Tool 1: Acoustic Annotator
     t1Category: "01 / 音響音声学・DSP",
@@ -74,42 +69,18 @@ const translations = {
     t4ActionLaunch: "アプリを起動する ↗",
     t4ActionRepo: "GitHub リポジトリ",
 
-    // Section 2: Workflow (Meaningful Pipeline)
-    secWorkflowTitle: "02 / WORKFLOW: 音声から統語へ",
-    secWorkflowSubtitle: "生の音声データから理論的モデリングへ昇華する",
-    secWorkflowDesc: "音声学の実験計測から統語論の階層モデルまで。分断されがちな研究・レポート作成のステップをシームレスにつなぎます。",
-    
-    wfStep1Num: "01",
-    wfStep1Title: "【計測】 音響分析 (Acoustic Phonetics)",
-    wfStep1Desc: "発話音声を録音・解析。声道フォルマント（F1〜F3）とF0ピッチ軌跡から、母音・子音の物理的境界を客観的に同定・アノテーション。",
-
-    wfStep2Num: "02",
-    wfStep2Title: "【記述】 記号転記 (Phonetic Transcription)",
-    wfStep2Desc: "音響データに裏付けられた発音・声調を、IPA Editor で精密にUnicodeテキスト化。声調バーや結合分音記号を直感的に合字合成。",
-
-    wfStep3Num: "03",
-    wfStep3Title: "【定式化】 音韻規則モデル (Phonology)",
-    wfStep3Desc: "音標テキストから見出された異音交替や通時的音変化を、Chomsky-Halle (SPE) 弁別的素性を用いて数理的に一般化・LaTeX数式化。",
-
-    wfStep4Num: "04",
-    wfStep4Title: "【構造化】 統語樹形図 (Formal Syntax)",
-    wfStep4Desc: "単語から文全体の階層構造へ。Xバー理論や移動の痕跡（Movement Trace）を樹形図として可視化し、論文やスライド用に出力。",
-
-    // Section 3: Functional Aesthetics (Swiss Design Philosophy)
-    secDesignTitle: "03 / FUNCTIONAL AESTHETICS",
-    secDesignSubtitle: "言語学のための、徹底した機能美と合理性",
-    designKey1: "NO DISTRACTION",
-    designDesc1: "純粋なデータ可視化",
-    designDetail1: "角丸や影など意味のない装飾を排し、複雑な言語データそのものを最も見やすく際立たせるミニマリズム。",
-    designKey2: "MATHEMATICAL GRID",
-    designDesc2: "論理的な秩序",
-    designDetail2: "緻密な方眼と整然としたグリッド分割線。学術ツールとしての論理的秩序と高い一覧性を実現。",
-    designKey3: "SWISS RED SIGNAL",
-    designDesc3: "機能的な焦点",
-    designDetail3: "白黒の高コントラストの中に、スイスレッド (#E30613) を操作の焦点・解析シグナルとして機能的にのみ配置。",
-    designKey4: "LOCAL SANDBOX",
-    designDesc4: "思考を止めない即応性",
-    designDetail4: "外部サーバー通信ゼロ・完全クライアント完結。ミリ秒単位の即時レスポンスと絶対のデータプライバシー。",
+    // Section: Tool Features (3 Major Pillars)
+    secFeaturesTitle: "FEATURES",
+    secFeaturesSubtitle: "ツールの特徴",
+    feat1Num: "01",
+    feat1Title: "ミニマルなデザイン",
+    feat1Desc: "スイススタイル（国際タイポグラフィ様式）に基づく角丸ゼロ・装飾排除の幾何学設計。余計な要素を削ぎ落とし、複雑な言語データや波形そのものを最もクリアに見やすく表示します。",
+    feat2Num: "02",
+    feat2Title: "ローカル完結",
+    feat2Desc: "外部サーバーへの音声やテキスト送信は一切ありません。ブラウザ内部（クライアントサイド）のDSPとパーサーで全て処理されるため、機密フィールドワーク音声も安全でゼロレイテンシで動作します。",
+    feat3Num: "03",
+    feat3Title: "言語学に特化した機能",
+    feat3Desc: "IPAの声調バー合字・補助記号、Praat互換TextGrid・LPCフォルマント、Penn Treebank構文木・Xバー理論、SPE示差特徴マトリクスなど、言語学の学習・研究に真に必要な機能だけを厳選して実装しています。",
 
     // Footer
     footerHeading: "LINGUISTICS SUITE",
@@ -123,8 +94,7 @@ const translations = {
     metaBrand: "LINGUISTICS SUITE",
     metaSub: "BUILT FOR LINGUISTS BY STUDENTS",
     navTools: "TOOLS",
-    navWorkflow: "WORKFLOW",
-    navDesign: "AESTHETICS",
+    navFeatures: "FEATURES",
     navGithub: "GITHUB",
 
     // Hero
@@ -133,11 +103,7 @@ const translations = {
     heroTitleLine2: "Built by Students, for Linguistics.",
     heroLead: "Acoustic analysis, IPA typing, syntax trees, and phonological rules. A unified suite of free, client-side, open-source web applications.",
     heroCtaExplore: "EXPLORE TOOLS ↓",
-    heroCtaWorkflow: "WORKFLOW →",
-    heroStatTools: "4 Specialized Apps",
-    heroStatServerless: "100% Client-Side",
-    heroStatDesign: "Swiss Typographic Style",
-    heroStatLicense: "Open Source (MIT / GPL)",
+    heroCtaFeatures: "FEATURES →",
 
     // Tool 1: Acoustic Annotator
     t1Category: "01 / ACOUSTIC PHONETICS & DSP",
@@ -187,42 +153,18 @@ const translations = {
     t4ActionLaunch: "LAUNCH APP ↗",
     t4ActionRepo: "GitHub Repository",
 
-    // Section 2: Workflow
-    secWorkflowTitle: "02 / WORKFLOW: FROM SOUND TO STRUCTURE",
-    secWorkflowSubtitle: "Bridging Raw Empirical Acoustics to Theoretical Models",
-    secWorkflowDesc: "From laboratory acoustic measurement to hierarchical syntax trees, seamlessly bridge the linguistic research pipeline in your browser.",
-    
-    wfStep1Num: "01",
-    wfStep1Title: "[MEASURE] Acoustic Phonetics",
-    wfStep1Desc: "Capture and analyze speech. Objectively identify vocal tract resonances (F1-F3) and F0 pitch contours on TextGrids.",
-
-    wfStep2Num: "02",
-    wfStep2Title: "[TRANSCRIBE] Phonetic Notation",
-    wfStep2Desc: "Convert acoustic cues into precise Unicode phonetic text. Assemble Chao tone letters and diacritics with real-time ligature merging.",
-
-    wfStep3Num: "03",
-    wfStep3Title: "[FORMULATE] Phonological Rules",
-    wfStep3Desc: "Formalize sound alternations into Chomsky-Halle (SPE) distinctive feature matrices and publication-ready LaTeX math.",
-
-    wfStep4Num: "04",
-    wfStep4Title: "[STRUCTURE] Formal Syntax Trees",
-    wfStep4Desc: "Project words into hierarchical syntactic trees. Model X-bar projections and movement traces with high-res export.",
-
-    // Section 3: Design
-    secDesignTitle: "03 / FUNCTIONAL AESTHETICS",
-    secDesignSubtitle: "Rigorous Functional Design & Purposeful Typography",
-    designKey1: "NO DISTRACTION",
-    designDesc1: "Pure Data Visualization",
-    designDetail1: "Zero rounded corners and zero decorative shadows, ensuring complex linguistic data remains clear and uncompromised.",
-    designKey2: "MATHEMATICAL GRID",
-    designDesc2: "Logical Order",
-    designDetail2: "Rigorous modular grids and crisp divider lines provide structural discipline and high information density.",
-    designKey3: "SWISS RED SIGNAL",
-    designDesc3: "Functional Focus",
-    designDetail3: "High-contrast monochrome punctuated by Swiss Red (#E30613), applied solely as an operational signal.",
-    designKey4: "LOCAL SANDBOX",
-    designDesc4: "Zero-Latency Privacy",
-    designDetail4: "100% client-side computation with zero remote servers. Instantaneous response times and absolute data privacy.",
+    // Section: Tool Features (3 Major Pillars)
+    secFeaturesTitle: "FEATURES",
+    secFeaturesSubtitle: "Key Features",
+    feat1Num: "01",
+    feat1Title: "Minimalist Design",
+    feat1Desc: "Rooted in the Swiss Typographic Style with zero rounded corners and zero decorative drop-shadows. Strips away extraneous noise to present complex linguistic data and waveforms with utmost clarity.",
+    feat2Num: "02",
+    feat2Title: "Local & Private",
+    feat2Desc: "Never uploads audio or text to remote servers. All DSP and parsers execute entirely in your browser sandbox, guaranteeing complete confidentiality for fieldwork data and zero latency.",
+    feat3Num: "03",
+    feat3Title: "Linguistics-Dedicated",
+    feat3Desc: "Tailored specifically for linguistic scholarship: SIL Chao tone bar ligatures, Praat TextGrid and LPC formant tracking, Penn Treebank X-bar trees, and SPE distinctive feature matrices.",
 
     // Footer
     footerHeading: "LINGUISTICS SUITE",

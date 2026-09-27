@@ -274,7 +274,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .hero-section {
   position: relative;
-  min-height: calc(85vh - var(--header-height));
+  min-height: calc(75vh - var(--header-height));
   display: flex;
   align-items: center;
   border-bottom: 1px solid var(--border-dark);
@@ -295,7 +295,7 @@ h1, h2, h3, h4, h5, h6 {
 .hero-content {
   position: relative;
   z-index: 2;
-  padding: 80px 0 70px 0;
+  padding: 88px 0 80px 0;
   max-width: 1040px;
   pointer-events: none;
 }
@@ -343,14 +343,13 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 400;
   line-height: 1.65;
   max-width: 780px;
-  margin-bottom: 36px;
+  margin-bottom: 40px;
 }
 
 .hero-actions {
   display: flex;
   align-items: center;
   gap: 16px;
-  margin-bottom: 52px;
 }
 
 .swiss-btn {
@@ -386,86 +385,6 @@ h1, h2, h3, h4, h5, h6 {
 .swiss-btn-outline:hover {
   background-color: var(--text-primary);
   color: var(--text-inverse);
-}
-
-.hero-stats-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
-  background-color: var(--border-medium);
-  border: 1px solid var(--border-medium);
-  max-width: 880px;
-}
-
-.stat-cell {
-  background-color: rgba(255, 255, 255, 0.94);
-  padding: 16px 20px;
-}
-
-.stat-cell-num {
-  font-family: var(--font-mono);
-  font-size: 1.3rem;
-  font-weight: 800;
-  color: var(--text-primary);
-  display: block;
-}
-
-.stat-cell-label {
-  font-family: var(--font-sans);
-  font-size: 0.76rem;
-  font-weight: 600;
-  color: var(--text-secondary);
-}
-
-/* ==========================================================================
-   KINETIC TYPOGRAPHY TICKER MARQUEE (DYNAMIC RUNWAY)
-   ========================================================================== */
-
-.kinetic-marquee-bar {
-  width: 100%;
-  overflow: hidden;
-  background-color: var(--bg-dark);
-  color: var(--text-inverse);
-  border-top: 1px solid var(--border-dark);
-  border-bottom: 1px solid var(--border-dark);
-  padding: 14px 0;
-  white-space: nowrap;
-  position: relative;
-  user-select: none;
-}
-
-.marquee-track {
-  display: inline-flex;
-  width: max-content;
-  animation: marqueeScroll 26s linear infinite;
-}
-
-.kinetic-marquee-bar:hover .marquee-track {
-  animation-play-state: paused;
-}
-
-@keyframes marqueeScroll {
-  0% { transform: translateX(0%); }
-  100% { transform: translateX(-50%); }
-}
-
-.marquee-content {
-  display: inline-flex;
-  align-items: center;
-}
-
-.marquee-item {
-  font-family: var(--font-mono);
-  font-size: 0.92rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  padding: 0 18px;
-}
-
-.marquee-bullet {
-  color: var(--swiss-red);
-  font-size: 0.65rem;
-  vertical-align: middle;
 }
 
 /* ==========================================================================
@@ -764,7 +683,7 @@ h1, h2, h3, h4, h5, h6 {
 
 @keyframes blinkCursor {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+  50% { opacity: 0.3; }
 }
 
 .demo-ipa-keypad {
@@ -842,7 +761,6 @@ h1, h2, h3, h4, h5, h6 {
   stroke-width: 2 !important;
 }
 
-/* Continuous Flowing Movement Dash Animation */
 .flowing-dash-path {
   animation: dashFlow 1.4s linear infinite;
   stroke-linecap: square;
@@ -867,7 +785,6 @@ h1, h2, h3, h4, h5, h6 {
   justify-content: center;
 }
 
-/* Tier 1: Full-width Unbroken Formula Line (No-wrap guaranteed) */
 .rule-formula-strip {
   display: flex;
   align-items: center;
@@ -938,7 +855,6 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--text-inverse);
 }
 
-/* Tier 2: 2-Column Subgrid */
 .rule-sub-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1024,16 +940,16 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ==========================================================================
-   WORKFLOW SECTION
+   FEATURES SECTION (3-COLUMN CLEAN & IMPACTFUL GRID)
    ========================================================================== */
 
-.workflow-section {
-  background-color: var(--bg-secondary);
+.design-poster-section {
   padding: 100px 0;
   border-bottom: 1px solid var(--border-light);
+  background-color: var(--bg-primary);
 }
 
-.sec-header {
+.poster-head {
   margin-bottom: 56px;
 }
 
@@ -1054,75 +970,9 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 16px;
 }
 
-.sec-lead {
-  font-size: 1.05rem;
-  color: var(--text-secondary);
-  max-width: 780px;
-  line-height: 1.6;
-}
-
-.workflow-timeline {
+.features-grid-3col {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
-  background-color: var(--border-medium);
-  border: 1px solid var(--border-medium);
-}
-
-.workflow-step {
-  background-color: var(--bg-primary);
-  padding: 34px 26px;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  transition: all 0.2s ease;
-}
-
-.workflow-step:hover {
-  background-color: #FAFAFB;
-  transform: translateY(-2px);
-}
-
-.wf-step-number {
-  font-family: var(--font-mono);
-  font-size: 2.2rem;
-  font-weight: 800;
-  color: var(--swiss-red);
-  line-height: 1;
-  margin-bottom: 18px;
-}
-
-.wf-step-title {
-  font-size: 1.1rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  margin-bottom: 12px;
-  line-height: 1.35;
-}
-
-.wf-step-desc {
-  font-size: 0.88rem;
-  color: var(--text-secondary);
-  line-height: 1.65;
-}
-
-/* ==========================================================================
-   DESIGN POSTER SECTION (FUNCTIONAL AESTHETICS - INVERSION HOVER)
-   ========================================================================== */
-
-.design-poster-section {
-  padding: 100px 0;
-  border-bottom: 1px solid var(--border-light);
-  background-color: var(--bg-primary);
-}
-
-.poster-head {
-  margin-bottom: 56px;
-}
-
-.poster-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1px;
   background-color: var(--border-medium);
   border: 1px solid var(--border-medium);
@@ -1130,7 +980,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .poster-block {
   background-color: var(--bg-primary);
-  padding: 36px 26px;
+  padding: 38px 28px;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -1166,27 +1016,18 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .poster-keyword {
-  font-size: 1.35rem;
+  font-size: 1.45rem;
   font-weight: 800;
   letter-spacing: -0.02em;
-  line-height: 1.15;
-  margin-bottom: 6px;
-}
-
-.poster-subtitle {
-  font-family: var(--font-mono);
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: var(--swiss-red);
-  margin-bottom: 10px;
-  display: block;
+  line-height: 1.2;
+  margin-bottom: 14px;
 }
 
 .poster-detail {
-  font-size: 0.85rem;
+  font-size: 0.92rem;
   color: var(--text-secondary);
-  line-height: 1.65;
-  margin-bottom: 28px;
+  line-height: 1.7;
+  margin-bottom: 32px;
   transition: color 0.25s ease;
 }
 
@@ -1216,19 +1057,6 @@ h1, h2, h3, h4, h5, h6 {
 
 .poster-demo-box.zero-box {
   border: 2px solid var(--border-dark);
-}
-
-.poster-demo-box.grid-box {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  gap: 1px;
-  background-color: var(--border-dark);
-  padding: 1px;
-}
-
-.poster-demo-box.grid-box span {
-  background-color: var(--bg-primary);
 }
 
 .poster-demo-box.red-signal-box {
@@ -1350,11 +1178,8 @@ h1, h2, h3, h4, h5, h6 {
     grid-template-columns: 1fr;
     gap: 40px;
   }
-  .workflow-timeline {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .poster-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .features-grid-3col {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -1364,15 +1189,6 @@ h1, h2, h3, h4, h5, h6 {
   }
   .realtime-pos-readout {
     display: none;
-  }
-  .hero-stats-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .workflow-timeline {
-    grid-template-columns: 1fr;
-  }
-  .poster-grid {
-    grid-template-columns: 1fr;
   }
   .rule-sub-grid {
     grid-template-columns: 1fr;
