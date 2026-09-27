@@ -32,10 +32,14 @@
   <meta name="twitter:description" content="言語学研究・学習のためのオープンソースWebツール群。音声分析・IPA記号入力・構文木・音韻規則の4領域を網羅。完全ローカル・ブラウザ完結動作。">
   <meta name="twitter:image" content="https://okawawaka.github.io/linguistics-suite-portal/assets/ogp.png">
 
-  <!-- Google Fonts: Noto Sans, Noto Sans JP, JetBrains Mono -->
+  <!-- Optimized Fast-Loading Fonts: Noto Sans, Noto Sans JP, JetBrains Mono (400, 700) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;800&family=Noto+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;700&family=Noto+Sans:wght@400;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;700&family=Noto+Sans:wght@400;700&display=swap" media="print" onload="this.media='all'">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;700&family=Noto+Sans:wght@400;700&display=swap">
+  </noscript>
 
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -890,10 +894,10 @@
     </div>
   </footer>
 
-  <!-- Scripts -->
-  <script src="js/i18n.js"></script>
-  <script src="js/canvas-bg.js"></script>
-  <script src="js/visual-demos.js"></script>
-  <script src="js/app.js"></script>
+  <!-- Scripts (Deferred for instant HTML parsing & FCP) -->
+  <script defer src="js/i18n.js"></script>
+  <script defer src="js/canvas-bg.js"></script>
+  <script defer src="js/visual-demos.js"></script>
+  <script defer src="js/app.js"></script>
 </body>
 </html>

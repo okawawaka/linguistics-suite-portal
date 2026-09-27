@@ -395,12 +395,41 @@
       if (playProgress > 1) {
         playProgress = 0;
       }
+    }
 
-      requestAnimationFrame(drawAnnotator);
+    let annotatorActive = false;
+    let annotatorAnimId = null;
+
+    function renderAnnotatorLoop() {
+      if (!annotatorActive) return;
+      drawAnnotator();
+      annotatorAnimId = requestAnimationFrame(renderAnnotatorLoop);
     }
 
     resizeAnnotator();
-    requestAnimationFrame(drawAnnotator);
+
+    if ("IntersectionObserver" in window) {
+      const annotatorObs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            if (!annotatorActive) {
+              annotatorActive = true;
+              annotatorAnimId = requestAnimationFrame(renderAnnotatorLoop);
+            }
+          } else {
+            annotatorActive = false;
+            if (annotatorAnimId) {
+              cancelAnimationFrame(annotatorAnimId);
+              annotatorAnimId = null;
+            }
+          }
+        });
+      }, { threshold: 0.05 });
+      annotatorObs.observe(annotatorCanvas.closest(".visual-monitor-frame") || annotatorCanvas);
+    } else {
+      annotatorActive = true;
+      annotatorAnimId = requestAnimationFrame(renderAnnotatorLoop);
+    }
   }
 
   /* ==========================================================================
@@ -472,13 +501,23 @@
     let wordIdx = 0;
     let charIdx = 0;
     let currentBuffer = "";
+    let ipaTimer = null;
+    let ipaActive = false;
+
+    function scheduleIpaNext(delay) {
+      if (!ipaActive) return;
+      if (ipaTimer) clearTimeout(ipaTimer);
+      ipaTimer = setTimeout(stepIpaSimulation, delay);
+    }
 
     function stepIpaSimulation() {
+      if (!ipaActive) return;
       const currentWord = sequences[wordIdx];
 
       if (charIdx >= currentWord.length) {
         // Word complete: wait, then clear and next word
-        setTimeout(() => {
+        ipaTimer = setTimeout(() => {
+          if (!ipaActive) return;
           if (ipaClearBtn) {
             ipaClearBtn.classList.add("act-highlight");
             setTimeout(() => ipaClearBtn.classList.remove("act-highlight"), 200);
@@ -490,7 +529,7 @@
           if (ipaStatusDesc) ipaStatusDesc.textContent = "国際音声字母 (IPA) リアルタイム合字入力システム";
           charIdx = 0;
           wordIdx = (wordIdx + 1) % sequences.length;
-          setTimeout(stepIpaSimulation, 600);
+          scheduleIpaNext(600);
         }, 2200);
         return;
       }
@@ -511,10 +550,32 @@
       }
 
       charIdx++;
-      setTimeout(stepIpaSimulation, 520);
+      scheduleIpaNext(520);
     }
 
-    setTimeout(stepIpaSimulation, 800);
+    const ipaContainer = ipaOutput.closest(".visual-monitor-frame") || ipaOutput;
+    if ("IntersectionObserver" in window) {
+      const ipaObs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            if (!ipaActive) {
+              ipaActive = true;
+              scheduleIpaNext(400);
+            }
+          } else {
+            ipaActive = false;
+            if (ipaTimer) {
+              clearTimeout(ipaTimer);
+              ipaTimer = null;
+            }
+          }
+        });
+      }, { threshold: 0.05 });
+      ipaObs.observe(ipaContainer);
+    } else {
+      ipaActive = true;
+      scheduleIpaNext(800);
+    }
 
     // Interactive user clicks
     matrixKeys.forEach(btn => {
@@ -584,10 +645,37 @@
       }
 
       step = (step + 1) % treeNodes.length;
-      setTimeout(stepTreeParser, 1300);
+      if (syntaxActive) {
+        syntaxTimer = setTimeout(stepTreeParser, 1300);
+      }
     }
 
-    stepTreeParser();
+    let syntaxActive = false;
+    let syntaxTimer = null;
+
+    const syntaxContainer = document.querySelector("#syntax .visual-monitor-frame") || document.getElementById("syntax");
+    if (syntaxContainer && "IntersectionObserver" in window) {
+      const syntaxObs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            if (!syntaxActive) {
+              syntaxActive = true;
+              syntaxTimer = setTimeout(stepTreeParser, 400);
+            }
+          } else {
+            syntaxActive = false;
+            if (syntaxTimer) {
+              clearTimeout(syntaxTimer);
+              syntaxTimer = null;
+            }
+          }
+        });
+      }, { threshold: 0.05 });
+      syntaxObs.observe(syntaxContainer);
+    } else {
+      syntaxActive = true;
+      stepTreeParser();
+    }
 
     // Toggle S/NP vs TP/DP framework
     function setGrammarFramework(mode) {
@@ -691,10 +779,37 @@
     }
 
     pipelineStep = (pipelineStep + 1) % 5;
-    setTimeout(stepRulePipeline, 1100);
+    if (phonologyActive) {
+      phonologyTimer = setTimeout(stepRulePipeline, 1100);
+    }
   }
 
-  stepRulePipeline();
+  let phonologyActive = false;
+  let phonologyTimer = null;
+
+  const phonologyContainer = document.querySelector("#phonology .visual-monitor-frame") || document.getElementById("phonology");
+  if (phonologyContainer && "IntersectionObserver" in window) {
+    const phonologyObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          if (!phonologyActive) {
+            phonologyActive = true;
+            phonologyTimer = setTimeout(stepRulePipeline, 400);
+          }
+        } else {
+          phonologyActive = false;
+          if (phonologyTimer) {
+            clearTimeout(phonologyTimer);
+            phonologyTimer = null;
+          }
+        }
+      });
+    }, { threshold: 0.05 });
+    phonologyObs.observe(phonologyContainer);
+  } else {
+    phonologyActive = true;
+    stepRulePipeline();
+  }
 
   // Operator toggle logic
   if (btnOpArrow && btnOpGreater) {

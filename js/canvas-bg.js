@@ -138,7 +138,11 @@
     }
   }
 
+  let isVisible = false;
+
   function animate() {
+    if (!isVisible) return;
+
     ctx.clearRect(0, 0, width, height);
 
     drawGrid();
@@ -148,5 +152,27 @@
     animFrameId = requestAnimationFrame(animate);
   }
 
-  animate();
+  // Optimize performance: pause canvas render loop when hero is off-screen
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          if (!isVisible) {
+            isVisible = true;
+            animFrameId = requestAnimationFrame(animate);
+          }
+        } else {
+          isVisible = false;
+          if (animFrameId) {
+            cancelAnimationFrame(animFrameId);
+            animFrameId = null;
+          }
+        }
+      });
+    }, { threshold: 0.05 });
+    observer.observe(canvas.parentElement || canvas);
+  } else {
+    isVisible = true;
+    animate();
+  }
 })();

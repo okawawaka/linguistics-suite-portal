@@ -1,13 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  <!-- Swiss Style Rich Black Ground -->
-  <rect width="64" height="64" fill="#111111" />
+  <!-- Swiss Style Rich Black Ground with Rounded Corners -->
+  <rect width="64" height="64" rx="12" fill="#111111" />
+  <rect x="2" y="2" width="60" height="60" rx="10" fill="none" stroke="#27272a" stroke-width="1.5" />
   
   <!-- Architectural Pure White "L" (Linguistics) -->
-  <path d="M 12 14 H 21 V 42 H 34 V 50 H 12 Z" fill="#FFFFFF" />
+  <path d="M 14 16 H 22 V 40 H 34 V 48 H 14 Z" fill="#FFFFFF" />
 
   <!-- Geometric Swiss Red "T" (Toolbox) -->
-  <path d="M 28 14 H 52 V 22 H 44 V 38 H 36 V 22 H 28 Z" fill="#E30613" />
+  <path d="M 28 16 H 50 V 23 H 43 V 38 H 35 V 23 H 28 Z" fill="#E30613" />
 
   <!-- Swiss Red Precision Calibration Signal Dot -->
-  <rect x="44" y="42" width="8" height="8" fill="#E30613" />
+  <rect x="42" y="40" width="8" height="8" fill="#E30613" />
 </svg>
