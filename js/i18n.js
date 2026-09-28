@@ -16,7 +16,7 @@ const translations = {
     // Hero
     heroOverline: "OPEN WEB TOOLS FOR PHONETICS & THEORETICAL LINGUISTICS",
     heroTitleLine1: "ブラウザですぐに使える、",
-    heroTitleLine2: "言語学の研究・学習ツール",
+    heroTitleLine2: "言語学のWebツール",
     heroBullet1: "音声分析、IPA入力、構文木、音韻規則の作成に対応",
     heroBullet2: "データはサーバーに送信せず、すべてブラウザ内（端末）で処理",
     heroBullet3: "アカウント登録やインストール不要で、PCやスマホからそのまま利用可能",
@@ -113,7 +113,7 @@ const translations = {
     // Hero
     heroOverline: "OPEN WEB TOOLS FOR PHONETICS & THEORETICAL LINGUISTICS",
     heroTitleLine1: "Open Web Tools",
-    heroTitleLine2: "for Linguistic Research & Learning",
+    heroTitleLine2: "for Linguistics",
     heroBullet1: "Tools for acoustic phonetics, IPA transcription, syntax trees, & phonological rules",
     heroBullet2: "All data stays in your browser — zero server uploads",
     heroBullet3: "No sign-up or installation required — runs right on your desktop or mobile browser",

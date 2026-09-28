@@ -21,7 +21,7 @@ async function capture() {
 
   await page.evaluate(() => {
     const hero = document.querySelector('.typewriter-hero');
-    if (hero) hero.textContent = '言語学のためのツール';
+    if (hero) hero.textContent = '言語学のWebツール';
     document.querySelectorAll('.slide-in-up').forEach(el => el.classList.add('is-visible'));
   });
 

@@ -1,11 +1,11 @@
-# 言語学ツールボックス (Linguistics Toolbox)
+# 言語学のWebツール (Linguistics Tools)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Portal-brightgreen?logo=github)](https://okawawaka.github.io/linguistics-suite-portal/)
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Portal-brightgreen?logo=github)](https://okawawaka.github.io/linguistics-tools-portal/)
 
-言語学研究・学習のためのオープンソースWebツール群の統合ツールボックスサイトです。
+言語学研究・学習のためのオープンソースWebツール群の統合ポータルサイトです。
 
-- 公開URL: https://okawawaka.github.io/linguistics-suite-portal/
+- 公開URL: https://okawawaka.github.io/linguistics-tools-portal/
 
 ---
 
