@@ -21,19 +21,13 @@ document.addEventListener("DOMContentLoaded", () => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.classList.add("is-visible");
-
-        // If it's a metrics strip, trigger number counters immediately
-        if (entry.target.classList.contains("metrics-strip")) {
-          const metricVals = entry.target.querySelectorAll(".metric-val");
-          metricVals.forEach(animateMetricVal);
-        }
       }
     });
   }, animObserverOptions);
 
   // Observe each component individually so animations trigger right in front of user
   document.querySelectorAll(
-    ".slide-in-up, .poster-block, .sec-header, .poster-head, .section-lead-band, .tool-feature-list, .metrics-strip"
+    ".slide-in-up, .poster-block, .sec-header, .poster-head, .section-lead-band, .tool-feature-list"
   ).forEach((el) => {
     if (!el.closest(".hero-section")) {
       animObserver.observe(el);

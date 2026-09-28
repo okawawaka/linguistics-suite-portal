@@ -6,7 +6,7 @@
   <!-- Primary Meta Tags -->
   <title>言語学ツールボックス | LINGUISTICS TOOLBOX</title>
   <meta name="title" content="言語学ツールボックス | LINGUISTICS TOOLBOX">
-  <meta name="description" content="言語学研究・学習のためのオープンソースWebツール群。音声分析・IPA記号入力・構文木・音韻規則の4領域を網羅。完全ローカル・ブラウザ完結動作。">
+  <meta name="description" content="言語学研究・学習のためのオープンソースWebツール群。音声分析・IPA記号入力・構文木・音韻規則に対応。サーバー送信なし・ブラウザ完結動作。">
 
   <!-- Custom Portal Favicon (Swiss Style High-Precision "LT" Monogram) -->
   <link rel="icon" type="image/svg+xml" href="assets/portal-favicon.svg">
@@ -17,7 +17,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://okawawaka.github.io/linguistics-suite-portal/">
   <meta property="og:title" content="言語学ツールボックス | LINGUISTICS TOOLBOX">
-  <meta property="og:description" content="言語学研究・学習のためのオープンソースWebツール群。音声分析・IPA記号入力・構文木・音韻規則の4領域を網羅。完全ローカル・ブラウザ完結動作。">
+  <meta property="og:description" content="言語学研究・学習のためのオープンソースWebツール群。音声分析・IPA記号入力・構文木・音韻規則に対応。サーバー送信なし・ブラウザ完結動作。">
   <meta property="og:image" content="https://okawawaka.github.io/linguistics-suite-portal/assets/ogp.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -29,7 +29,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://okawawaka.github.io/linguistics-suite-portal/">
   <meta name="twitter:title" content="言語学ツールボックス | LINGUISTICS TOOLBOX">
-  <meta name="twitter:description" content="言語学研究・学習のためのオープンソースWebツール群。音声分析・IPA記号入力・構文木・音韻規則の4領域を網羅。完全ローカル・ブラウザ完結動作。">
+  <meta name="twitter:description" content="言語学研究・学習のためのオープンソースWebツール群。音声分析・IPA記号入力・構文木・音韻規則に対応。サーバー送信なし・ブラウザ完結動作。">
   <meta name="twitter:image" content="https://okawawaka.github.io/linguistics-suite-portal/assets/ogp.png">
 
   <!-- Optimized Fast-Loading Fonts: Noto Sans, Noto Sans JP, JetBrains Mono (400, 700) -->
@@ -81,7 +81,7 @@
         <img src="assets/portal-favicon.svg" alt="Linguistics Toolbox Emblem" class="brand-emblem-svg">
         <div class="brand-titles">
           <span class="brand-main" data-i18n="metaBrand">LINGUISTICS TOOLBOX</span>
-          <span class="brand-sub" data-i18n="metaSub">BUILT FOR LINGUISTS BY STUDENTS</span>
+          <span class="brand-sub" data-i18n="metaSub">OPEN WEB TOOLS FOR LINGUISTICS</span>
         </div>
       </a>
 
@@ -111,17 +111,17 @@
     <canvas id="hero-canvas"></canvas>
 
     <div class="container hero-content">
-      <div class="hero-overline slide-in-up" data-i18n="heroOverline">OPEN WEB APPS FOR PHONETICS & THEORETICAL LINGUISTICS</div>
+      <div class="hero-overline slide-in-up" data-i18n="heroOverline">OPEN WEB TOOLS FOR PHONETICS & THEORETICAL LINGUISTICS</div>
       
       <h1 class="hero-headline">
-        <span class="headline-line slide-in-up delay-1" data-i18n="heroTitleLine1">言語学専攻の学生による</span>
-        <span class="headline-line slide-in-up delay-2 typewriter-hero" style="color: var(--swiss-red);" data-i18n="heroTitleLine2">言語学のためのツール</span>
+        <span class="headline-line slide-in-up delay-1" data-i18n="heroTitleLine1">ブラウザですぐに使える、</span>
+        <span class="headline-line slide-in-up delay-2 typewriter-hero" style="color: var(--swiss-red);" data-i18n="heroTitleLine2">言語学の研究・学習ツール</span>
       </h1>
 
       <ul class="hero-bullets slide-in-up delay-3">
-        <li class="hero-bullet-item" data-i18n="heroBullet1">音声分析・IPA入力・構文木・音韻規則の4領域を網羅</li>
-        <li class="hero-bullet-item" data-i18n="heroBullet2">完全ブラウザ完結・サーバー通信なし（機密データ保護）</li>
-        <li class="hero-bullet-item" data-i18n="heroBullet3">登録不要・完全無料のオープンソースWebツール群</li>
+        <li class="hero-bullet-item" data-i18n="heroBullet1">音声分析、IPA入力、構文木、音韻規則の作成に対応</li>
+        <li class="hero-bullet-item" data-i18n="heroBullet2">データはサーバーに送信せず、すべてブラウザ内（端末）で処理</li>
+        <li class="hero-bullet-item" data-i18n="heroBullet3">アカウント登録やインストール不要で、PCやスマホからそのまま利用可能</li>
       </ul>
 
       <div class="hero-actions slide-in-up delay-4">
@@ -162,28 +162,12 @@
             <span class="built-for-text" data-i18n="t1BuiltFor">音響音声学で使うPraatをもっと手軽に、パソコンがなくても直接スマホやタブレットから録音して分析できるようにしたいと思って作りました。</span>
           </div>
 
-          <!-- Scientific Metric Badges -->
-          <div class="metrics-strip">
-            <div class="metric-item">
-              <span class="metric-val" data-target="16">0</span>
-              <span class="metric-lbl">BIT PCM</span>
-            </div>
-            <div class="metric-item">
-              <span class="metric-val" data-target="3">0</span>
-              <span class="metric-lbl">FORMANTS (F1-F3)</span>
-            </div>
-            <div class="metric-item">
-              <span class="metric-val" data-target="100" data-suffix="%">0%</span>
-              <span class="metric-lbl">CLIENT LOCAL</span>
-            </div>
-          </div>
-
           <ul class="tool-feature-list">
-            <li class="tool-feature-item stagger-item" data-i18n="t1Spec1">ブラウザ内16-bit PCM高音質録音 & 音響VAD無音自動分割</li>
-            <li class="tool-feature-item stagger-item" data-i18n="t1Spec2">F0ピッチ軌跡推定 & Burg法LPCフォルマント (F1-F3)</li>
-            <li class="tool-feature-item stagger-item" data-i18n="t1Spec3">F1-F2母音四辺形散布図プロット（CSV出力対応）</li>
-            <li class="tool-feature-item stagger-item" data-i18n="t1Spec4">Praat TextGrid形式の双方向インポート・エクスポート</li>
-            <li class="tool-feature-item stagger-item" data-i18n="t1Spec5">サーバー送信なし・完全ローカルクライアントサイド処理</li>
+            <li class="tool-feature-item stagger-item" data-i18n="t1Spec1">ブラウザ上での音声録音と、無音区間の自動検出・区間分割</li>
+            <li class="tool-feature-item stagger-item" data-i18n="t1Spec2">基本周波数（F0）のピッチ推定とLPCフォルマント（F1〜F3）の抽出</li>
+            <li class="tool-feature-item stagger-item" data-i18n="t1Spec3">F1-F2母音四辺形散布図のリアルタイム描画とCSV書き出し</li>
+            <li class="tool-feature-item stagger-item" data-i18n="t1Spec4">Praat TextGrid形式の読み込み・書き出しに対応</li>
+            <li class="tool-feature-item stagger-item" data-i18n="t1Spec5">音声データを外部に送信せず、すべての解析をブラウザ内で完結</li>
           </ul>
 
           <div class="tool-action-group">
@@ -419,30 +403,14 @@
 
           <div class="tool-built-for">
             <span class="built-for-tag" data-i18n="creatorNoteLabel">開発のきっかけ //</span>
-            <span class="built-for-text" data-i18n="t2BuiltFor">言語学の様々な分野で使うIPAの記号を手軽に、パソコンでもスマホでも入力したいと思って開発しました。</span>
-          </div>
-
-          <!-- Scientific Metric Badges -->
-          <div class="metrics-strip">
-            <div class="metric-item">
-              <span class="metric-val" data-target="339">0</span>
-              <span class="metric-lbl">IPA SYMBOLS</span>
-            </div>
-            <div class="metric-item">
-              <span class="metric-val" data-target="5">0</span>
-              <span class="metric-lbl">CHAO TONE LEVELS</span>
-            </div>
-            <div class="metric-item">
-              <span class="metric-val" data-target="0" data-suffix="ms">0ms</span>
-              <span class="metric-lbl">LIGATURE LATENCY</span>
-            </div>
+            <span class="built-for-text" data-i18n="t2BuiltFor">記述言語学や音声学で扱うIPA（国際音声字母）の特殊記号を、パソコンだけでなくスマホからでも手軽に入力したくて作りました。</span>
           </div>
 
           <ul class="tool-feature-list">
-            <li class="tool-feature-item stagger-item" data-i18n="t2Spec1">全339記号・肺臓気流・非肺臓気流・補助記号を完全網羅</li>
-            <li class="tool-feature-item stagger-item" data-i18n="t2Spec2">声調番号からChao Tone Letters（声調バー）を自動合字合成</li>
-            <li class="tool-feature-item stagger-item" data-i18n="t2Spec3">結合分音記号の非破壊自動アタッチ & 音声記号検索</li>
-            <li class="tool-feature-item stagger-item" data-i18n="t2Spec4">ワンクリックでのクリップボードコピー & 日英UI</li>
+            <li class="tool-feature-item stagger-item" data-i18n="t2Spec1">肺臓気流子音・非肺臓気流子音・母音・補助記号など、IPAの各記号に対応</li>
+            <li class="tool-feature-item stagger-item" data-i18n="t2Spec2">数字キー（1〜5）の入力から趙元任の声調バー（Chao Tone Letters）を合字変換</li>
+            <li class="tool-feature-item stagger-item" data-i18n="t2Spec3">ベース文字の並びを崩さずにダイアクリティカルマーク（結合記号）を付与</li>
+            <li class="tool-feature-item stagger-item" data-i18n="t2Spec4">ボタン一つでクリップボードへコピー（日本語・英語の表示切替に対応）</li>
           </ul>
 
           <div class="tool-action-group">
@@ -482,30 +450,14 @@
 
           <div class="tool-built-for">
             <span class="built-for-tag" data-i18n="creatorNoteLabel">開発のきっかけ //</span>
-            <span class="built-for-text" data-i18n="t3BuiltFor">意味論や統語論で使う構文木を、PCでの板書に耐えられるように手軽に作成したくて開発しました。</span>
-          </div>
-
-          <!-- Scientific Metric Badges -->
-          <div class="metrics-strip">
-            <div class="metric-item">
-              <span class="metric-val" data-target="2">0</span>
-              <span class="metric-lbl">GRAMMAR SYSTEMS</span>
-            </div>
-            <div class="metric-item">
-              <span class="metric-val" data-target="100" data-suffix="%">0%</span>
-              <span class="metric-lbl">VECTOR SVG/LATEX</span>
-            </div>
-            <div class="metric-item">
-              <span class="metric-val" data-target="0">0</span>
-              <span class="metric-lbl">BACKEND CALLS</span>
-            </div>
+            <span class="built-for-text" data-i18n="t3BuiltFor">統語論や意味論で扱う構文木を、授業のノートや板書、レポート作成時にパソコン上ですばやく組み立てたくて作りました。</span>
           </div>
 
           <ul class="tool-feature-list">
-            <li class="tool-feature-item stagger-item" data-i18n="t3Spec1">Penn Treebankブラケット記法のリアルタイム構文木パース</li>
-            <li class="tool-feature-item stagger-item" data-i18n="t3Spec2">TP/DP学術体系 ＆ S/NP学校文法体系のワンクリック切替</li>
-            <li class="tool-feature-item stagger-item" data-i18n="t3Spec3">構成素移動矢印（Movement Arrows）と三角形省略記法</li>
-            <li class="tool-feature-item stagger-item" data-i18n="t3Spec4">LaTeX（forest / qtree）コード & ベクターSVG/PNG出力</li>
+            <li class="tool-feature-item stagger-item" data-i18n="t3Spec1">ブラケット記法（かっこ表記）から構文木をリアルタイムに自動描画</li>
+            <li class="tool-feature-item stagger-item" data-i18n="t3Spec2">TP/DP体系（生成文法）とS/NP体系（伝統文法）をボタン一つで切り替え</li>
+            <li class="tool-feature-item stagger-item" data-i18n="t3Spec3">構成素の移動を表す矢印描画と、下位構造の三角形省略記法</li>
+            <li class="tool-feature-item stagger-item" data-i18n="t3Spec4">LaTeX（forest / qtree）形式のコード生成、SVG・PNG画像としての保存</li>
           </ul>
 
           <div class="tool-action-group">
@@ -799,27 +751,11 @@
             <span class="built-for-text" data-i18n="t4BuiltFor">歴史言語学や音韻論で出てくる音韻規則を、パソコン上できれいに表示できるようにしたくて開発しました。</span>
           </div>
 
-          <!-- Scientific Metric Badges -->
-          <div class="metrics-strip">
-            <div class="metric-item">
-              <span class="metric-val" data-target="28">0</span>
-              <span class="metric-lbl">SPE FEATURES</span>
-            </div>
-            <div class="metric-item">
-              <span class="metric-val" data-target="2">0</span>
-              <span class="metric-lbl">RULE MODES (→ / &gt;)</span>
-            </div>
-            <div class="metric-item">
-              <span class="metric-val" data-target="100" data-suffix="%">0%</span>
-              <span class="metric-lbl">KATEX REALTIME</span>
-            </div>
-          </div>
-
           <ul class="tool-feature-list">
-            <li class="tool-feature-item stagger-item" data-i18n="t4Spec1">共時的音韻規則（→）と通時的音変化（>）の統合エディタ</li>
-            <li class="tool-feature-item stagger-item" data-i18n="t4Spec2">Chomsky-Halle (SPE) 示差特徴マトリクスの自動整形</li>
-            <li class="tool-feature-item stagger-item" data-i18n="t4Spec3">KaTeX（LaTeX）数式コード生成 & リアルタイムプレビュー</li>
-            <li class="tool-feature-item stagger-item" data-i18n="t4Spec4">論文・発表スライド用ベクターSVG & 高解像度PNG出力</li>
+            <li class="tool-feature-item stagger-item" data-i18n="t4Spec1">共時的な音韻規則（→）と通時的な音変化（>）の入力に対応</li>
+            <li class="tool-feature-item stagger-item" data-i18n="t4Spec2">Chomsky-Halle（SPE）の示差的特徴マトリクスを縦並びで自動レイアウト</li>
+            <li class="tool-feature-item stagger-item" data-i18n="t4Spec3">KaTeX形式の数式プレビュー表示とLaTeXコードの生成</li>
+            <li class="tool-feature-item stagger-item" data-i18n="t4Spec4">レポートやスライドにそのまま貼れるSVG・高解像度PNG画像の書き出し</li>
           </ul>
 
           <div class="tool-action-group">
@@ -849,9 +785,9 @@
           <span class="poster-num" data-i18n="feat1Num">01</span>
           <h3 class="poster-keyword" data-i18n="feat1Title">ミニマルなデザイン</h3>
           <ul class="poster-bullet-list">
-            <li class="poster-bullet-item" data-i18n="feat1Bullet1">スイススタイル（国際タイポグラフィ様式）準拠</li>
-            <li class="poster-bullet-item" data-i18n="feat1Bullet2">角丸ゼロ・装飾シャドウ完全排除の幾何学設計</li>
-            <li class="poster-bullet-item" data-i18n="feat1Bullet3">言語データ・波形・階層の可読性を極限まで重視</li>
+            <li class="poster-bullet-item" data-i18n="feat1Bullet1">スイススタイル（国際タイポグラフィ様式）を取り入れた簡潔なレイアウト</li>
+            <li class="poster-bullet-item" data-i18n="feat1Bullet2">装飾的な影や過度な角丸を排した、データ重視の構成</li>
+            <li class="poster-bullet-item" data-i18n="feat1Bullet3">音声波形や統語木、マトリクス記号の視認性を最優先</li>
           </ul>
           <div class="poster-demo-box zero-box">
             <span class="demo-tag mono">BORDER-RADIUS: 0</span>
@@ -861,11 +797,11 @@
         <!-- Feature 2: Local & Private -->
         <div class="poster-block">
           <span class="poster-num" data-i18n="feat2Num">02</span>
-          <h3 class="poster-keyword" data-i18n="feat2Title">ローカル完結</h3>
+          <h3 class="poster-keyword" data-i18n="feat2Title">端末内（ブラウザ）で完結</h3>
           <ul class="poster-bullet-list">
-            <li class="poster-bullet-item" data-i18n="feat2Bullet1">外部サーバーへの音声・テキスト送信ゼロ</li>
-            <li class="poster-bullet-item" data-i18n="feat2Bullet2">ブラウザ内部（DSP / WASM）で高速リアルタイム処理</li>
-            <li class="poster-bullet-item" data-i18n="feat2Bullet3">機密フィールドワーク音声・未発表データの安全保護</li>
+            <li class="poster-bullet-item" data-i18n="feat2Bullet1">音声データや入力テキストを外部サーバーへ一切送信しません</li>
+            <li class="poster-bullet-item" data-i18n="feat2Bullet2">ブラウザの標準機能（Web Audio API等）を用いてローカルで高速処理</li>
+            <li class="poster-bullet-item" data-i18n="feat2Bullet3">調査データや未発表の言語資料も安心して扱えます</li>
           </ul>
           <div class="poster-demo-box local-box">
             <span class="local-badge mono">100% CLIENT-SIDE</span>
@@ -875,12 +811,12 @@
         <!-- Feature 3: Linguistics-Dedicated Functions -->
         <div class="poster-block">
           <span class="poster-num" data-i18n="feat3Num">03</span>
-          <h3 class="poster-keyword" data-i18n="feat3Title">言語学に特化した機能</h3>
+          <h3 class="poster-keyword" data-i18n="feat3Title">言語学の記法に特化</h3>
           <ul class="poster-bullet-list">
-            <li class="poster-bullet-item" data-i18n="feat3Bullet1">声調バー自動合字 & IPA結合分音記号</li>
-            <li class="poster-bullet-item" data-i18n="feat3Bullet2">Praat TextGrid連携 & Burg法LPCフォルマント解析</li>
-            <li class="poster-bullet-item" data-i18n="feat3Bullet3">Penn Treebank構文木 & Xバー移動矢印描画</li>
-            <li class="poster-bullet-item" data-i18n="feat3Bullet4">SPE示差特徴マトリクス & KaTeX論文出力</li>
+            <li class="poster-bullet-item" data-i18n="feat3Bullet1">声調バー（Chao tone letters）やIPAダイアクリティカルマークの合成</li>
+            <li class="poster-bullet-item" data-i18n="feat3Bullet2">Praat TextGridの入出力とフォルマント分析</li>
+            <li class="poster-bullet-item" data-i18n="feat3Bullet3">Penn Treebank形式の構文木パースと移動矢印の描画</li>
+            <li class="poster-bullet-item" data-i18n="feat3Bullet4">SPE示差的特徴マトリクスとKaTeX数式コードの生成</li>
           </ul>
           <div class="poster-demo-box red-signal-box">
             <span class="red-signal-dot"></span>
@@ -900,8 +836,8 @@
         <div class="footer-brand">
           <h2 data-i18n="footerHeading">LINGUISTICS TOOLBOX</h2>
           <ul class="footer-bullets">
-            <li class="footer-bullet-item" data-i18n="footerBullet1">全ツール完全無料・オープンソース（MIT / GPL v3）</li>
-            <li class="footer-bullet-item" data-i18n="footerBullet2">学術研究・レポート・講義・教材作成に自由利用可能</li>
+            <li class="footer-bullet-item" data-i18n="footerBullet1">全ツール無料・オープンソース（MIT / GPL v3）</li>
+            <li class="footer-bullet-item" data-i18n="footerBullet2">大学の講義・ゼミ、個人研究や教材作成などにご活用ください</li>
           </ul>
         </div>
 
@@ -930,16 +866,16 @@
       </div>
 
       <div class="footer-bottom">
-        <span data-i18n="footerCopy">© 2026 okawawaka. Built for linguistics by students.</span>
+        <span data-i18n="footerCopy">© 2026 okawawaka. Linguistics Toolbox.</span>
         <button type="button" id="back-to-top" class="btn-back-to-top" data-i18n="footerBackToTop">TOP ↑</button>
       </div>
     </div>
   </footer>
 
   <!-- Scripts (Deferred for instant HTML parsing & FCP) -->
-  <script defer src="js/i18n.js?v=20260927-5"></script>
+  <script defer src="js/i18n.js?v=20260928-1"></script>
   <script defer src="js/canvas-bg.js"></script>
-  <script defer src="js/visual-demos.js?v=20260927-10"></script>
-  <script defer src="js/app.js?v=20260927-10"></script>
+  <script defer src="js/visual-demos.js?v=20260928-1"></script>
+  <script defer src="js/app.js?v=20260928-1"></script>
 </body>
 </html>
